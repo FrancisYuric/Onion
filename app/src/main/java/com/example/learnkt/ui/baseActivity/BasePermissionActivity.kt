@@ -11,7 +11,8 @@ abstract class BasePermissionActivity : BaseDisposableActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addDisposable(RxPermissions(this).requestEachCombined()
+        if(staticPermission().isNotEmpty())
+        addDisposable(RxPermissions(this).requestEachCombined(Permission(staticPermission()))
                 .subscribe { permission ->
                     //允许权限
                     if (permission.granted) {

@@ -3,6 +3,7 @@ package com.example.learnkt.manager
 import com.example.learnkt.CiruyApplication
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.rx.DownloadObserver
+import com.example.learnkt.util.LogUtil
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -28,7 +29,7 @@ class DownloadManager {
     }
 
 
-    fun createDownInfo(url: String) = DownloadInfo(url, getContentLength(url), 0, url.substring(url.lastIndexOf("/")))
+    private fun createDownInfo(url: String) = DownloadInfo(url, getContentLength(url), 0, url.substring(url.lastIndexOf("/")))
     private val downCalls: HashMap<String, Call> = HashMap()
 
     //Todo:小心此处的内存泄露
@@ -91,13 +92,14 @@ class DownloadManager {
 
     inner class DownloadSubscribe(val downloadInfo: DownloadInfo) : ObservableOnSubscribe<DownloadInfo> {
         override fun subscribe(emitter: ObservableEmitter<DownloadInfo>) {
+            LogUtil.e("url subscribed")
             val url = downloadInfo.url
-            var downloadedLength = downloadInfo.total
-            val totalLenth = downloadInfo.total
+            var downloadedLength = downloadInfo.progress
+            val totalLength = downloadInfo.total
             emitter.onNext(downloadInfo)
 
             val request = Request.Builder()
-                    .addHeader("RANGE", "bytes=$downloadedLength-$totalLenth")
+                    .addHeader("RANGE", "bytes=$downloadedLength-$totalLength")
                     .url(url)
                     .build()
 
@@ -116,7 +118,7 @@ class DownloadManager {
                     if (len == -1) break
                     outputStream.write(buffer, 0, len ?: 0)
                     downloadedLength += (len ?: 0)
-                    downloadInfo.total = downloadedLength
+                    downloadInfo.progress= downloadedLength
                     emitter.onNext(downloadInfo)
                 }
                 outputStream.flush()

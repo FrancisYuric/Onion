@@ -189,6 +189,10 @@ public class RxPermissions {
         return Observable.just(TRIGGER).compose(ensureEachCombined(permissions));
     }
 
+    public Observable<Permission> requestEachCombined(final Permission permission){
+        return Observable.just(permission);
+    }
+
     private Observable<Permission> request(final Observable<?> trigger, final String... permissions) {
         if (permissions == null || permissions.length == 0) {
             throw new IllegalArgumentException("RxPermissions.request/requestEach requires at least one input permission");
