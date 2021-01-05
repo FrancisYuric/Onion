@@ -2,11 +2,11 @@ package com.example.learnkt.api
 
 import com.example.learnkt.bean.LoginResultEntity
 import com.example.learnkt.bean.ResultEntityWrapper
+import io.reactivex.Flowable
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.Streaming
+import okhttp3.Call
+import okhttp3.ResponseBody
+import retrofit2.http.*
 
 //客户端API
 interface WanAndroidAPI {
@@ -17,8 +17,12 @@ interface WanAndroidAPI {
         @Field("password") password: String
     ): Observable<ResultEntityWrapper<LoginResultEntity>>
 
-//    @POST()
-//    @Streaming
-//    fun download():
+    @GET("/apps/5eccda86b2eb4670747962c3/install?download_token=13bcbbe50f70729766c88f4573cf12ef")
+    @Streaming
+    fun download():Flowable<ResponseBody>
 
+    @GET("/")
+//    @Streaming
+//    fun baidu():retrofit2.Call<ResponseBody>
+    fun baidu():Flowable<ResponseBody>
 }
