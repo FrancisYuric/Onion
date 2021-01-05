@@ -49,8 +49,8 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
     }
 
     override fun layout() = R.layout.ac_download_demo
-    override fun staticPermission(): List<Permission> {
-        return listOf(Permission(Manifest.permission.INTERNET, false))
+    override fun staticPermission(): List<String> {
+        return listOf(Manifest.permission.INTERNET)
     }
 
 

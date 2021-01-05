@@ -1,4 +1,4 @@
-package com.example.learnkt
+package com.example.learnkt.test
 
 open class Person(id: Int) {
     constructor(id: Int, name: String) : this(id) {

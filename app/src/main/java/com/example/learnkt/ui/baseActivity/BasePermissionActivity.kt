@@ -7,12 +7,13 @@ import com.example.learnkt.rx.RxPermissions
 
 abstract class BasePermissionActivity : BaseDisposableActivity() {
     //staticPermission needed
-    abstract fun staticPermission(): List<Permission>
+    abstract fun staticPermission(): List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(staticPermission().isNotEmpty())
-        addDisposable(RxPermissions(this).requestEachCombined(Permission(staticPermission()))
+            addDisposable(
+                RxPermissions(this).requestEachCombined(Permission.create(staticPermission()))
                 .subscribe { permission ->
                     //允许权限
                     if (permission.granted) {

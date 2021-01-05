@@ -1,4 +1,4 @@
-package com.example.learnkt
+package com.example.learnkt.test
 
 class Student(id: Int) : Person(id) {
     //在kotlin不存在默认值，为了避免null默认值的出现

@@ -3,6 +3,7 @@ package com.example.learnkt.rx;
 
 import com.example.learnkt.bean.BaseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -39,6 +40,13 @@ public class Permission extends BaseEntity {
         shouldShowRequestPermissionRationale = combineShouldShowRequestPermissionRationale(permissions);
     }
 
+    public static Permission create(List<String> permission) {
+        List<Permission> result = new ArrayList<>();
+        for (int i = 0; i < permission.size(); ++i) {
+            result.add(new Permission(permission.get(i), false));
+        }
+        return new Permission(result);
+    }
     @Override
     @SuppressWarnings("SimplifiableIfStatement")
     public boolean equals(final Object o) {
