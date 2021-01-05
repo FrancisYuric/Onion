@@ -21,8 +21,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <!--        <activity android:name=".ui.DownloadProgressActivity">-->
-        <activity android:name=".ui.DownloadDemoActivity">
+        <activity android:name=".ui.DownloadProgressActivity">
+            <!--        <activity android:name=".ui.DownloadDemoActivity">-->
             <!--        <activity android:name=".TestRxViewActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -83,11 +83,11 @@ public class RequestUtil {
                 outputStream.write(fileReader, 0, read);
                 fileSizeDownloaded += read;
                 int newProgressPercent = (int) (100*fileSizeDownloaded/fileSize);
-                if (newProgressPercent-progressPercent>=2&&downloadApkListener!=null) {
-//                    Log.e("ciruy", fileSizeDownloaded+" totalSize:"+fileSize);
-                    LogUtil.INSTANCE.e(fileSizeDownloaded+":"+fileSize);
+                if (newProgressPercent - progressPercent >= 2) {
+                    LogUtil.INSTANCE.e(fileSizeDownloaded + " totalSize:" + fileSize);
                     progressPercent = newProgressPercent;
-                    downloadApkListener.onProgress(progressPercent);
+                    if (downloadApkListener != null)
+                        downloadApkListener.onProgress(progressPercent);
                 }
             }
 
