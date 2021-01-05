@@ -1,35 +1,14 @@
-package com.example.learnkt
+package com.example.learnkt.ui
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Environment
-import android.text.TextUtils
 import android.util.Log
-import android.util.Pair
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.learnkt.R
 import com.example.learnkt.api.APIClient
 import com.example.learnkt.api.WanAndroidAPI
 import com.example.learnkt.bean.ResponseError
-import com.example.learnkt.listener.DownloadApkListener
-import com.example.learnkt.rx.Permission
-import com.example.learnkt.rx.RxPermissions
-import com.example.learnkt.util.RequestUtil
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.ResponseBody
-import retrofit2.Response
-import java.io.File
-import java.io.IOException
 
 class DownloadProgressActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.learnkt
+package com.example.learnkt.ui
 
 import android.app.Activity
 import android.app.Dialog
@@ -9,6 +9,7 @@ import android.os.Message
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.example.learnkt.R
 import com.jakewharton.rxbinding2.view.RxView
 
 

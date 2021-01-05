@@ -22,7 +22,8 @@ public class RxPermissionsFragment extends Fragment {
     // Contains all the current permission requests.
     // Once granted or denied, they are removed from it.
     private Map<String, PublishSubject<Permission>> mSubjects = new HashMap<>();
-    private boolean mLogging;
+
+    private boolean mLogging = true;
 
     public RxPermissionsFragment() {
     }
