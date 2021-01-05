@@ -73,6 +73,7 @@ public class RequestUtil {
             inputStream = body.byteStream();
             outputStream = new FileOutputStream(file);
             int progressPercent=0;
+            LogUtil.INSTANCE.e("write start!");
             while (true) {
                 int read = inputStream.read(fileReader);
 
@@ -82,8 +83,9 @@ public class RequestUtil {
                 outputStream.write(fileReader, 0, read);
                 fileSizeDownloaded += read;
                 int newProgressPercent = (int) (100*fileSizeDownloaded/fileSize);
-                Log.e("ciruy", fileSizeDownloaded+" totalSize:"+fileSize);
                 if (newProgressPercent-progressPercent>=2&&downloadApkListener!=null) {
+//                    Log.e("ciruy", fileSizeDownloaded+" totalSize:"+fileSize);
+                    LogUtil.INSTANCE.e(fileSizeDownloaded+":"+fileSize);
                     progressPercent = newProgressPercent;
                     downloadApkListener.onProgress(progressPercent);
                 }

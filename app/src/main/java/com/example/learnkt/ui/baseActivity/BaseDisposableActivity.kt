@@ -3,7 +3,8 @@ package com.example.learnkt.ui.baseActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-open class BaseDisposableActivity : BaseActivity() {
+open abstract class BaseDisposableActivity : BaseActivity() {
+
     var mCompositeDisposable: CompositeDisposable? = null
 
     fun addDisposable(disposable: Disposable) {

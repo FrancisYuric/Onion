@@ -2,13 +2,23 @@ package com.example.learnkt.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
+import android.util.Pair
 import androidx.appcompat.app.AppCompatActivity
 import com.example.learnkt.R
 import com.example.learnkt.api.APIClient
 import com.example.learnkt.api.WanAndroidAPI
 import com.example.learnkt.bean.ResponseError
+import com.example.learnkt.listener.DownloadApkListener
+import com.example.learnkt.util.LogUtil
+import com.example.learnkt.util.RequestUtil
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.schedulers.Schedulers
+import okhttp3.ResponseBody
+import java.io.File
 
 class DownloadProgressActivity : AppCompatActivity() {
 
@@ -23,9 +33,28 @@ class DownloadProgressActivity : AppCompatActivity() {
 //                .download()
                 .baidu()
                 .subscribeOn(Schedulers.io())
-                .onErrorReturn { ResponseError.instance() }
+                .onErrorReturn {
+                    LogUtil.e(it.toString())
+                    ResponseError.instance() }
                 .filter {t-> t!==ResponseError.instance() }
-                .subscribe { Log.e("ciruy","123") }
+                .subscribe{
+                                            val LOCAL_PATH = (application.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
+                                + File.separator )
+                    RequestUtil.writeResponseBodyToDisk(it, LOCAL_PATH+System.currentTimeMillis()+".apk",null)
+                }
+
+//                .flatMap { t: ResponseBody -> object : Observable<Pair<String, Int>>() {
+//                    override fun subscribeActual(observer: Observer<in Pair<String, Int>>?) {
+//                        val downloadApkListener = DownloadApkListener(observer)
+//                        observer?.onSubscribe(downloadApkListener)
+//                        val LOCAL_PATH = (application.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
+//                                + File.separator )
+//                        RequestUtil.writeResponseBodyToDisk(t,LOCAL_PATH+System.currentTimeMillis()+".apk",downloadApkListener )
+//                    }
+//                }.toFlowable(BackpressureStrategy.DROP)
+//                }
+//                .subscribe { Log.e("ciruy","123") }
+
 //                .subscribeOn(Schedulers.io())
 //                .onErrorReturn {
 //                    ResponseError.instance()

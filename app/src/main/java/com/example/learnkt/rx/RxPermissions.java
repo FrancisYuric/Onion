@@ -8,7 +8,7 @@
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
+  See the License for the specific language governing staticPermission and
   limitations under the License.
  */
 
@@ -103,11 +103,11 @@ public class RxPermissions {
     }
 
     /**
-     * Map emitted items from the source observable into {@code true} if permissions in parameters
+     * Map emitted items from the source observable into {@code true} if staticPermission in parameters
      * are granted, or {@code false} if not.
      * <p>
-     * If one or several permissions have never been requested, invoke the related framework method
-     * to ask the user if he allows the permissions.
+     * If one or several staticPermission have never been requested, invoke the related framework method
+     * to ask the user if he allows the staticPermission.
      */
     @SuppressWarnings("WeakerAccess")
     public <T> ObservableTransformer<T, Boolean> ensure(final String... permissions) {
@@ -121,7 +121,7 @@ public class RxPermissions {
                         // subscriber, only the onComplete.
                         return Observable.empty();
                     }
-                    // Return true if all permissions are granted.
+                    // Return true if all staticPermission are granted.
                     for (Permission p : permissions1) {
                         if (!p.granted) {
                             return Observable.just(false);
@@ -135,19 +135,19 @@ public class RxPermissions {
      * Map emitted items from the source observable into {@link Permission} objects for each
      * permission in parameters.
      * <p>
-     * If one or several permissions have never been requested, invoke the related framework method
-     * to ask the user if he allows the permissions.
+     * If one or several staticPermission have never been requested, invoke the related framework method
+     * to ask the user if he allows the staticPermission.
      */
     public <T> ObservableTransformer<T, Permission> ensureEach(final String... permissions) {
         return o -> request(o, permissions);
     }
 
     /**
-     * Map emitted items from the source observable into one combined {@link Permission} object. Only if all permissions are granted,
+     * Map emitted items from the source observable into one combined {@link Permission} object. Only if all staticPermission are granted,
      * permission also will be granted. If any permission has {@code shouldShowRationale} checked, than result also has it checked.
      * <p>
-     * If one or several permissions have never been requested, invoke the related framework method
-     * to ask the user if he allows the permissions.
+     * If one or several staticPermission have never been requested, invoke the related framework method
+     * to ask the user if he allows the staticPermission.
      */
     <T> ObservableTransformer<T, Permission> ensureEachCombined(final String... permissions) {
         return o -> request(o, permissions)
@@ -161,7 +161,7 @@ public class RxPermissions {
     }
 
     /**
-     * Request permissions immediately, <b>must be invoked during initialization phase
+     * Request staticPermission immediately, <b>must be invoked during initialization phase
      * of your application</b>.
      */
     @SuppressWarnings({"unused"})
@@ -171,7 +171,7 @@ public class RxPermissions {
 
     /**
      * 逐个请求权限
-     * Request permissions immediately, <b>must be invoked during initialization phase
+     * Request staticPermission immediately, <b>must be invoked during initialization phase
      * of your application</b>.
      */
     @SuppressWarnings({"unused"})
@@ -181,7 +181,7 @@ public class RxPermissions {
 
     /**
      * 统一请求权限
-     * Request permissions immediately, <b>must be invoked during initialization phase
+     * Request staticPermission immediately, <b>must be invoked during initialization phase
      * of your application</b>.
      */
     @SuppressWarnings({"unused"})
@@ -218,7 +218,7 @@ public class RxPermissions {
         List<Observable<Permission>> list = new ArrayList<>(permissions.length);
         List<String> unrequestedPermissions = new ArrayList<>();
 
-        // In case of multiple permissions, we create an Observable for each of them.
+        // In case of multiple staticPermission, we create an Observable for each of them.
         // At the end, the observables are combined to have a unique response.
         //本次遍历首先处理用户没有处理过的权限请求，对于用户已经处理过的权限请求则先存储结果
         for (String permission : permissions) {
@@ -259,11 +259,11 @@ public class RxPermissions {
      * Invokes Activity.shouldShowRequestPermissionRationale and wraps
      * the returned value in an observable.
      * <p>
-     * In case of multiple permissions, only emits true if
+     * In case of multiple staticPermission, only emits true if
      * Activity.shouldShowRequestPermissionRationale returned true for
-     * all revoked permissions.
+     * all revoked staticPermission.
      * <p>
-     * You shouldn't call this method if all permissions have been granted.
+     * You shouldn't call this method if all staticPermission have been granted.
      * <p>
      * For SDK &lt; 23, the observable will always emit false.
      */

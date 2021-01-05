@@ -6,8 +6,8 @@ import com.example.learnkt.rx.Permission
 import com.example.learnkt.rx.RxPermissions
 
 abstract class BasePermissionActivity : BaseDisposableActivity() {
-    //permissions needed
-    abstract fun permissions(): List<Permission>
+    //staticPermission needed
+    abstract fun staticPermission(): List<Permission>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +33,8 @@ abstract class BasePermissionActivity : BaseDisposableActivity() {
 
     }
 
-    //拒绝且不再提醒
+    //拒绝且不再提醒,默认退出当前activity
     fun onRejectShowShowRequestPermissionRationale(){
-
+        onBackPressed()
     }
 }

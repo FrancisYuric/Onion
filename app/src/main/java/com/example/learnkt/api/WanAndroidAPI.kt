@@ -21,8 +21,9 @@ interface WanAndroidAPI {
     @Streaming
     fun download():Flowable<ResponseBody>
 
-    @GET("/")
-//    @Streaming
+    @GET("/apps/5eccda86b2eb4670747962c3/install?download_token=13bcbbe50f70729766c88f4573cf12ef")
+//    @GET("/")
+    @Streaming
 //    fun baidu():retrofit2.Call<ResponseBody>
     fun baidu():Flowable<ResponseBody>
 }

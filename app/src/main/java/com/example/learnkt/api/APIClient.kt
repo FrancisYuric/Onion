@@ -39,22 +39,22 @@ class APIClient {
         return Retrofit.Builder()
                 .client(
                         OkHttpClient().newBuilder()
-                                .addInterceptor(object : Interceptor {
-                                    override fun intercept(chain: Interceptor.Chain): Response {
-                                        Log.e("ciruy", chain.call().request().url.encodedPath)
-                                        return chain.proceed(chain.request())
-                                    }
-
-                                })
+//                                .addInterceptor(object : Interceptor {
+//                                    override fun intercept(chain: Interceptor.Chain): Response {
+//                                        Log.e("ciruy", chain.call().request().url.encodedPath)
+//                                        return chain.proceed(chain.request())
+//                                    }
+//
+//                                })
                                 .addInterceptor(log)
-                                .readTimeout(10, TimeUnit.SECONDS)
-                                .connectTimeout(10, TimeUnit.SECONDS)
-                                .callTimeout(10, TimeUnit.SECONDS)
+                                .readTimeout(1000, TimeUnit.SECONDS)
+                                .connectTimeout(1000, TimeUnit.SECONDS)
+                                .callTimeout(1000, TimeUnit.SECONDS)
                                 .cache(cache)
-                                .writeTimeout(10, TimeUnit.SECONDS).build()
+                                .writeTimeout(1000, TimeUnit.SECONDS).build()
                 )
-//                .baseUrl("http://download.fir.im")
-                .baseUrl("https://www.baidu.com")
+                .baseUrl("http://download.fir.im")
+//                .baseUrl("https://www.baidu.com")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
