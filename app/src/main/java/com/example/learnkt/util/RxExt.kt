@@ -12,7 +12,6 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Response
 import okhttp3.ResponseBody
 import java.util.concurrent.TimeUnit
 
@@ -28,7 +27,7 @@ fun <T> View.bind2Api(flowable: Flowable<T>): Flowable<T> {
             .flatMap { flowable }
 }
 
-fun  View.bind2ProgressDownload(flowable: Flowable<ResponseBody>):Flowable<Pair<String,Int>> {
+fun View.bind2ProgressDownload(flowable: Flowable<ResponseBody>): Flowable<Pair<String, Int>> {
     return this.bind2Api(flowable).progressDownload()
 }
 
