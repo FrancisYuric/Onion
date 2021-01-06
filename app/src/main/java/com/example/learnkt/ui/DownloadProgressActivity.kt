@@ -12,6 +12,7 @@ import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 import com.example.learnkt.util.ToastUtil
 import com.example.learnkt.util.bind2ProgressDownload
 import io.reactivex.Flowable
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.ResponseBody
 
@@ -19,14 +20,18 @@ class DownloadProgressActivity : BaseDisposableActivity() {
     override fun layout(): Int = R.layout.activity_main
 
     override fun initListeners() {
-        addDisposable(helloWorld.onion<TextView, Flowable<ResponseBody>, Flowable<Pair<String, Int>>> { pair ->
-            pair.first.bind2ProgressDownload(pair.second)
-        }.invoke {
-            APIClient.instances.instanceRetrofit(Constant.THUNDER_DOWNLOAD_URL_BASE, WanAndroidAPI::class.java).downloadThunderDmgSize22M()
-        }.subscribe {
-            if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
-            else ToastUtil.long(this, it.first)
-        })
+        helloWorld.bind(APIClient.instances.instanceRetrofit(Constant.THUNDER_DOWNLOAD_URL_BASE,WanAndroidAPI::class.java).downloadThunderDmgSize22M())
+                .invoke {
+                    Consumer {  }
+                }
+//        addDisposable(helloWorld.onion<TextView, Flowable<ResponseBody>, Flowable<Pair<String, Int>>> { pair ->
+//            pair.first.bind2ProgressDownload(pair.second)
+//        }.invoke {
+//            APIClient.instances.instanceRetrofit(Constant.THUNDER_DOWNLOAD_URL_BASE, WanAndroidAPI::class.java).downloadThunderDmgSize22M()
+//        }.subscribe {
+//            if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
+//            else ToastUtil.long(this, it.first)
+//        })
     }
 
 }
