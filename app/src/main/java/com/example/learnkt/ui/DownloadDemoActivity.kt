@@ -37,13 +37,9 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
                     }
                 })
             }
-//                    main_btn_down2
-//                    main_btn_down3
             main_btn_cancel1 -> {
                 DownloadManager.instance().cancel(Constant.THUNDER_DOWNLOAD_URL_BASE)
             }
-//                    main_btn_cancel2
-//                    main_btn_cancel3
         }
     }
 
