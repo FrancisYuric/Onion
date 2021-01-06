@@ -26,7 +26,8 @@ class DownloadProgressActivity : BaseDisposableActivity() {
 //            if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
 //            else ToastUtil.long(this, it.first)
 //        })
-        addDisposable(helloWorld.bind2ProgressDownload(APIClient.instances.instanceRetrofit(Constant.THUNDER_DOWNLOAD_URL_BASE, WanAndroidAPI::class.java).downloadThunderDmgSize22M())
+        addDisposable(helloWorld.bind2ProgressDownload(APIClient.instances.instanceRetrofit(Constant.THUNDER_DOWNLOAD_URL_BASE, WanAndroidAPI::class.java)
+                .downloadThunderDmgSize22M())
                 .subscribe {
                     if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
                     else ToastUtil.long(this, it.first)
