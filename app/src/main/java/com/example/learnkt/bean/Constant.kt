@@ -1,7 +1,12 @@
 package com.example.learnkt.bean
 
 object Constant {
-    //    val DOWNLOAD_URL_BASE = "http://download.fir.im/apps/5eccda86b2eb4670747962c3/install?download_token=13bcbbe50f70729766c88f4573cf12ef"
-    val DOWNLOAD_URL = "https://down.sandai.net/mac/thunder_3.4.1.4368.dmg"
-    val DOWNLOAD_URL_BASE = "https://down.sandai.net/"
+    //迅雷的基本URL
+    const val THUNDER_DOWNLOAD_URL_BASE = "https://down.sandai.net/"
+
+    //百度的基本URL
+    const val BAIDU_URL_BASE = "https://www.baidu.com/"
+
+    //FIR的基本URL
+    const val FIRIM_URL_BASE = "http://download.fir.im/"
 }
