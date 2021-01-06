@@ -21,10 +21,10 @@ interface WanAndroidAPI {
     @Streaming
     fun download():Flowable<ResponseBody>
 
-    //    @GET("/apps/5eccda86b2eb4670747962c3/install?download_token=13bcbbe50f70729766c88f4573cf12ef")
-//    @GET("/")
-    @GET("mac/thunder_3.4.1.4368.dmg")
+    //    @GET("/")
+//    @GET("mac/thunder_3.4.1.4368.dmg")
+    //    fun baidu():retrofit2.Call<ResponseBody>
+        @GET("/apps/5eccda86b2eb4670747962c3/install?download_token=13bcbbe50f70729766c88f4573cf12ef")
     @Streaming
-//    fun baidu():retrofit2.Call<ResponseBody>
-    fun baidu(): retrofit2.Call<ResponseBody>
+    fun baidu(): Flowable<ResponseBody>
 }

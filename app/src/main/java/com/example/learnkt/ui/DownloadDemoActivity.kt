@@ -7,7 +7,6 @@ import com.example.learnkt.bean.Constant
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.manager.DownloadManager
 import com.example.learnkt.rx.DownloadObserver
-import com.example.learnkt.rx.Permission
 import com.example.learnkt.ui.baseActivity.BasePermissionActivity
 import com.example.learnkt.util.LogUtil
 import com.example.learnkt.util.ToastUtil
@@ -21,7 +20,7 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
         when (p0) {
 
             main_btn_down1 -> {
-                DownloadManager.instance().download(Constant.DOWNLOAD_URL, object : DownloadObserver(null
+                DownloadManager.instance().download(Constant.DOWNLOAD_URL_BASE, object : DownloadObserver(null
                         , null) {
                     override fun onComplete() {
                         if (downloadInfo != null) {
@@ -41,7 +40,7 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
 //                    main_btn_down2
 //                    main_btn_down3
             main_btn_cancel1 -> {
-                DownloadManager.instance().cancel(Constant.DOWNLOAD_URL)
+                DownloadManager.instance().cancel(Constant.DOWNLOAD_URL_BASE)
             }
 //                    main_btn_cancel2
 //                    main_btn_cancel3

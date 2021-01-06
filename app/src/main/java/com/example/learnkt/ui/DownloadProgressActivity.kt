@@ -8,13 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.learnkt.R
 import com.example.learnkt.api.APIClient
 import com.example.learnkt.api.WanAndroidAPI
+import com.example.learnkt.bean.ResponseError
 import com.example.learnkt.util.LogUtil
 import com.example.learnkt.util.RequestUtil
 import io.reactivex.Flowable
 import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 import java.io.File
 import java.sql.Time
+import java.text.DateFormat
 import java.util.concurrent.TimeUnit
 
 class DownloadProgressActivity : AppCompatActivity() {
@@ -26,43 +29,43 @@ class DownloadProgressActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        RxPermissions(this).requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
 //                .subscribe{
-//        APIClient.instances.instanceRetrofit(WanAndroidAPI::class.java)
-////                .download()
-//            .baidu()
-//            .subscribeOn(Schedulers.io())
-//            .onErrorReturn {
-//                LogUtil.e(it.toString())
-//                ResponseError.instance()
-//            }
-//            .filter { t -> t !== ResponseError.instance() }
-//            .subscribe {
-//                LogUtil.e(DateFormat.getInstance().format(System.currentTimeMillis()))
-//                val LOCAL_PATH =
-//                    (application.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
-//                            + File.separator)
-//                RequestUtil.writeResponseBodyToDisk(
-//                    it
-//                    LOCAL_PATH + System.currentTimeMillis() + ".apk",
-//                    null
-//                )
-//            }
-        LogUtil.e("link start")
-        val LOCAL_PATH =
-            (application.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
-                    + File.separator)
-        Flowable.timer(2, TimeUnit.SECONDS)
+        APIClient.instances.instanceRetrofit(WanAndroidAPI::class.java)
+//                .download()
+            .baidu()
+            .subscribeOn(Schedulers.io())
+            .onErrorReturn {
+                LogUtil.e(it.toString())
+                ResponseError.instance()
+            }
+            .filter { t -> t !== ResponseError.instance() }
             .subscribe {
-
+                LogUtil.e(DateFormat.getInstance().format(System.currentTimeMillis()))
+                val LOCAL_PATH =
+                    (application.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
+                            + File.separator)
                 RequestUtil.writeResponseBodyToDisk(
-                    APIClient.instances
-                        .response().body,
-//                .instanceRetrofit(WanAndroidAPI::class.java)
-//            .baidu()
-//            .execute().body(),
-                    LOCAL_PATH + System.currentTimeMillis() + "apk",
+                    it,
+                    LOCAL_PATH + System.currentTimeMillis() + ".apk",
                     null
                 )
             }
+//        LogUtil.e("link start")
+//        val LOCAL_PATH =
+//            (application.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
+//                    + File.separator)
+//        Flowable.timer(2, TimeUnit.SECONDS)
+//            .subscribe {
+//
+//                RequestUtil.writeResponseBodyToDisk(
+//                    APIClient.instances
+//                        .response().body,
+////                .instanceRetrofit(WanAndroidAPI::class.java)
+////            .baidu()
+////            .execute().body(),
+//                    LOCAL_PATH + System.currentTimeMillis() + "apk",
+//                    null
+//                )
+//            }
 
 
 //            .enqueue(object : retrofit2.Callback<ResponseBody> {
