@@ -30,29 +30,8 @@ class DownloadProgressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        RxPermissions(this).requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-//                .subscribe{
         APIClient.instances.instanceRetrofit(Constant.THUNDER_DOWNLOAD_URL_BASE, WanAndroidAPI::class.java)
                 .downloadThunderDmgSize22M()
-//            .subscribeOn(Schedulers.io())
-//            .onErrorReturn {
-//                LogUtil.e(it.toString())
-//                ResponseError.instance()
-//            }
-//            .filter { t -> t !== ResponseError.instance() }
-//            .subscribe {
-//                LogUtil.e(DateFormat.getInstance().format(System.currentTimeMillis()))
-//                val LOCAL_PATH =
-//                    (application.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
-//                            + File.separator)
-//                RequestUtil.writeResponseBodyToDisk(
-//                    it,
-//                    LOCAL_PATH + System.currentTimeMillis() + ".apk",
-//                    null
-//                )
-//            }
-
-
                 .subscribeOn(Schedulers.io())
                 .onErrorReturn {
                     ResponseError.instance()
