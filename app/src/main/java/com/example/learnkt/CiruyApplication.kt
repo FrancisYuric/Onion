@@ -10,9 +10,10 @@ class CiruyApplication : Application() {
         var instance: CiruyApplication? = null
     }
 
-    fun getExternalFilesDir() = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString() + File.separator
+    fun getExternalDownloadLocalFilesDir() = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString() + File.separator
 
     override fun onCreate() {
+
         super.onCreate()
         instance = this
     }
