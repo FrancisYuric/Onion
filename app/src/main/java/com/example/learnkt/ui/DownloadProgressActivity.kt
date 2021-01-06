@@ -1,6 +1,5 @@
 package com.example.learnkt.ui
 
-import android.os.Bundle
 import android.text.TextUtils
 import com.example.learnkt.R
 import com.example.learnkt.api.APIClient
@@ -24,10 +23,6 @@ class DownloadProgressActivity : BaseDisposableActivity() {
                 })
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
 }
 
 
