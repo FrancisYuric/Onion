@@ -24,15 +24,15 @@ open abstract class BaseDisposableActivity : BaseActivity() {
             mCompositeDisposable = CompositeDisposable()
     }
 
-//    fun <T> View.bind(flowable: Flowable<T>) =
-//            from<BaseDisposableActivity, Disposable> {
-//                addDisposable(it.second)
-//            }.fromTwo<Disposable, Flowable<T>, Consumer<T>> {
-//                this.bind2Api(it.first)
-//                it.first.subscribe(it.second)
-//            }.invoke {
-//                flowable
-//            }
+    fun <T> View.bind(flowable: Flowable<T>) =
+            from<BaseDisposableActivity, Disposable> {
+                addDisposable(it.second)
+            }.fromTwo<Disposable, Flowable<T>, Consumer<T>> {
+                this.bind2Api(it.first)
+                it.first.subscribe(it.second)
+            }.invoke(
+                flowable
+            )
 
 
 //    fun View.bind(vConnect2Disposable: ((Pair<View, Disposable>) -> Unit)): (() -> Disposable) -> Unit {
