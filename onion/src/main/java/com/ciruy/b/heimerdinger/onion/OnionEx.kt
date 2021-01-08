@@ -1,5 +1,7 @@
 package com.ciruy.b.heimerdinger.onion
 
+import java.util.*
+
 
 fun <F, T, P> F.onion(pairConsumer: (Pair<F, T>) -> P): (() -> (T)) -> P = {
     pairConsumer.invoke(Pair(this, it.invoke()))
@@ -22,6 +24,4 @@ fun <F, T, P> ((F) -> Unit).from(pair2f: (Pair<T, P>) -> F): (T) -> (P) -> Unit 
         }
     }
 }
-
-
 

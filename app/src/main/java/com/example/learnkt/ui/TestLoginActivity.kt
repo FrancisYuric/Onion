@@ -1,4 +1,4 @@
-package com.example.learnkt.modules.login
+package com.example.learnkt.ui
 
 import android.os.Bundle
 import android.view.View
@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_user_login.*
 
-class LoginActivity : AppCompatActivity() {
+class TestLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_login)

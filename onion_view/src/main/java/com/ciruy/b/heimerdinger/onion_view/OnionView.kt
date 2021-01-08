@@ -1,10 +1,14 @@
 package com.ciruy.b.heimerdinger.onion_view
 
 import android.view.View
+import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
@@ -22,4 +26,7 @@ fun <T> View.bind2Api(flowable: Flowable<T>): Flowable<T> {
             .flatMap { flowable }
 }
 
+fun TextView.textChanges():Observable<CharSequence>{
+    return RxTextView.textChanges(this).skipInitialValue()
+}
 
