@@ -3,7 +3,7 @@ package com.example.learnkt.ui.baseActivity
 import android.util.Pair
 import android.view.View
 import com.ciruy.b.heimerdinger.onion.from
-import com.example.learnkt.util.bind2Api
+import com.ciruy.b.heimerdinger.onion_view.bind2Api
 import com.example.learnkt.util.progressDownload
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -19,6 +19,7 @@ open abstract class BaseDisposableActivity : BaseActivity() {
     fun addDisposable(disposable: Disposable) {
         if (mCompositeDisposable == null)
             mCompositeDisposable = CompositeDisposable()
+        mCompositeDisposable?.add(disposable)
     }
 
     fun <T> View.bind(flowable: Flowable<T>) =
@@ -28,18 +29,14 @@ open abstract class BaseDisposableActivity : BaseActivity() {
                 val targetFlowable = it.first.observeOn(Schedulers.io())
                 this.bind2Api(targetFlowable)
                 targetFlowable.subscribe(it.second)
-            }.invoke(
-                    flowable
-            )
+            }.invoke(flowable)
 
     fun View.download(flowable: Flowable<ResponseBody>) =
             from<BaseDisposableActivity, Disposable> {
                 addDisposable(it.second)
             }.from<Disposable, Flowable<ResponseBody>, Consumer<Pair<String, Int>>> {
                 this.bind2Api(it.first.subscribeOn(Schedulers.io()).progressDownload()).subscribe(it.second)
-            }.invoke(
-                flowable
-            )
+            }.invoke(flowable)
 
 //    fun View.bind(vConnect2Disposable: ((Pair<View, Disposable>) -> Unit)): (() -> Disposable) -> Unit {
 //        return { it ->

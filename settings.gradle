@@ -1,2 +1,2 @@
-include ':app', ':upload_annotation', ':onion'
+include ':app', ':upload_annotation', ':onion', ':onion_view'
 rootProject.name='LearnKt'

@@ -20,11 +20,12 @@ class DownloadProgressActivity : BaseDisposableActivity() {
 //
 //                })
 
-//        addDisposable(helloWorld.bind2ProgressDownload(APIClient.instances.instanceRetrofit( WanAndroidAPI::class.java).firApkSize80M())
-//                .subscribe {
-//                    if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
-//                    else ToastUtil.long(this, it.first)
-//                })
+        addDisposable(helloWorld.bind2ProgressDownload(APIClient.instances.instanceRetrofit( WanAndroidAPI::class.java).firApkSize80M())
+                .subscribe {
+                    if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
+                    else ToastUtil.long(this, it.first)
+                })
+
         helloWorld.download(APIClient.instances.instanceRetrofit(Constant.FIRIM_URL_BASE, WanAndroidAPI::class.java).firApkSize80M())
                 .invoke(Consumer {
                     if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"

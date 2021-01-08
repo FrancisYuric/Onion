@@ -28,7 +28,6 @@ class DownloadManager {
         fun instance(): DownloadManager = Holder.INSTANCE
     }
 
-
     private fun createDownInfo(url: String) = DownloadInfo(url, getContentLength(url), 0, url.substring(url.lastIndexOf("/")))
     private val downCalls: HashMap<String, Call> = HashMap()
 
@@ -90,7 +89,7 @@ class DownloadManager {
         return DownloadInfo.TOTAL_ERROR
     }
 
-    inner class DownloadSubscribe(val downloadInfo: DownloadInfo) : ObservableOnSubscribe<DownloadInfo> {
+    inner class DownloadSubscribe(private val downloadInfo: DownloadInfo) : ObservableOnSubscribe<DownloadInfo> {
         override fun subscribe(emitter: ObservableEmitter<DownloadInfo>) {
             LogUtil.e("url subscribed")
             val url = downloadInfo.url
