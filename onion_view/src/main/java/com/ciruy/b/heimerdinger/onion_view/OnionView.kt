@@ -20,13 +20,16 @@ fun flowableClick(view: View): Flowable<Any> {
             .toFlowable(BackpressureStrategy.DROP)
 }
 
+fun flowableTextChanges(textView: TextView):Observable<CharSequence>{
+    return RxTextView.textChanges(textView)
+            .skipInitialValue()
+}
+
 fun <T> View.bind2Api(flowable: Flowable<T>): Flowable<T> {
     return flowableClick(this)
             .observeOn(Schedulers.io())
             .flatMap { flowable }
 }
 
-fun TextView.textChanges():Observable<CharSequence>{
-    return RxTextView.textChanges(this).skipInitialValue()
-}
+
 

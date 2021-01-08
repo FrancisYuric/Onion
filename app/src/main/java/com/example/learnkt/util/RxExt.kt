@@ -21,14 +21,14 @@ fun View.bind2ProgressDownload(flowable: Flowable<ResponseBody>): Flowable<Pair<
     return this.bind2Api(flowable).progressDownload()
 }
 
-fun Flowable<ResponseBody>.progressDownload(): Flowable<android.util.Pair<String, Int>> {
+fun Flowable<ResponseBody>.progressDownload(): Flowable<Pair<String, Int>> {
     return this
             .observeOn(Schedulers.io())
             .onErrorReturn { ResponseError.error(it) }
             .flatMap { t: ResponseBody ->
-                if (t is ResponseError) Flowable.just(android.util.Pair(t.throwable.toString(), -1))
-                else object : Observable<android.util.Pair<String, Int>>() {
-                    override fun subscribeActual(observer: Observer<in android.util.Pair<String, Int>>?) {
+                if (t is ResponseError) Flowable.just(Pair(t.throwable.toString(), -1))
+                else object : Observable<Pair<String, Int>>() {
+                    override fun subscribeActual(observer: Observer<in Pair<String, Int>>?) {
                         val downloadApkListener = DownloadApkListener(observer)
                         observer?.onSubscribe(downloadApkListener)
                         RequestUtil.writeResponseBodyToDisk(t, CiruyApplication.instance?.getExternalDownloadLocalFilesDir()

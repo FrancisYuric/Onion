@@ -2,9 +2,8 @@ package com.example.learnkt.ui
 
 import android.text.TextUtils
 import com.example.learnkt.R
-import com.example.learnkt.api.APIClient
-import com.example.learnkt.api.WanAndroidAPI
-import com.example.learnkt.bean.Constant
+import com.example.learnkt.bean.NetConstant
+import com.example.learnkt.bean.NetConstant.thunder_download
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 import com.example.learnkt.util.ToastUtil
 import com.example.learnkt.util.bind2ProgressDownload
@@ -20,17 +19,16 @@ class DownloadProgressActivity : BaseDisposableActivity() {
 //
 //                })
 
-        addDisposable(helloWorld.bind2ProgressDownload(APIClient.instances.instanceRetrofit( WanAndroidAPI::class.java).firApkSize80M())
+        addDisposable(helloWorld.bind2ProgressDownload(thunder_download())
                 .subscribe {
                     if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
                     else ToastUtil.long(this, it.first)
                 })
 
-        helloWorld.download(APIClient.instances.instanceRetrofit(Constant.FIRIM_URL_BASE, WanAndroidAPI::class.java).firApkSize80M())
-                .invoke(Consumer {
-                    if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
-                    else ToastUtil.long(this, it.first)
-                })
+        helloWorld.download(NetConstant.firm_download(), Consumer {
+            if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
+            else ToastUtil.long(this, it.first)
+        })
 
 //        addDisposable(helloWorld.onion<TextView, Flowable<ResponseBody>, Flowable<Pair<String, Int>>> { pair ->
 //            pair.first.bind2ProgressDownload(pair.second)
@@ -43,6 +41,7 @@ class DownloadProgressActivity : BaseDisposableActivity() {
 
 
     }
+
 
 }
 
