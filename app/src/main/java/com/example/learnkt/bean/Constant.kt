@@ -9,4 +9,11 @@ object Constant {
 
     //FIR的基本URL
     const val FIRIM_URL_BASE = "http://download.fir.im/"
+
+    object MemorySize {
+        const val KB = 1024L
+        const val MB = KB * 1024
+        const val GB = MB * 1024
+        const val TB = GB * 1024
+    }
 }

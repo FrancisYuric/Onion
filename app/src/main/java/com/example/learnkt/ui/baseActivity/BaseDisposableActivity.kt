@@ -2,17 +2,14 @@ package com.example.learnkt.ui.baseActivity
 
 import android.util.Pair
 import android.view.View
-import android.widget.TextView
 import com.ciruy.b.heimerdinger.onion.from
-import com.ciruy.b.heimerdinger.onion.fromTwo
-import com.ciruy.b.heimerdinger.onion.onion
 import com.example.learnkt.util.bind2Api
-import com.example.learnkt.util.bind2ProgressDownload
+import com.example.learnkt.util.progressDownload
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.activity_main.*
+import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 
 open abstract class BaseDisposableActivity : BaseActivity() {
@@ -27,13 +24,22 @@ open abstract class BaseDisposableActivity : BaseActivity() {
     fun <T> View.bind(flowable: Flowable<T>) =
             from<BaseDisposableActivity, Disposable> {
                 addDisposable(it.second)
-            }.fromTwo<Disposable, Flowable<T>, Consumer<T>> {
-                this.bind2Api(it.first)
-                it.first.subscribe(it.second)
+            }.from<Disposable, Flowable<T>, Consumer<T>> {
+                val targetFlowable = it.first.observeOn(Schedulers.io())
+                this.bind2Api(targetFlowable)
+                targetFlowable.subscribe(it.second)
+            }.invoke(
+                    flowable
+            )
+
+    fun View.download(flowable: Flowable<ResponseBody>) =
+            from<BaseDisposableActivity, Disposable> {
+                addDisposable(it.second)
+            }.from<Disposable, Flowable<ResponseBody>, Consumer<Pair<String, Int>>> {
+                this.bind2Api(it.first.subscribeOn(Schedulers.io()).progressDownload()).subscribe(it.second)
             }.invoke(
                 flowable
             )
-
 
 //    fun View.bind(vConnect2Disposable: ((Pair<View, Disposable>) -> Unit)): (() -> Disposable) -> Unit {
 //        return { it ->

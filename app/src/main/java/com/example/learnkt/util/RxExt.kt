@@ -17,13 +17,18 @@ import java.util.concurrent.TimeUnit
 
 fun flowableClick(view: View): Flowable<Any> {
     return RxView.clicks(view)
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .observeOn(Schedulers.io())
+            .doOnNext{
+                LogUtil.e("Click Button")
+            }
             .debounce(2, TimeUnit.SECONDS)
             .toFlowable(BackpressureStrategy.DROP)
-            .observeOn(Schedulers.io())
 }
 
 fun <T> View.bind2Api(flowable: Flowable<T>): Flowable<T> {
     return flowableClick(this)
+            .observeOn(Schedulers.io())
             .flatMap { flowable }
 }
 

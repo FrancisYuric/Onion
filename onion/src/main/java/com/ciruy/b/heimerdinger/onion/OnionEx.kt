@@ -15,7 +15,7 @@ fun <F, T> F.from(pairConsumer: (Pair<F, T>) -> Unit): (T) -> Unit {
  * Activity.addDisposable(disposable):((()->disposable)->Unit)
  * (()->disposable)->Unit
  */
-fun <F, T, P> ((F) -> Unit).fromTwo(pair2f: (Pair<T, P>) -> F): (T) -> (P) -> Unit {
+fun <F, T, P> ((F) -> Unit).from(pair2f: (Pair<T, P>) -> F): (T) -> (P) -> Unit {
     return { t ->
         { p ->
             this.invoke(pair2f.invoke(Pair(t, p)))
