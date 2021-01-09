@@ -1,4 +1,4 @@
-package com.example.learnkt.bean
+package com.example.learnkt.modules.logon.bean
 
 //登录接口回调数据模型
 data class LoginResultEntity(

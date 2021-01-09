@@ -1,6 +1,6 @@
 package com.example.learnkt.api
 
-import com.example.learnkt.bean.LoginResultEntity
+import com.example.learnkt.modules.logon.bean.LoginResultEntity
 import com.example.learnkt.bean.ResultEntityWrapper
 import io.reactivex.Flowable
 import io.reactivex.Observable

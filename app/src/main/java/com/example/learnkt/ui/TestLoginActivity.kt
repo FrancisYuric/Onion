@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.learnkt.R
 import com.example.learnkt.api.APIClient
 import com.example.learnkt.api.WanAndroidAPI
-import com.example.learnkt.bean.LoginResultEntity
+import com.example.learnkt.modules.logon.bean.LoginResultEntity
 import com.example.learnkt.bean.rx.LoadingAPIResultObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

@@ -41,7 +41,7 @@
     </LinearLayout>
     <Button
         android:layout_width="100dp"
-        android:id="@+id/login"
+        android:id="@+id/btn_login"
         android:text="登录"
         android:layout_height="@dimen/h_edit_text"/>
 </LinearLayout>

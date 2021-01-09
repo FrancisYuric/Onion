@@ -4,6 +4,9 @@ import okhttp3.MediaType
 import okhttp3.ResponseBody
 import okio.BufferedSource
 
+/**
+ * 通用调用失败回调
+ */
 class ResponseError(var throwable: Throwable?) : ResponseBody() {
     constructor() : this(null)
 
