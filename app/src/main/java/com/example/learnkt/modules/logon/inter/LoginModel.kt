@@ -1,8 +1,9 @@
 package com.example.learnkt.modules.logon.inter
 
 import android.content.Context
+import com.example.learnkt.inter.IModel
 
-interface LoginModel {
+interface LoginModel :IModel{
     /**
      * 登录操作
      */
