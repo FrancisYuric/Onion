@@ -11,8 +11,9 @@ open class LoginPresenter : IPresenter<LoginModel, LoginView, LoginPresenter> {
     //登录
     fun loginAction(context: Context,
                     username: String,
-                    password: String) :ResultListener<LoginModel> {
-        return model()
+                    password: String,
+                    resultListener: ResultListener<LoginModel>) :ResultListener<LoginModel> {
+        return model().login(context, username,password,resultListener)
     }
 
 
