@@ -1,9 +1,10 @@
 package com.example.learnkt.modules.logon.inter
 
 import android.content.Context
+import android.util.LogPrinter
 import com.example.learnkt.inter.IModel
 
-interface LoginModel :IModel{
+interface LoginModel :IModel<LoginModel,LoginView,LoginPresenter>{
     /**
      * 登录操作
      */

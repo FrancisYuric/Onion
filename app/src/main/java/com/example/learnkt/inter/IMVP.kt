@@ -1,10 +1,19 @@
 package com.example.learnkt.inter
 
-interface IPresenter<M:IModel,V:IView>:ResultListener<M>{
+/**
+ * 堪称完美的MVP结构
+ */
+interface IPresenter<
+        M : IModel<M, V, P>,
+        V : IView<M, V, P>,
+        P : IPresenter<M, V, P>>
 
-}
-interface IModel {
-}
-interface IView{
+interface IModel<
+        M : IModel<M, V, P>,
+        V : IView<M, V, P>,
+        P : IPresenter<M, V, P>>
 
-}
+interface IView<
+        M : IModel<M, V, P>,
+        V : IView<M, V, P>,
+        P : IPresenter<M, V, P>>
