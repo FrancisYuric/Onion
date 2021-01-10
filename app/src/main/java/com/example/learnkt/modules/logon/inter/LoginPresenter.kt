@@ -5,15 +5,20 @@ import com.example.learnkt.inter.IPresenter
 import com.example.learnkt.inter.ResultListener
 
 //Presenter层
-open class LoginPresenter : IPresenter<LoginModel, LoginView, LoginPresenter> {
+class LoginPresenter : IPresenter<LoginModel, LoginPresenter> {
+    //Todo:懒加载
     override fun model() = LoginModel()
 
     //登录
     fun loginAction(context: Context,
                     username: String,
                     password: String,
-                    resultListener: ResultListener<LoginModel>) :ResultListener<LoginModel> {
-        return model().login(context, username,password,resultListener)
+                    resultListener: ResultListener<LoginModel>) {
+        when {
+            username.isEmpty() -> resultListener.failure("请输入你的用户名！")
+            password.isEmpty() -> resultListener.failure("请输入你的密码！")
+            else -> return model().login(context, username, password, resultListener)
+        }
     }
 
 

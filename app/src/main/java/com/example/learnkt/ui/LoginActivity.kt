@@ -1,15 +1,16 @@
 package com.example.learnkt.ui
 
-import android.text.Editable
 import com.example.learnkt.R
+import com.example.learnkt.inter.ResultListener
+import com.example.learnkt.modules.logon.inter.LoginModel
+import com.example.learnkt.modules.logon.inter.LoginView
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 import com.example.learnkt.util.LogUtil
 import com.example.learnkt.util.ToastUtil
-import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.ac_login.*
 
-class LoginActivity : BaseDisposableActivity() {
+class LoginActivity : BaseDisposableActivity(), LoginView {
     override fun layout(): Int = R.layout.ac_login
     override fun initListeners() {
         super.initListeners()
@@ -20,16 +21,17 @@ class LoginActivity : BaseDisposableActivity() {
             LogUtil.e("change password to $it.toString()")
         })
         btn_login.click(Consumer {
-            if(et_username.text.isNotEmpty()&&et_password.text.isNotEmpty())
-            doLogIn(et_username.text,et_password.text)
-            else ToastUtil.short(this, "请输入用户名和密码！")
+            loginAction(this@LoginActivity,
+                    et_username.text.toString(),
+                    et_password.text.toString(),
+                    object : ResultListener<LoginModel> {
+                        override fun success(t: LoginModel) {
+
+                        }
+
+                        override fun failure(errMes: String?) = ToastUtil.short(this@LoginActivity, errMes)
+                    })
         })
     }
 
-    /**
-     * 进行登录操作
-     */
-    private fun doLogIn(text: Editable?, text1: Editable?) {
-
-    }
 }
