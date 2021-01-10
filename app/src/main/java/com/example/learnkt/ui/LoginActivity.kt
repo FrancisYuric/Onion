@@ -20,6 +20,7 @@ class LoginActivity : BaseDisposableActivity(), LoginView {
         et_password.textChanges(Consumer {
             LogUtil.e("change password to $it.toString()")
         })
+        //Todo：这个方式可能会引起的内存泄漏问题
         btn_login.click(Consumer {
             loginAction(this@LoginActivity,
                     et_username.text.toString(),
