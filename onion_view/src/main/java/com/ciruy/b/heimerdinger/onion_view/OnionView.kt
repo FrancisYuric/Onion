@@ -16,7 +16,7 @@ fun flowableClick(view: View): Flowable<Any> {
     return RxView.clicks(view)
             .subscribeOn(AndroidSchedulers.mainThread())
             .observeOn(Schedulers.io())
-            .debounce(2, TimeUnit.SECONDS)
+            .debounce(500, TimeUnit.MILLISECONDS)
             .toFlowable(BackpressureStrategy.DROP)
 }
 

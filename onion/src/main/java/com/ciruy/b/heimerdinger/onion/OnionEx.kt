@@ -7,6 +7,14 @@ fun <F, T, P> F.onion(pairConsumer: (Pair<F, T>) -> P): (() -> (T)) -> P = {
     pairConsumer.invoke(Pair(this, it.invoke()))
 }
 
+fun <F,T,P> ((T?)->P).changeFrom(f2t:(F)->T?):(F)->P = {
+    this.invoke(f2t.invoke(it))
+}
+
+fun <F,T,P> ((F)->T).changeTo(t2p:(T)->P):(F)->P = {
+    t2p.invoke(this.invoke(it))
+}
+
 fun <F, T> F.from(pairConsumer: (Pair<F, T>) -> Unit): (T) -> Unit {
     return {
         pairConsumer.invoke(Pair(this, it))

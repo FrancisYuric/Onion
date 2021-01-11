@@ -14,14 +14,14 @@ class LoginActivity : BaseDisposableActivity(), LoginView {
     override fun layout(): Int = R.layout.ac_login
     override fun initListeners() {
         super.initListeners()
-        et_username.textChanges(Consumer {
+        et_username.flowableTextChanges(Consumer {
             LogUtil.e("change username to $it.toString()")
         })
-        et_password.textChanges(Consumer {
+        et_password.flowableTextChanges(Consumer {
             LogUtil.e("change password to $it.toString()")
         })
         //Todo：这个方式可能会引起的内存泄漏问题
-        btn_login.click(Consumer {
+        btn_login.flowableClick(Consumer {
             loginAction(this@LoginActivity,
                     et_username.text.toString(),
                     et_password.text.toString(),

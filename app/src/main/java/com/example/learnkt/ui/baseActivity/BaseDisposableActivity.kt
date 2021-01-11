@@ -37,7 +37,7 @@ abstract class BaseDisposableActivity : BaseActivity() {
                 this.bind2Api(it.first.subscribeOn(Schedulers.io()).progressDownload()).subscribe(it.second)
             }.invoke(flowable).invoke(consumer)
 
-    fun TextView.textChanges(consumer: Consumer<CharSequence>) =
+    fun TextView.flowableTextChanges(consumer: Consumer<CharSequence>) =
             funAddDisposable().from<Disposable, TextView, Consumer<CharSequence>> {
                 flowableTextChanges(it.first).subscribe(it.second)
             }.invoke(this).invoke(consumer)
@@ -45,11 +45,8 @@ abstract class BaseDisposableActivity : BaseActivity() {
     private fun funAddDisposable(): (Disposable) -> Unit = from { addDisposable(it.second) }
 
 
-    fun View.click(consumer: Consumer<Any>) {
-        funAddDisposable().from<Disposable, View, Consumer<Any>> {
-            flowableClick(it.first).subscribe(it.second)
-        }.invoke(this).invoke(consumer)
-    }
+    fun View.flowableClick(consumer: Consumer<Any>) =
+            funAddDisposable().from<Disposable, View, Consumer<Any>> { flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
 
     override fun onDestroy() {
         mCompositeDisposable?.dispose()

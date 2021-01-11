@@ -56,11 +56,9 @@ class TestRxViewActivity : Activity() {
                         val info =
                             dialog.findViewById(R.id.dialog_info) as TextView
                         info.text = "Dialog shows in thread " + Thread.currentThread().id
-                        val change =
-                            dialog.window?.decorView?.findViewById(R.id.change_btn) as Button
+                        val change = dialog.window?.decorView?.findViewById(R.id.change_btn) as Button
                         change.setOnClickListener {
-                            info.text =
-                                "onClick is called in thread " + Thread.currentThread().id
+                            info.text = "onClick is called in thread " + Thread.currentThread().id
                         }
                         RxView.clicks(change)
                             .subscribe {
