@@ -73,11 +73,7 @@ class APIClient {
         { baseUrl ->
             { apiInterface ->
                 url2retrofitMem.computeIfAbsent(
-                    Pair(
-                        timeout2OkHttpClientMem.computeIfAbsent(
-                            timeout
-                        )!!, baseUrl
-                    )
+                    Pair.create(timeout2OkHttpClientMem.computeIfAbsent(timeout)!!, baseUrl)
                 )?.create(apiInterface)!!
             }
         }
