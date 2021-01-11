@@ -8,10 +8,10 @@ import java.util.concurrent.ConcurrentHashMap
 abstract class BaseMemorizers<T, U>(private val applicable: (T) -> U) {
     private val cache = ConcurrentHashMap<T, U>()
     fun computeIfAbsentOrigin(t: T) = if (cache.containsKey(t)) {
-        println("cache contains $t")
+        LogUtil.e("cache contains $t")
         cache[t]
     } else {
-        println("cache not contains $t")
+        LogUtil.e("cache not contains $t")
         val u = applicable.invoke(t)
         cache[t] = u
         u
@@ -39,12 +39,8 @@ class SoftMemorizers<T, U>(applicable: (ComparableSoftReference<T?>) -> Comparab
         private fun <U> unwrapReference(): (ComparableSoftReference<U?>) -> U? = ComparableSoftReference<U?>::get
     }
 
-    fun computeIfAbsent(t:T){
-        computeIfAbsentOrigin(softReference<T?>().invoke(t))
-    }
-    fun forget(t:T){
-        computeIfAbsentOrigin(softReference<T?>().invoke(t))
-    }
+    fun computeIfAbsent(t: T) = computeIfAbsentOrigin(softReference<T?>().invoke(t))?.get()
+    fun forget(t: T) = computeIfAbsentOrigin(softReference<T?>().invoke(t))?.get()
 }
 
 class WeakMemorizers<T, U>
