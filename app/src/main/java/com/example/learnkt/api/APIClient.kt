@@ -88,6 +88,11 @@ class APIClient {
         }
     }
 
+    fun <T> instanceRetrofit(timeout: Long, baseUrl: String, apiInterface: Class<T>): T =
+        instanceRetrofit<T>().invoke(timeout)
+            .invoke(baseUrl)
+            .invoke(apiInterface)
+
     fun <T> instanceRetrofit(baseUrl: String, apiInterface: Class<T>): T = instanceRetrofit<T>()
         .invoke(timeoutInSecond)
         .invoke(baseUrl)
