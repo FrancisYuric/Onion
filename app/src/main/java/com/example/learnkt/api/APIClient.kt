@@ -56,6 +56,10 @@ class APIClient {
                 .baseUrl(it?.second)
                 .build()
         }
+
+        val retrofit2service = SoftMemorizers.applicable<Pair<Retrofit, Class<*>>, Any> {
+            it!!.first.create(it.second)
+        }
     }
 
     /**
@@ -69,12 +73,17 @@ class APIClient {
 
 
     fun <F, T> createIfAbsent(f2t: (F?) -> T) = SoftMemorizers.applicable(f2t)
+    @Suppress("UNCHECKED_CAST")
     fun <T> instanceRetrofit(): (Long) -> (String) -> (Class<T>) -> T = { timeout ->
         { baseUrl ->
             { apiInterface ->
-                url2retrofitMem.computeIfAbsent(
-                    Pair.create(timeout2OkHttpClientMem.computeIfAbsent(timeout)!!, baseUrl)
-                )?.create(apiInterface)!!
+                retrofit2service.computeIfAbsent(
+                    Pair.create(
+                        url2retrofitMem.computeIfAbsent(
+                            Pair.create(timeout2OkHttpClientMem.computeIfAbsent(timeout)!!, baseUrl)
+                        ), apiInterface
+                    )
+                ) as T
             }
         }
     }

@@ -18,5 +18,17 @@ class DownloadProgressActivity : BaseDisposableActivity() {
             if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
             else ToastUtil.long(this, it.first)
         })
+        println(
+            APIClient.instance().instanceRetrofit(
+                "http://www.baidu.com",
+                WanAndroidAPI::class.java
+            )
+        )
+        println(
+            APIClient.instance().instanceRetrofit(
+                "http://www.baidu.com",
+                WanAndroidAPI::class.java
+            )
+        )
     }
 }
