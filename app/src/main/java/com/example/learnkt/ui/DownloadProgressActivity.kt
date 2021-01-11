@@ -14,21 +14,9 @@ class DownloadProgressActivity : BaseDisposableActivity() {
     override fun layout(): Int = R.layout.activity_main
 
     override fun initListeners() {
-//        helloWorld.download(NetConstant.firm_download(), Consumer {
-//            if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
-//            else ToastUtil.long(this, it.first)
-//        })
-        println(
-            APIClient.instance().instanceRetrofit(
-                "http://www.baidu.com",
-                WanAndroidAPI::class.java
-            )
-        )
-        println(
-            APIClient.instance().instanceRetrofit(
-                "http://www.baidu.com",
-                WanAndroidAPI::class.java
-            )
-        )
+        helloWorld.download(NetConstant.firm_download(), Consumer {
+            if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
+            else ToastUtil.long(this, it.first)
+        })
     }
 }
