@@ -1,2 +1,2 @@
-include ':app', ':upload_annotation', ':onion', ':onion_view', ':onion_kapt'
+include ':app', ':onion_annotation', ':onion', ':onion_view', ':onion_kapt', ':test_HengyiProject'
 rootProject.name='LearnKt'
