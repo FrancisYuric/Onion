@@ -25,6 +25,14 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+//    运行所有测试用例相关配置
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+            outputs.upToDateWhen { false }
+            showStandardStreams = true
+        }
+    }
 }
 
 dependencies {

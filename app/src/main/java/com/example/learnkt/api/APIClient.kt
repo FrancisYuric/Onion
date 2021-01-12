@@ -71,7 +71,6 @@ class APIClient {
         .newCall(Request.Builder().url(Constant.THUNDER_DOWNLOAD_URL_BASE).build())
         .execute()
 
-
     fun <F, T> createIfAbsent(f2t: (F?) -> T) = SoftMemorizers.applicable(f2t)
     @Suppress("UNCHECKED_CAST")
     fun <T> instanceRetrofit(): (Long) -> (String) -> (Class<T>) -> T = { timeout ->
