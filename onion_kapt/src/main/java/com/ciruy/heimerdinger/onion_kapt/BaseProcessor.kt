@@ -1,21 +1,28 @@
 package com.ciruy.heimerdinger.onion_kapt
 
+import java.util.logging.Logger
 import javax.annotation.processing.AbstractProcessor
+import javax.annotation.processing.ProcessingEnvironment
 import javax.annotation.processing.RoundEnvironment
-import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
+import javax.lang.model.util.ElementFilter
+import javax.lang.model.util.Elements
 
-abstract class BaseProcessor : AbstractProcessor() {
-    override fun process(
-        p0: MutableSet<out TypeElement>?,
-        roundEnvironment: RoundEnvironment?
+abstract class BaseProcessor  {
+    fun process(
+            roundEnvironment: RoundEnvironment?,
+            mAbstractProcessor:OnionMainProcessor
     ): Boolean {
-        getElementsAnnotatedWith(roundEnvironment!!, targetAnnotation())
-            .forEach { doOnElement(it) }
+        processingEnvironment = mAbstractProcessor.mProcessorEnvironment
+        ElementFilter.typesIn(getElementsAnnotatedWith(roundEnvironment!!, targetAnnotation()))
+                .forEach { doOnElement(it) }
         return true
     }
 
-    abstract fun <T : Element> doOnElement(t: T)
+//    protected var onionMainProcessor:OnionMainProcessor? = null
+    protected var processingEnvironment:ProcessingEnvironment? = null
+    private var elementUtils: Elements? = null
+    abstract fun <T : TypeElement> doOnElement(typeElement: T)
 
     /**
      * target annotation to be resolve
@@ -23,7 +30,7 @@ abstract class BaseProcessor : AbstractProcessor() {
     abstract fun targetAnnotation(): Class<out Annotation>
 
     private fun getElementsAnnotatedWith(
-        roundEnvironment: RoundEnvironment,
-        targetAnnotation: Class<out Annotation>
+            roundEnvironment: RoundEnvironment,
+            targetAnnotation: Class<out Annotation>
     ) = roundEnvironment.getElementsAnnotatedWith(targetAnnotation)
 }

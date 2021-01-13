@@ -1,5 +1,8 @@
 package com.example.learnkt.bean
 
+import ciruy.b.heimerdinger.annotation.BuilderClass
+
+@BuilderClass
 data class DownloadInfo(var url: String,
                         var total: Long,
                         var progress: Long,
