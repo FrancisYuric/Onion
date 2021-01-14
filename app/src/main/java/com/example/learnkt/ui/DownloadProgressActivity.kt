@@ -1,18 +1,19 @@
 package com.example.learnkt.ui
 
 import android.text.TextUtils
-import android.util.Log
+import com.app.common_upload.annotation.apt.BuilderClass
+import com.app.common_upload.inter.ISubBuilder
 import com.example.learnkt.R
-import com.example.learnkt.api.APIClient
-import com.example.learnkt.api.WanAndroidAPI
 import com.example.learnkt.bean.NetConstant
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
-import com.example.learnkt.util.LogUtil
 import com.example.learnkt.util.ToastUtil
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main.*
 
-class DownloadProgressActivity : BaseDisposableActivity() {
+@BuilderClass
+class DownloadProgressActivity : BaseDisposableActivity(), ISubBuilder<SubDownloadProgressActivity> {
+    override fun subBuilder() = SubDownloadProgressActivity.__create(this)
+
     override fun layout(): Int = R.layout.activity_main
 
     override fun initListeners() {

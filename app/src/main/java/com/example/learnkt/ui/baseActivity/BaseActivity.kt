@@ -3,9 +3,9 @@ package com.example.learnkt.ui.baseActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import com.app.common_upload.inter.ISubBuilder
 
 abstract class BaseActivity : AppCompatActivity() {
-
     abstract fun layout(): Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

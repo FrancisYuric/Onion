@@ -1,6 +1,9 @@
 package com.example.learnkt
 
 import android.content.Context
+import com.app.common_upload.inter.ISubBuilder
+import com.example.learnkt.ui.DownloadProgressActivity
+import com.example.learnkt.ui.SubDownloadProgressActivity
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test
@@ -15,7 +18,9 @@ import org.mockito.junit.MockitoJUnitRunner
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(MockitoJUnitRunner::class)
-class ExampleUnitTest {
+class ExampleUnitTest : ISubBuilder<SubDownloadProgressActivity> {
+    override fun subBuilder() = SubDownloadProgressActivity.__create(DownloadProgressActivity())
+
     companion object {
         val FAKE_STRING = "AndroidUnitTest"
     }
