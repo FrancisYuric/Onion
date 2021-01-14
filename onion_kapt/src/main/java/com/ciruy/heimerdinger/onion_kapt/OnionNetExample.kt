@@ -26,3 +26,4 @@ interface OnionNetExample {
     @Streaming
     fun exampleRequest(): Flowable<ResponseBody>
 }
+

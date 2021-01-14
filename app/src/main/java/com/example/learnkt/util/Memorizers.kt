@@ -31,7 +31,6 @@ class SoftMemorizers<T, U>(applicable: (ComparableSoftReference<T?>) -> Comparab
                         .changeFrom<ComparableSoftReference<T?>, T?, U> { unwrapReference<T?>().invoke(it) }
                         .changeTo { softReference<U>().invoke(it) })
 
-
         private fun <U> softReference(): (u: U) -> ComparableSoftReference<U> = {
             ComparableSoftReference(it)
         }

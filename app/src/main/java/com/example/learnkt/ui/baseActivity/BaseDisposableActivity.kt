@@ -7,6 +7,8 @@ import com.ciruy.b.heimerdinger.onion.from
 import com.ciruy.b.heimerdinger.onion_view.bind2Api
 import com.ciruy.b.heimerdinger.onion_view.flowableClick
 import com.ciruy.b.heimerdinger.onion_view.flowableTextChanges
+import com.example.learnkt.bean.DownloadInfo
+import com.example.learnkt.manager.DownloadManager
 import com.example.learnkt.util.progressDownload
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -31,6 +33,18 @@ abstract class BaseDisposableActivity : BaseActivity() {
                 this.bind2Api(targetFlowable)
                 targetFlowable.subscribe(it.second)
             }.invoke(flowable)
+
+    fun View.download(url: String, consumer: Consumer<DownloadInfo>) =
+            funAddDisposable().from<Disposable, Flowable<DownloadInfo>, Consumer<DownloadInfo>> {
+                this.bind2Api(it.first)
+                        .subscribe(it.second)
+            }.invoke(DownloadManager.instance().download(url)).invoke(consumer)
+
+    fun View.cancelDownload(url: String) {
+        funAddDisposable().from<Disposable, Flowable<Any>, Any?> {
+            it.first.subscribe { DownloadManager.instance().cancel(url) }
+        }.invoke(flowableClick(this)).invoke(null)
+    }
 
     fun View.download(flowable: Flowable<ResponseBody>, consumer: Consumer<Pair<String, Int>>) =
             funAddDisposable().from<Disposable, Flowable<ResponseBody>, Consumer<Pair<String, Int>>> {

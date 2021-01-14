@@ -21,14 +21,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_btn_down1"
-            android:onClick="onClick"
             android:text="下载1"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_btn_cancel1"
-            android:onClick="onClick"
             android:text="取消1"
             />
     </LinearLayout>

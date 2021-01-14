@@ -1,7 +1,7 @@
 package com.example.learnkt.api
 
-import com.example.learnkt.modules.logon.bean.LoginResultEntity
 import com.example.learnkt.bean.ResultEntityWrapper
+import com.example.learnkt.modules.logon.bean.LoginResultEntity
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -29,4 +29,8 @@ interface WanAndroidAPI {
     @GET("apps/5eccda86b2eb4670747962c3/install?download_token=13bcbbe50f70729766c88f4573cf12ef")
     @Streaming
     fun firApkSize80M(): Flowable<ResponseBody>
+
+    @GET("apps/5eccda86b2eb4670747962c3/install?download_token=13bcbbe50f70729766c88f4573cf12ef")
+    @Streaming
+    fun firApkSize80MCall(): retrofit2.Call<ResponseBody>
 }

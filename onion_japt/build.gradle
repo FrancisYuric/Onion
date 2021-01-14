@@ -1,0 +1,20 @@
+apply plugin: 'java-library'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    compileOnly 'com.google.auto.service:auto-service-annotations:1.0-rc6'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc6'
+//    compileOnly 'com.google.auto:auto-common:0.10'
+    compileOnly 'com.google.guava:guava:24.1-jre'
+    compileOnly project(':onion_jannotation')
+    api 'com.squareup:javapoet:1.11.1'
+//    api "com.supcon.mes.common:com_http:$rootProject.ext.httpVersion"
+
+}
+
+//  解决build警告：编码GBK的不可映射字符
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+

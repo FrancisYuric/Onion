@@ -2,6 +2,7 @@ package com.example.learnkt.util
 
 import android.util.Pair
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.ciruy.b.heimerdinger.onion_view.bind2Api
 import com.example.learnkt.CiruyApplication
 import com.example.learnkt.bean.ResponseError
@@ -11,6 +12,7 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 

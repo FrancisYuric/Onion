@@ -4,9 +4,7 @@ import com.example.learnkt.CiruyApplication
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.rx.DownloadObserver
 import com.example.learnkt.util.LogUtil
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
+import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Call
@@ -16,6 +14,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
+import java.lang.Exception
 
 class DownloadManager {
     object Holder {
@@ -32,7 +31,7 @@ class DownloadManager {
     private val downCalls: HashMap<String, Call> = HashMap()
 
     //Todo:小心此处的内存泄露
-    fun download(url: String, downloadObserver: DownloadObserver) {
+    fun download_(url: String, downloadObserver: DownloadObserver) {
         Observable.just(url)
                 .filter { !downCalls.containsKey(it) }
                 .flatMap { Observable.just(createDownInfo(it)) }
@@ -42,6 +41,15 @@ class DownloadManager {
                 .subscribeOn(Schedulers.io())
                 .subscribe(downloadObserver)
     }
+
+    fun download(url: String) = Observable.just(url)
+            .filter { !downCalls.containsKey(it) }
+            .flatMap { Observable.just(createDownInfo(it)) }
+            .map { getRealFileName(it) }
+            .flatMap { Observable.create(DownloadSubscribe(it)) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .toFlowable(BackpressureStrategy.DROP)
 
     private fun getRealFileName(downloadInfo: DownloadInfo): DownloadInfo {
         val fileName: String = downloadInfo.mFileName
@@ -59,7 +67,7 @@ class DownloadManager {
             downloadLength = newFile.length()
             ++i
         }
-        downloadInfo.progress = (downloadLength)
+        downloadInfo.progress = downloadLength
         downloadInfo.mFileName = file.name
         return downloadInfo
     }
@@ -117,12 +125,16 @@ class DownloadManager {
                     if (len == -1) break
                     outputStream.write(buffer, 0, len ?: 0)
                     downloadedLength += (len ?: 0)
-                    downloadInfo.progress= downloadedLength
+                    downloadInfo.progress = downloadedLength
                     emitter.onNext(downloadInfo)
                 }
                 outputStream.flush()
                 downCalls.remove(url)
-            } finally {
+            }catch (e:Exception){
+//                emitter.onError(Throwable(e.message))
+//                emitter.onNext()
+            }
+            finally {
                 inputStream?.close()
                 outputStream?.close()
             }
