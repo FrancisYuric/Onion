@@ -4,6 +4,7 @@ import android.util.Pair
 import android.view.View
 import android.widget.TextView
 import com.ciruy.b.heimerdinger.onion.from
+import com.ciruy.b.heimerdinger.onion_view.activity.BaseActivity
 import com.ciruy.b.heimerdinger.onion_view.bind2Api
 import com.ciruy.b.heimerdinger.onion_view.flowableClick
 import com.ciruy.b.heimerdinger.onion_view.flowableTextChanges

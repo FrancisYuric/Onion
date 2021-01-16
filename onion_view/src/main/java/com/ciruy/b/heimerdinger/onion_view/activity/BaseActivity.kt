@@ -1,4 +1,4 @@
-package com.example.learnkt.ui.baseActivity
+package com.ciruy.b.heimerdinger.onion_view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

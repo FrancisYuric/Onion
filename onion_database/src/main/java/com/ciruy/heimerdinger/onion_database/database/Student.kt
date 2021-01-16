@@ -1,4 +1,4 @@
-package com.example.learnkt.database
+package com.ciruy.heimerdinger.onion_database.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

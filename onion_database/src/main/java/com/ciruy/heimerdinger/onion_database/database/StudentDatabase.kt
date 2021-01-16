@@ -1,4 +1,4 @@
-package com.example.learnkt.database
+package com.ciruy.heimerdinger.onion_database.database
 
 import android.content.Context
 import androidx.room.Database

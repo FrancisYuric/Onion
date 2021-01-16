@@ -1,9 +1,8 @@
-include ':app', ':onion_database',
+include ':app', ':onion_database', ':onion_net',
         ':onion_kannotation',
         ':onion',
         ':onion_view',
         ':onion_kapt',
-        ':onion_net',
         ':test_HengyiProject',
         ':onion_jannotation',
         ':onion_japt'
