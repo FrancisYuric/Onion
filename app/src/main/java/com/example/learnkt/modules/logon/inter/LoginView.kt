@@ -13,6 +13,6 @@ interface LoginView : IView<LoginModel, LoginView, LoginPresenter>{
                     username: String,
                     password: String,
                     resultListener: ResultListener<LoginModel>) {
-           return presenter().loginAction(context.get(), username, password, resultListener)
+           return presenter().loginAction(context, username, password, resultListener)
     }
 }
