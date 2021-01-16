@@ -3,6 +3,7 @@ include ':app', ':onion_database',
         ':onion',
         ':onion_view',
         ':onion_kapt',
+        ':onion_net',
         ':test_HengyiProject',
         ':onion_jannotation',
         ':onion_japt'

@@ -17,5 +17,10 @@
         app:menu="@menu/bottom_nav_menu"
         tools:ignore="MissingClass"
         />
-
+<TextView
+    android:layout_width="wrap_content"
+    android:visibility="gone"
+    android:layout_height="wrap_content"
+    android:id="@+id/helloWorld"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>
