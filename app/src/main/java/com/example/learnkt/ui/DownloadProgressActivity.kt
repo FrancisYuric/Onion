@@ -18,9 +18,9 @@ class DownloadProgressActivity : BaseDisposableActivity(), ISubBuilder<SubDownlo
     override fun layout(): Int = R.layout.activity_download_progress
 
     override fun initListeners() {
-        helloWorld.download(NetConstant.thunder_download(), Consumer {
+        helloWorld.download(NetConstant.thunder_download()) {
             if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
             else ToastUtil.long(this, it.first)
-        })
+        }
     }
 }

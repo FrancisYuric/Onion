@@ -15,14 +15,14 @@ class LoginActivity : BaseDisposableActivity(), LoginView {
     override fun layout(): Int = R.layout.ac_login
     override fun initListeners() {
         super.initListeners()
-        et_username.flowableTextChanges(Consumer {
+        et_username.flowableTextChanges {
             LogUtil.e("change username to $it.toString()")
-        })
-        et_password.flowableTextChanges(Consumer {
+        }
+        et_password.flowableTextChanges{
             LogUtil.e("change password to $it.toString()")
-        })
+        }
         //Todo：这个方式可能会引起的内存泄漏问题
-        btn_login.flowableClick(Consumer {
+        btn_login.flowableClick {
             loginAction(weakR(), et_username.text.toString(), et_password.text.toString(),
                     object : ResultListener<LoginModel> {
                         override fun success(t: LoginModel) {
@@ -31,7 +31,7 @@ class LoginActivity : BaseDisposableActivity(), LoginView {
 
                         override fun failure(errMes: String?) = ToastUtil.short(this@LoginActivity, errMes)
                     })
-        })
+        }
     }
 
 }
