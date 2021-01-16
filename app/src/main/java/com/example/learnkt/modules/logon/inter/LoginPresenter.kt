@@ -3,6 +3,7 @@ package com.example.learnkt.modules.logon.inter
 import android.content.Context
 import com.example.learnkt.inter.IPresenter
 import com.example.learnkt.inter.ResultListener
+import java.lang.ref.WeakReference
 
 //Presenter层
 class LoginPresenter : IPresenter<LoginModel, LoginPresenter> {
@@ -10,7 +11,7 @@ class LoginPresenter : IPresenter<LoginModel, LoginPresenter> {
     override fun model() = LoginModel()
 
     //登录
-    fun loginAction(context: Context,
+    fun loginAction(context: WeakReference<Context>,
                     username: String,
                     password: String,
                     resultListener: ResultListener<LoginModel>) {
@@ -20,6 +21,4 @@ class LoginPresenter : IPresenter<LoginModel, LoginPresenter> {
             else -> return model().login(context, username, password, resultListener)
         }
     }
-
-
 }

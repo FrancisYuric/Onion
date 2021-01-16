@@ -1,8 +1,10 @@
 package com.ciruy.b.heimerdinger.onion
 
+import java.lang.ref.WeakReference
 import java.util.*
 
 
+fun <F> F.weakR() = WeakReference(this)
 fun <F, T, P> F.onion(pairConsumer: (Pair<F, T>) -> P): (() -> (T)) -> P = {
     pairConsumer.invoke(Pair(this, it.invoke()))
 }

@@ -1,5 +1,6 @@
 package com.example.learnkt.ui
 
+import com.ciruy.b.heimerdinger.onion.weakR
 import com.example.learnkt.R
 import com.example.learnkt.inter.ResultListener
 import com.example.learnkt.modules.logon.inter.LoginModel
@@ -22,7 +23,7 @@ class LoginActivity : BaseDisposableActivity(), LoginView {
         })
         //Todo：这个方式可能会引起的内存泄漏问题
         btn_login.flowableClick(Consumer {
-            loginAction(this@LoginActivity,
+            loginAction(weakR(),
                     et_username.text.toString(),
                     et_password.text.toString(),
                     object : ResultListener<LoginModel> {
