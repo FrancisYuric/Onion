@@ -20,6 +20,6 @@ abstract class StudentDatabase : RoomDatabase() {
             return INSTANCE
         }
         //忽略初始化Context操作
-        fun getDatabase():StudentDatabase? = INSTANCE
+        fun getDatabase(): StudentDatabase? = INSTANCE
     }
 }

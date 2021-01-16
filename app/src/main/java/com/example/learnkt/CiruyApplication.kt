@@ -2,6 +2,7 @@ package com.example.learnkt
 
 import android.app.Application
 import android.os.Environment
+import androidx.multidex.MultiDex
 import java.io.File
 
 class CiruyApplication : Application() {
@@ -14,6 +15,7 @@ class CiruyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        MultiDex.install(this)
         instance = this
     }
 }

@@ -1,4 +1,4 @@
-include ':app',
+include ':app', ':onion_database',
         ':onion_kannotation',
         ':onion',
         ':onion_view',
