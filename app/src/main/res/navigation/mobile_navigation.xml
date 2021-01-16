@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/mobile_navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@menu/bottom_nav_menu"
+    tools:ignore="InvalidNavigation,UnusedNavigation">
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.learnkt.ui.fragment.HomeFragment"
+        android:label="首页"
+        tools:layout="@layout/frag_home" />
+    <fragment
+        android:id="@+id/navigation_collect"
+        android:name="com.example.learnkt.ui.fragment.CollectFragment"
+        android:label="收藏"
+        tools:layout="@layout/frag_collect" />
+    <fragment
+        android:id="@+id/navigation_personal"
+        android:name="com.example.learnkt.ui.fragment.PersonalFragment"
+        android:label="个人"
+        tools:layout="@layout/frag_personal" />
 
 </navigation>
