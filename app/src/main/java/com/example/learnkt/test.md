@@ -6,3 +6,8 @@
 这个功能在高并发的操作中其实效果挺明显的
 
 3. View层和Net层抽离到对应的模块中，让业务层仅仅关注视图层
+4. 如果我知道API以及返回的数据类型，那么Model，Presenter，View三个其实完全都不用我自己去创建，用APT去生成就行了
+实际上生成的三者为BaseModel,BasePresenter,BaseView，通过注解的方式将此三者的实现类直接传输，注解的定义如下
+@MVP(model= ModelImpl.class
+            ,view=ViewImpl.class
+            ,presenter=PresenterImpl.class)
