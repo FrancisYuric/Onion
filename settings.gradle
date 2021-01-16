@@ -3,6 +3,8 @@ include ':app',
         ':onion',
         ':onion_view',
         ':onion_kapt',
-        ':test_HengyiProject', ':onion_jannotation', ':onion_japt'
+        ':test_HengyiProject',
+        ':onion_jannotation',
+        ':onion_japt'
 
 rootProject.name='LearnKt'

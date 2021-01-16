@@ -1,9 +1,7 @@
 package com.example.learnkt.ui.baseActivity
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import com.app.common_upload.inter.ISubBuilder
 
 abstract class BaseActivity : AppCompatActivity() {
     abstract fun layout(): Int
@@ -17,9 +15,14 @@ abstract class BaseActivity : AppCompatActivity() {
         initViews()
         initListeners()
     }
+
     open fun initViews() {
 
     }
+
+    fun hideActionBar() = supportActionBar?.hide()
+
+    fun showActionBar() = supportActionBar?.show()
 
     open fun initListeners() {
 
