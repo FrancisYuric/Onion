@@ -15,15 +15,6 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
             main_progress1.progress = it.progress.toInt()
         })
         main_btn_cancel1.cancelDownload(Constant.THUNDER_DOWNLOAD_FULL_URL)
-//        val softMemorizers = SoftMemorizers.applicable<String,String> {
-//            LogUtil.e("计算开始 ${System.currentTimeMillis()}")
-//            Thread.sleep(1000)
-//            LogUtil.e("计算结束 ${System.currentTimeMillis()}")
-//            it!!
-//        }
-//        for (i in 0L..9L) {
-//            LogUtil.e("${i}次计算结果 ${softMemorizers.computeIfAbsent(""+(i%3))}")
-//        }
     }
 
     override fun onClick(p0: View?) {
@@ -33,6 +24,4 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
     override fun staticPermission(): List<String> {
         return listOf(Manifest.permission.INTERNET)
     }
-
-
 }
