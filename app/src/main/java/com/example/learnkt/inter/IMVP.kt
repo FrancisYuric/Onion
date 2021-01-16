@@ -3,10 +3,11 @@ package com.example.learnkt.inter
 /**
  * 堪称完美的MVP结构
  */
-interface IPresenter<
+abstract class IPresenter<
         M : IModel<M>,
         P : IPresenter<M, P>> {
-    fun model(): M
+    abstract fun model(): M
+    val model by lazy { model() }
 }
 
 interface IModel<M : IModel<M>> {

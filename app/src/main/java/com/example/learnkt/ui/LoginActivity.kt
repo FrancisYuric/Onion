@@ -23,9 +23,7 @@ class LoginActivity : BaseDisposableActivity(), LoginView {
         })
         //Todo：这个方式可能会引起的内存泄漏问题
         btn_login.flowableClick(Consumer {
-            loginAction(weakR(),
-                    et_username.text.toString(),
-                    et_password.text.toString(),
+            loginAction(weakR(), et_username.text.toString(), et_password.text.toString(),
                     object : ResultListener<LoginModel> {
                         override fun success(t: LoginModel) {
 

@@ -80,7 +80,7 @@ dependencies {
     //导入onion
     implementation project(':onion')
     implementation project(':onion_view')
-    implementation project(':onion_database')
+    implementation project(':onion_data')
     //onion-apt相关包
     implementation project(':onion_kannotation')
     implementation project(':onion_jannotation')
