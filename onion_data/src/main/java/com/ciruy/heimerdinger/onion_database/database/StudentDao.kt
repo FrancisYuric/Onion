@@ -9,19 +9,18 @@ import androidx.room.Update
  * 对于增删改查的相关方法的拓展
  */
 @Dao
-interface StudentDao {
+interface StudentDao:IDao<Student> {
     //varage 可变参数
     //void a(Student... stus vararg student:Student
     @Insert
-    fun insertStudents(vararg student: Student)
-
+    override fun insertInTx(vararg student: Student)
 
     @Update
-    fun updateStudents(vararg students: Student)
+    override fun updateInTx(vararg students: Student)
 
     @Query("DELETE FROM student")
-    fun deleteAllStudents()
+    override fun deleteAll()
 
     @Query("SELECT * FROM student ORDER BY ID DESC")
-    fun queryAllStudent():List<Student>
+    override fun queryAll():List<Student>
 }
