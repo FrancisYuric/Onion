@@ -14,4 +14,13 @@ abstract class BaseFragment : Fragment() {
             layoutInflater.inflate(layoutId(), null)
                     ?: super.onCreateView(inflater, container, savedInstanceState)
 
+
+    override fun onStart() {
+        initListener()
+        super.onStart()
+    }
+
+    open fun initListener() {
+
+    }
 }

@@ -19,4 +19,10 @@ object Constant {
         const val GB = MB * 1024
         const val TB = GB * 1024
     }
+
+    object ApiQuery{
+        const val USER_NAME = "username"
+        const val PASSWORD = "password"
+        const val SYSTEM_ENTITY_CODES = "systemEntityCodes"
+    }
 }

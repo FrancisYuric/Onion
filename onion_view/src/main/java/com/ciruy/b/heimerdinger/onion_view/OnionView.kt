@@ -1,5 +1,6 @@
 package com.ciruy.b.heimerdinger.onion_view
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
@@ -17,6 +18,7 @@ fun flowableClick(view: View): Flowable<Any> {
             .subscribeOn(AndroidSchedulers.mainThread())
             .observeOn(Schedulers.io())
             .debounce(500, TimeUnit.MILLISECONDS)
+            .doOnNext { Log.e("ciruy", "flowableClick") }
             .toFlowable(BackpressureStrategy.DROP)
 }
 
@@ -30,6 +32,8 @@ fun <T> View.bind2Api(flowable: Flowable<T>): Flowable<T> {
             .observeOn(Schedulers.io())
             .flatMap { flowable }
 }
+fun <T> View.lazyBind2Api(flowable:()-> Flowable<T>):Flowable<T> = flowableClick(this)
+        .observeOn(Schedulers.io()).flatMap { flowable.invoke() }
 
-
+fun <T:TextView> T.content() = this.text.toString()
 
