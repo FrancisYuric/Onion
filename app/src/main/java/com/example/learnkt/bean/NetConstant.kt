@@ -4,6 +4,7 @@ import android.widget.EditText
 import com.example.learnkt.api.APIClient
 import com.example.learnkt.api.SupconApi
 import com.example.learnkt.api.WanAndroidAPI
+import com.example.learnkt.bean.supcon.LoginEntity
 
 object NetConstant {
     /**
@@ -21,5 +22,6 @@ object NetConstant {
                      password: String) = APIClient.instance()
             .instanceRetrofit(url, SupconApi::class.java)
             .login(username, password, hashMapOf())
+            .onErrorReturn(LoginEntity::fail)
 
 }

@@ -1,7 +1,5 @@
 package com.example.learnkt.bean
 
-import retrofit2.http.GET
-
 object Constant {
     //迅雷的基本URL
     const val THUNDER_DOWNLOAD_URL_BASE = "https://down.sandai.net/"
@@ -9,6 +7,10 @@ object Constant {
     const val THUNDER_DOWNLOAD_FULL_URL = "${THUNDER_DOWNLOAD_URL_BASE}mac/thunder_3.4.1.4368.dmg"
     //百度的基本URL
     const val BAIDU_URL_BASE = "https://www.firApkSize80M.com/"
+
+    object Pattern {
+        const val URL_PATTERN = "^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$"
+    }
 
     //FIR的基本URL
     const val FIRIM_URL_BASE = "http://download_.fir.im/"
@@ -20,7 +22,7 @@ object Constant {
         const val TB = GB * 1024
     }
 
-    object ApiQuery{
+    object ApiQuery {
         const val USER_NAME = "username"
         const val PASSWORD = "password"
         const val SYSTEM_ENTITY_CODES = "systemEntityCodes"
