@@ -7,7 +7,6 @@ import com.example.learnkt.R
 import com.example.learnkt.bean.thunder_download
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 import com.example.learnkt.util.ToastUtil
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_download_progress.*
 
 @BuilderClass
@@ -19,7 +18,7 @@ class DownloadProgressActivity : BaseDisposableActivity(), ISubBuilder<SubDownlo
 
     override fun initListeners() {
         helloWorld.download(thunder_download()) {
-            if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
+            if (TextUtils.isEmpty(it.first)) helloWorld.text = getString(R.string.download_progress, it.second)
             else ToastUtil.long(this, it.first)
         }
     }
