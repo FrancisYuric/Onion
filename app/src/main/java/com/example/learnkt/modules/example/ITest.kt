@@ -10,6 +10,6 @@ import io.reactivex.Flowable
         presenter = Nothing::class)
 interface ITest {
     fun method1(textView:TextView)
-    fun method2(url:String, username:String,password:String):Flowable<LoginEntity>
+    fun login(url:String, username:String, password:String):Flowable<LoginEntity>
     fun method3()
 }

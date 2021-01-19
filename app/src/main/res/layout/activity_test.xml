@@ -5,16 +5,10 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/helloWorld"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/helloWorld"
-        android:text="10.6.0.92:8080"
         android:gravity="center"
-        />
-<!--    <fragment xmlns:tools="http://schemas.android.com/tools"-->
-<!--        android:name="com.example.learnkt.ui.fragment.TestFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        tools:layout="@layout/fragment_test"-->
-<!--        android:id="@+id/TODO" />-->
+        android:text="10.6.0.92" />
+
 </LinearLayout>

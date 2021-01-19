@@ -1,7 +1,6 @@
 package com.example.learnkt.ui.fragment
 
 import com.example.learnkt.R
-import com.example.learnkt.bean.NetConstant
 import kotlinx.android.synthetic.main.fragment_test.*
 
 class TestFragment : BaseDisposableFragment() {

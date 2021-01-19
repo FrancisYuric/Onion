@@ -4,7 +4,7 @@ import android.text.TextUtils
 import com.app.common_upload.annotation.apt.BuilderClass
 import com.app.common_upload.inter.ISubBuilder
 import com.example.learnkt.R
-import com.example.learnkt.bean.NetConstant
+import com.example.learnkt.bean.thunder_download
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 import com.example.learnkt.util.ToastUtil
 import io.reactivex.functions.Consumer
@@ -18,7 +18,7 @@ class DownloadProgressActivity : BaseDisposableActivity(), ISubBuilder<SubDownlo
     override fun layout(): Int = R.layout.activity_download_progress
 
     override fun initListeners() {
-        helloWorld.download(NetConstant.thunder_download()) {
+        helloWorld.download(thunder_download()) {
             if (TextUtils.isEmpty(it.first)) helloWorld.text = "下载进度：${it.second}%"
             else ToastUtil.long(this, it.first)
         }

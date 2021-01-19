@@ -11,7 +11,7 @@ class TestActivity : BaseDisposableActivity(), TestView {
     override fun initListeners() {
         super.initListeners()
         helloWorld.lazyBind {
-            presenter().method2(helloWorld.content, helloWorld.content, helloWorld.content)
+            presenter().login(helloWorld.content, helloWorld.content, helloWorld.content)
         }.invoke {
 
         }
