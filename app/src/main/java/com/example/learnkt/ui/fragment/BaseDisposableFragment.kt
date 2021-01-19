@@ -4,9 +4,9 @@ import android.util.Pair
 import android.view.View
 import android.widget.TextView
 import com.ciruy.b.heimerdinger.onion.from
-import com.ciruy.b.heimerdinger.onion_view.bind2Api
+import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
 import com.ciruy.b.heimerdinger.onion_view.fragment.BaseFragment
-import com.ciruy.b.heimerdinger.onion_view.lazyBind2Api
+import com.ciruy.b.heimerdinger.onion_view.view.lazyBind2Api
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.manager.DownloadManager
 import com.example.learnkt.util.progressDownload
@@ -46,7 +46,7 @@ abstract class BaseDisposableFragment : BaseFragment() {
     private fun <T> ((T) -> Unit).toConsumer() = Consumer<T> { this.invoke(it) }
     fun View.cancelDownload(url: String) = funAddDisposable().from<Disposable, Flowable<Any>, Any?> {
         it.first.subscribe { DownloadManager.instance().cancel(url) }
-    }.invoke(com.ciruy.b.heimerdinger.onion_view.flowableClick(this)).invoke(null)
+    }.invoke(com.ciruy.b.heimerdinger.onion_view.view.flowableClick(this)).invoke(null)
 
     fun View.download(flowable: Flowable<ResponseBody>, consumer: (Pair<String, Int>) -> Unit) =
             this.download(flowable, consumer.toConsumer())
@@ -59,7 +59,7 @@ abstract class BaseDisposableFragment : BaseFragment() {
     fun TextView.flowableTextChanges(consumer: (CharSequence) -> Unit) = this.flowableTextChanges(consumer.toConsumer())
     fun TextView.flowableTextChanges(consumer: Consumer<CharSequence>) =
             funAddDisposable().from<Disposable, TextView, Consumer<CharSequence>> {
-                com.ciruy.b.heimerdinger.onion_view.flowableTextChanges(it.first).subscribe(it.second)
+                com.ciruy.b.heimerdinger.onion_view.view.flowableTextChanges(it.first).subscribe(it.second)
             }.invoke(this).invoke(consumer)
 
     private fun funAddDisposable(): (Disposable) -> Unit = from { addDisposable(it.second) }
@@ -67,7 +67,7 @@ abstract class BaseDisposableFragment : BaseFragment() {
 
     fun View.flowableClick(consumer: (Any) -> Unit) = this.flowableClick(consumer.toConsumer())
     fun View.flowableClick(consumer: Consumer<Any>) =
-            funAddDisposable().from<Disposable, View, Consumer<Any>> { com.ciruy.b.heimerdinger.onion_view.flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
+            funAddDisposable().from<Disposable, View, Consumer<Any>> { com.ciruy.b.heimerdinger.onion_view.view.flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
 
     override fun onDestroy() {
         mCompositeDisposable?.dispose()

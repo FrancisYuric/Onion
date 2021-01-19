@@ -5,10 +5,10 @@ import android.view.View
 import android.widget.TextView
 import com.ciruy.b.heimerdinger.onion.from
 import com.ciruy.b.heimerdinger.onion_view.activity.BaseActivity
-import com.ciruy.b.heimerdinger.onion_view.bind2Api
-import com.ciruy.b.heimerdinger.onion_view.flowableClick
-import com.ciruy.b.heimerdinger.onion_view.flowableTextChanges
-import com.ciruy.b.heimerdinger.onion_view.lazyBind2Api
+import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
+import com.ciruy.b.heimerdinger.onion_view.view.flowableClick
+import com.ciruy.b.heimerdinger.onion_view.view.flowableTextChanges
+import com.ciruy.b.heimerdinger.onion_view.view.lazyBind2Api
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.manager.DownloadManager
 import com.example.learnkt.util.progressDownload

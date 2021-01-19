@@ -1,5 +1,6 @@
 package com.example.learnkt.ui
 
+import com.ciruy.b.heimerdinger.onion_view.view.content
 import com.example.learnkt.R
 import com.example.learnkt.modules.example.TestView
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
@@ -10,7 +11,7 @@ class TestActivity : BaseDisposableActivity(), TestView {
     override fun initListeners() {
         super.initListeners()
         helloWorld.lazyBind {
-            presenter().method2(helloWorld.text.toString(), helloWorld.text.toString(), helloWorld.text.toString())
+            presenter().method2(helloWorld.content, helloWorld.content, helloWorld.content)
         }.invoke {
 
         }
