@@ -1,7 +1,7 @@
 package com.example.learnkt.api
 
+import ciruy.b.heimerdinger.annotation.ResponseFormat
 import com.example.learnkt.bean.Constant
-import com.example.learnkt.bean.supcon.LoginEntity
 import com.example.learnkt.bean.supcon.SystemCodeListEntity
 import io.reactivex.Flowable
 import retrofit2.http.GET
@@ -17,9 +17,10 @@ interface SupconApi {
      * @param map      默认参数
      * @return
      */
+    @ResponseFormat(ResponseFormat.XML)
     @GET("/cas/mobile/logon")
     fun login(@Query(Constant.ApiQuery.USER_NAME) username: String,
-              @Query(Constant.ApiQuery.PASSWORD) password: String, @QueryMap map: Map<String, Any>): Flowable<LoginEntity>
+              @Query(Constant.ApiQuery.PASSWORD) password: String, @QueryMap map: Map<String, String>): Flowable<LoginEntity>
 
     /**
      * 获取系统编码

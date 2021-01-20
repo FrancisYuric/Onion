@@ -3,7 +3,7 @@ package com.example.learnkt.bean
 import com.example.learnkt.api.APIClient
 import com.example.learnkt.api.SupconApi
 import com.example.learnkt.api.WanAndroidAPI
-import com.example.learnkt.bean.supcon.LoginEntity
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -25,7 +25,11 @@ fun supcon_login(url: String,
                  username: String,
                  password: String) = APIClient.instance()
         .instanceRetrofit(url, SupconApi::class.java)
-        .login(username, password, hashMapOf())
+        .login(username, password, hashMapOf(Pair("machineId", "11111111"),
+                Pair("clientType", "mobile"),
+                Pair("clientVersion", "2.1"),
+                Pair("timeStamp", Date().time.toString()),
+                Pair("clientId", "123")))
         .onErrorReturn(LoginEntity::fail)
 
 fun patternCheck(pattern: String, targetStr: String): Matcher =

@@ -11,21 +11,23 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-fun <T:View>flowableClick(view: T): Flowable<Any> = RxView.clicks(view)
+fun <T : View> flowableClick(view: T): Flowable<Any> = RxView.clicks(view)
         .subscribeOn(AndroidSchedulers.mainThread())
         .observeOn(Schedulers.io())
         .debounce(500, TimeUnit.MILLISECONDS)
         .toFlowable(BackpressureStrategy.DROP)
 
-fun <T:TextView>flowableTextChanges(textView: T): Observable<CharSequence> = RxTextView.textChanges(textView)
+fun <T : TextView> flowableTextChanges(textView: T): Observable<CharSequence> = RxTextView.textChanges(textView)
         .skipInitialValue()
 
 fun <T> View.bind2Api(flowable: Flowable<T>): Flowable<T> = flowableClick(this)
         .observeOn(Schedulers.io())
         .flatMap { flowable }
+        .observeOn(AndroidSchedulers.mainThread())
 
 fun <T> View.lazyBind2Api(flowable: () -> Flowable<T>): Flowable<T> = flowableClick(this)
         .observeOn(Schedulers.io()).flatMap { flowable.invoke() }
+        .observeOn(AndroidSchedulers.mainThread())
 
 val <T : TextView> T.content
     get() = this.text.toString()

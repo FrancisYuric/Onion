@@ -4,6 +4,7 @@ import android.util.Pair
 import android.view.View
 import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
 import com.example.learnkt.CiruyApplication
+import com.example.learnkt.bean.BaseEntity
 import com.example.learnkt.bean.ResponseError
 import com.example.learnkt.listener.DownloadApkListener
 import io.reactivex.BackpressureStrategy
@@ -31,3 +32,5 @@ fun Flowable<ResponseBody>.progressDownload(): Flowable<Pair<String, Int>> = thi
             }.toFlowable(BackpressureStrategy.DROP)
         }
         .observeOn(AndroidSchedulers.mainThread())
+
+fun <T : BaseEntity> errorFlowable(errMes: String) = Flowable.error<T>(Throwable(errMes))

@@ -9,7 +9,7 @@ object Constant {
     const val BAIDU_URL_BASE = "https://www.firApkSize80M.com/"
 
     object Pattern {
-        const val URL_PATTERN = "^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$"
+        const val URL_PATTERN = "^([hH][tT]{2}[pP]:/*|[hH][tT]{2}[pP][sS]:/*|[fF][tT][pP]:/*)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\/])+(\\?{0,1}(([A-Za-z0-9-~]+\\={0,1})([A-Za-z0-9-~]*)\\&{0,1})*)$"
     }
 
     //FIR的基本URL
