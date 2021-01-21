@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">恒逸项目测试</string>
     <string name="test_system_code">系统编码测试</string>
-    <string name="download_progress">下载进度：%1d\%</string>
+    <string name="download_progress">下载进度：%d\%</string>
 </resources>
