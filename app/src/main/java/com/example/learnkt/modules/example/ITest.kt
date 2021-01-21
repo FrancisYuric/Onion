@@ -2,6 +2,7 @@ package com.example.learnkt.modules.example
 
 import android.widget.TextView
 import ciruy.b.heimerdinger.annotation.MVP
+import com.example.learnkt.bean.supcon.LoginEntity
 import io.reactivex.Flowable
 
 @MVP(model = Nothing::class,

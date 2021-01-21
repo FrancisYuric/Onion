@@ -2,6 +2,7 @@ package com.example.learnkt.api
 
 import ciruy.b.heimerdinger.annotation.ResponseFormat
 import com.example.learnkt.bean.Constant
+import com.example.learnkt.bean.supcon.LoginEntity
 import com.example.learnkt.bean.supcon.SystemCodeListEntity
 import io.reactivex.Flowable
 import retrofit2.http.GET

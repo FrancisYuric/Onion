@@ -3,6 +3,7 @@ package com.example.learnkt.bean
 import com.example.learnkt.api.APIClient
 import com.example.learnkt.api.SupconApi
 import com.example.learnkt.api.WanAndroidAPI
+import com.example.learnkt.bean.supcon.LoginEntity
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
