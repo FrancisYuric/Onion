@@ -8,8 +8,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-//太奇葩了，竟然不知道自动处理
-class MockUnitTest (){
+class MockUnitTest {
     companion object {
         const val FAKE_STRING = "AndroidUnitTest"
 
