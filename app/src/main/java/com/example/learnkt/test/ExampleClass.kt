@@ -1,6 +1,6 @@
 package com.example.learnkt.test
 
-class ExampleClass(var uniqueId: Int) {
+class ExampleClass(public var uniqueId: Int) {
     fun compareTo(int: Int) = uniqueId - int
     fun close() = Unit
     fun execute() {
