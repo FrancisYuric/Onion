@@ -7,7 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
-        @null
+        @null</style>
+
+    <style name="TestTextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:text">给徐时运加鸡腿</item>
     </style>
 </resources>

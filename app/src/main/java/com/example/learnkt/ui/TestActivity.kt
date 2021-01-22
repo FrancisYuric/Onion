@@ -12,8 +12,10 @@ class TestActivity : BaseDisposableActivity(), TestView {
     override fun initListeners() {
         super.initListeners()
         helloWorld.lazyBind { presenter().login(helloWorld.content, "frank", "1") }
-                .invoke { if(it.errMsg.isEmpty()) ToastUtil.short(this, "登录成功！")
-                else ToastUtil.short(this, it.errMsg)}
+                .invoke {
+                    if (it.errMsg.isEmpty()) ToastUtil.short(this, "登录成功！")
+                    else ToastUtil.short(this, it.errMsg)
+                }
     }
 
 }
