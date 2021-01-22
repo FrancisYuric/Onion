@@ -14,6 +14,11 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onStart()
         initViews()
         initListeners()
+        initData()
+    }
+
+    open fun initData() {
+
     }
 
     open fun initViews() {

@@ -1,6 +1,7 @@
 package com.ciruy.b.heimerdinger.onion_view.view
 
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -31,4 +32,7 @@ fun <T> View.lazyBind2Api(flowable: () -> Flowable<T>): Flowable<T> = flowableCl
 
 val <T : TextView> T.content
     get() = this.text.toString()
+
+val <T : ViewGroup> T.childList
+    get() = 0.until(childCount).map { getChildAt(it) }
 
