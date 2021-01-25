@@ -10,3 +10,8 @@ val <T> T.rxJava
 val <T> T.rxFlow
     get() = Flowable.just(this)
 
+val <F, T : Iterable<F>> T.rxIterable
+    get() = Flowable.fromIterable(this)
+
+val <F, T : Sequence<F>> T.rxIterable
+    get() = Flowable.fromIterable(this.asIterable())

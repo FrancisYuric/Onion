@@ -39,6 +39,7 @@ class FlowableLayout : ViewGroup {
         var lineHeight = 0
         var parentNeededWidth = 0
         var parentNeededHeight = 0
+
         children.filter { it.visibility != View.GONE }
                 .withIndex()
                 .forEach {
