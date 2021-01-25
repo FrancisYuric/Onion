@@ -7,7 +7,7 @@ import com.example.learnkt.bean.Constant.FIRIM_URL_BASE
 import com.example.learnkt.net.CookieJarImpl
 import com.example.learnkt.net.HttpLoggingInterceptorImpl
 import com.example.learnkt.net.JsonOrXmlConverterFactory
-import com.example.learnkt.util.SoftMemorizers
+import com.ciruy.onion_base.memory.SoftMemorizers
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient

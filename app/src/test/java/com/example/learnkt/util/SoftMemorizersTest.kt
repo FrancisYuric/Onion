@@ -1,5 +1,6 @@
 package com.example.learnkt.util
 
+import com.ciruy.onion_base.memory.SoftMemorizers
 import org.junit.Test
 
 class SoftMemorizersTest{

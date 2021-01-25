@@ -1,9 +1,8 @@
-package com.example.learnkt.util
+package com.ciruy.onion_base.memory
 
 import com.ciruy.b.heimerdinger.onion.changeFrom
 import com.ciruy.b.heimerdinger.onion.changeTo
 import com.ciruy.onion_base.util.LogUtil
-import com.ciruy.onion_base.memory.ComparableSoftReference
 import java.util.concurrent.ConcurrentHashMap
 
 abstract class BaseMemorizers<T, U>(private val applicable: (T) -> U) {
