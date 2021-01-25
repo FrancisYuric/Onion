@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.RedundantAddViewActivity">
+        <activity android:name=".ui.FlowLayoutExampleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,9 +31,10 @@
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.TestRxViewActivity" />
-<!--        <activity android:name=".ui.RedundantAddViewActivity" />-->
         <!--        <activity android:name=".ui.MyPagerActivity" />-->
-        <!--        <activity android:name=".ui.FlowLayoutActivity" />-->
+        <!--        <activity android:name=".ui.RedundantAddViewActivity" />-->
+        <!--        <activity android:name=".ui.MyPagerActivity" />-->
+        <!--        <activity android:name=".ui.FlowLayoutExampleActivity" />-->
     </application>
 
 </manifest>

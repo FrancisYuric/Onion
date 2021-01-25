@@ -45,16 +45,22 @@ public class BuilderProcessor extends BaseProcessor {
     private static final String PREFIX = "Sub";
     private static final String TARGET_CLASS_NAME = "targetClass";
     private Set<String> containedMethods = new HashSet<>();
-    
+
     @Override
     public void process(RoundEnvironment roundEnv, AnnotationProcessor mAbstractProcessor) {
         //通过创建代码块的方式向类中添加对应的代码内容,遇到复杂的代码信息的时候直接这么实现感觉会好的多
         //依次分析所有被BuilderClass注解注释的类
-        for (TypeElement elementAnnotatedWithBuilderClass : ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(BuilderClass.class))) {
+//        for(TypeElement element:ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(InternalBuilderClass.class)))
+//        {
+//            Class[] internalBuilderClass = element.getAnnotation(InternalBuilderClass.class).extClass;
+//            TypeElement typeElement = TypeElement
+//        }
+        for (TypeElement elementAnnotatedWithBuilderClass :
+                ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(BuilderClass.class))) {
             //直接获取被标记的类名
             String targetAnnotationClass = elementAnnotatedWithBuilderClass.getSimpleName().toString();
             String generatedClassName = PREFIX + targetAnnotationClass;
-        //创建类空壳
+            //创建类空壳
             ClassName originClassName = ClassName.get(elementAnnotatedWithBuilderClass);
             String packageName = originClassName.packageName();
             ClassName targetClassName = ClassName.get(packageName, generatedClassName);
@@ -63,13 +69,17 @@ public class BuilderProcessor extends BaseProcessor {
                             .addMethod(MethodSpec.constructorBuilder()
                                     .addParameter(originClassName, TARGET_CLASS_NAME)
                                     .addModifiers(Modifier.PRIVATE)
-                                    .addStatement(CodeBlock.builder().add("this.$L = $L", TARGET_CLASS_NAME, TARGET_CLASS_NAME).build())
+                                    .addStatement(CodeBlock.builder().add("this.$L = $L",
+                                            TARGET_CLASS_NAME,
+                                            TARGET_CLASS_NAME).build())
                                     .build())
                             .addMethod(MethodSpec.methodBuilder("__create")
                                     .addModifiers(Modifier.STATIC, Modifier.PUBLIC)
                                     .addParameter(originClassName, TARGET_CLASS_NAME)
                                     .returns(targetClassName)
-                                    .addCode(CodeBlock.builder().addStatement("return new $T($L)", targetClassName, TARGET_CLASS_NAME).build())
+                                    .addCode(CodeBlock.builder().addStatement("return new $T($L)",
+                                            targetClassName,
+                                            TARGET_CLASS_NAME).build())
                                     .build())
                             .addField(FieldSpec.builder(originClassName, TARGET_CLASS_NAME).build());
             //获取被BuilderClass所注释的类中的所有方法
@@ -95,12 +105,12 @@ public class BuilderProcessor extends BaseProcessor {
             }
         }
     }
-    
+
     private TypeElement getSuperClassTypeElement(TypeElement element) {
         DeclaredType declaredType = (DeclaredType) element.getSuperclass();
         return (TypeElement) declaredType.asElement();
     }
-    
+
     private void analyseEnclosedElements(String generatedClassName, String packageName, TypeSpec.Builder typeSpecBuilder, Element declaredType, AnnotationProcessor mAbstractProcessor) {
         for (ExecutableElement executableElement : ElementFilter.methodsIn(declaredType.getEnclosedElements())) {
             if (executableElement.getAnnotation(OmitMethod.class) != null) continue;
@@ -126,7 +136,7 @@ public class BuilderProcessor extends BaseProcessor {
             TypeMirror receiverType = executableElement.getReceiverType();
             //获取当前方法抛出类型
             List<TypeMirror> thrownTypes = (List<TypeMirror>) executableElement.getThrownTypes();
-            List<? extends TypeParameterElement> typeParameterElements =executableElement.getTypeParameters();
+            List<? extends TypeParameterElement> typeParameterElements = executableElement.getTypeParameters();
             MethodSpec.Builder methodSpecBuilder = MethodSpec.methodBuilder(simpleName);
             StringBuilder paramString = new StringBuilder();
             for (int i = 0; i < parameters.size(); i++) {
@@ -139,7 +149,7 @@ public class BuilderProcessor extends BaseProcessor {
                     paramString.append("p" + i);
                 }
             }
-            for(TypeParameterElement typeParameterElement:typeParameterElements){
+            for (TypeParameterElement typeParameterElement : typeParameterElements) {
                 methodSpecBuilder.addTypeVariable(TypeVariableName.get((TypeVariable) typeParameterElement.asType()));
             }
             for (TypeMirror typeMirror : thrownTypes) {

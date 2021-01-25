@@ -19,7 +19,7 @@ class MyPagerActivity : BaseActivity() {
     var preIndex: Int = 0
     private val timer = Timer()
     var isContinue = true
-    val onPageChangeListener: ViewPager.OnPageChangeListener = object : ViewPager.OnPageChangeListener {
+    private val onPageChangeListener: ViewPager.OnPageChangeListener = object : ViewPager.OnPageChangeListener {
         override fun onPageScrollStateChanged(state: Int) {
 
         }
@@ -75,7 +75,8 @@ class MyPagerActivity : BaseActivity() {
             val imageView = ImageView(this)
             imageView.setImageResource(R.drawable.rg_selector)
             imageView.setPadding(20, 0, 0, 0)
-            radio_group.addView(imageView, ViewGroup.LayoutParams.WRAP_CONTENT,
+            radio_group.addView(imageView,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT)
             radio_group.getChildAt(0).isEnabled = false
         }
