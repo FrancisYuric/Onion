@@ -1,6 +1,6 @@
 package com.example.learnkt.net
 
-import com.example.learnkt.util.LogUtil
+import com.ciruy.onion_base.util.LogUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor

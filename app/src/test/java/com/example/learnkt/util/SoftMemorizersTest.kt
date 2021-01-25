@@ -1,8 +1,6 @@
 package com.example.learnkt.util
 
-import com.example.learnkt.bean.ComparableSoftReference
 import org.junit.Test
-import java.util.concurrent.TimeUnit
 
 class SoftMemorizersTest{
     @Test

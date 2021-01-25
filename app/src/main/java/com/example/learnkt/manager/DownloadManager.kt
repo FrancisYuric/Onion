@@ -3,7 +3,7 @@ package com.example.learnkt.manager
 import com.example.learnkt.CiruyApplication
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.rx.DownloadObserver
-import com.example.learnkt.util.LogUtil
+import com.ciruy.onion_base.util.LogUtil
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

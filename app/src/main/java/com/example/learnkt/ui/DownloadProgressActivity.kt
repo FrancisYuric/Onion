@@ -6,7 +6,7 @@ import com.app.common_upload.inter.ISubBuilder
 import com.example.learnkt.R
 import com.example.learnkt.bean.thunder_download
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
-import com.example.learnkt.util.ToastUtil
+import com.ciruy.onion_base.util.ToastUtil
 import kotlinx.android.synthetic.main.activity_download_progress.*
 
 @BuilderClass

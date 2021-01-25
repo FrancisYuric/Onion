@@ -4,7 +4,7 @@ import android.widget.TextView
 import com.example.learnkt.bean.legalUrl
 import com.example.learnkt.bean.supcon.LoginEntity
 import com.example.learnkt.inter.IPresenter
-import com.example.learnkt.util.ToastUtil
+import com.ciruy.onion_base.util.ToastUtil
 import io.reactivex.Flowable
 
 /**

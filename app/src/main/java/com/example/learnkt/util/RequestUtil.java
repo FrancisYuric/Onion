@@ -1,12 +1,9 @@
 package com.example.learnkt.util;
 
-import android.os.Environment;
-import android.util.Log;
 
-
+import com.ciruy.onion_base.util.LogUtil;
 import com.example.learnkt.listener.DownloadApkListener;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -6,9 +6,8 @@ import com.example.learnkt.inter.ResultListener
 import com.example.learnkt.modules.logon.inter.LoginModel
 import com.example.learnkt.modules.logon.inter.LoginView
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
-import com.example.learnkt.util.LogUtil
-import com.example.learnkt.util.ToastUtil
-import io.reactivex.functions.Consumer
+import com.ciruy.onion_base.util.LogUtil
+import com.ciruy.onion_base.util.ToastUtil
 import kotlinx.android.synthetic.main.ac_login.*
 
 class LoginActivity : BaseDisposableActivity(), LoginView {

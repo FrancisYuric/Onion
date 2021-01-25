@@ -1,4 +1,4 @@
-package com.example.learnkt.bean
+package com.ciruy.onion_base.memory
 
 import java.lang.ref.SoftReference
 

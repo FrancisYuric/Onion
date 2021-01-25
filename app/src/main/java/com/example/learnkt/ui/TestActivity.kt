@@ -4,7 +4,7 @@ import com.ciruy.b.heimerdinger.onion_view.view.content
 import com.example.learnkt.R
 import com.example.learnkt.modules.example.TestView
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
-import com.example.learnkt.util.ToastUtil
+import com.ciruy.onion_base.util.ToastUtil
 import kotlinx.android.synthetic.main.activity_test.*
 
 class TestActivity : BaseDisposableActivity(), TestView {
