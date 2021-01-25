@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
 import com.ciruy.b.heimerdinger.onion_view.view.*
+import com.ciruy.onion_base.util.LogUtil
 import kotlin.math.max
 
 class FlowableLayout : ViewGroup {
@@ -79,6 +80,7 @@ class FlowableLayout : ViewGroup {
     }
 
     override fun onLayout(p0: Boolean, p1: Int, p2: Int, p3: Int, p4: Int) {
+        LogUtil.e("flowLayout onLayout")
         val lineCount = allLines.size
         var curL = paddingLeft
         var curT = paddingTop
