@@ -9,7 +9,7 @@ import com.ciruy.b.heimerdinger.onion_view.view.*
 import com.ciruy.onion_base.util.LogUtil
 import kotlin.math.max
 
-class FlowableLayout : ViewGroup {
+class SimpleFlowLayout : ViewGroup {
     companion object {
         const val TAG = "FlowLayout"
         val mHorizontalSpacing = 16.dp2px()
@@ -39,10 +39,10 @@ class FlowableLayout : ViewGroup {
         var lineHeight = 0
         var parentNeededWidth = 0
         var parentNeededHeight = 0
-
         children.filter { it.visibility != View.GONE }
                 .withIndex()
                 .forEach {
+                    //整合父视图所给的布局限制和子视图LayoutParam
                     val childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec, paddingHorizontal, it.value.layoutParams.width)
                     val childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, paddingVertical, it.value.layoutParams.height)
                     it.value.measure(childWidthMeasureSpec, childHeightMeasureSpec)
