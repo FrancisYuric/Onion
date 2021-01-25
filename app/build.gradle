@@ -8,8 +8,8 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
-    testOptions{
-        unitTests{
+    testOptions {
+        unitTests {
             includeAndroidResources = true
         }
     }
@@ -95,6 +95,7 @@ dependencies {
     implementation project(':onion')
     implementation project(':onion_view')
     implementation project(':onion_data')
+    implementation project(':onion_base')
     //onion-apt相关包
     implementation project(':onion_kannotation')
     implementation project(':onion_jannotation')
