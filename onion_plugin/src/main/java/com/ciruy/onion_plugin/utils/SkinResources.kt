@@ -5,10 +5,10 @@ import android.content.res.Resources
 import android.text.TextUtils
 
 class SkinResources(context: Context) {
-    val mAppResources: Resources = context.resources
-    var mSkinResources: Resources? = null
-    var mSkinPkgName: String? = ""
-    var isDefaultSkin = true
+    private val mAppResources: Resources = context.resources
+    private var mSkinResources: Resources? = null
+    private var mSkinPkgName: String? = ""
+    private var isDefaultSkin = true
 
     companion object {
         var instance: SkinResources? = null
@@ -35,9 +35,11 @@ class SkinResources(context: Context) {
         isDefaultSkin = TextUtils.isEmpty(pkgName) || resources == null
     }
 
-    fun getIdentifier(resId: Int) = if (isDefaultSkin) resId
-    else mSkinResources?.getIdentifier(mAppResources.getResourceEntryName(resId),
-            mAppResources.getResourceTypeName(resId), mSkinPkgName)
+    private fun getIdentifier(resId: Int) = if (isDefaultSkin) resId
+    else mSkinResources?.getIdentifier(
+        mAppResources.getResourceEntryName(resId),
+        mAppResources.getResourceTypeName(resId), mSkinPkgName
+    )
 
     fun getColor(resId: Int) = when {
         isDefaultSkin -> mAppResources.getColor(resId)
@@ -58,7 +60,7 @@ class SkinResources(context: Context) {
         else -> mSkinResources?.getDrawable(resId.identifier)
     }
 
-    fun getBackground(resId:Int):Any= {
+    fun getBackground(resId: Int): Any = {
         when (mAppResources.getResourceTypeName(resId)) {
             "color" -> getColor(resId)
             else -> getDrawable(resId)
