@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 
 class SkinPreference(context: Context) {
     companion object {
-        val SKIN_SHARED = "skins"
-        val KEY_SKI_PATH = "skin-path"
+        const val SKIN_SHARED = "skins"
+        const val KEY_SKIN_PATH = "skin-path"
         @Volatile
         var instance: SkinPreference? = null
 
@@ -25,10 +25,12 @@ class SkinPreference(context: Context) {
         mPref = context.getSharedPreferences(SKIN_SHARED, Context.MODE_PRIVATE)
     }
 
-    fun setSkin(skinPath:String) = mPref.edit().remove(KEY_SKI_PATH).apply()
-    fun getSkin() = mPref.getString(KEY_SKI_PATH, null)
+    fun setSkin(skinPath: String) = mPref.edit().putString(KEY_SKIN_PATH, skinPath).commit()
+//    fun removeSkin() = mPref.edit().remove(KEY_SKIN_PATH).apply()
 
-    fun reset(){
-        mPref.edit().remove(KEY_SKI_PATH).apply()
+    fun getSkin() = mPref.getString(KEY_SKIN_PATH, null)
+
+    fun reset() {
+        mPref.edit().remove(KEY_SKIN_PATH).apply()
     }
 }

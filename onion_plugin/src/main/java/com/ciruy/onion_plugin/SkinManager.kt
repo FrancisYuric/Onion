@@ -8,8 +8,9 @@ import android.text.TextUtils
 import com.ciruy.onion_plugin.utils.SkinResources
 import java.util.*
 
-class SkinManager(private val mApplication: Application) : Observable(){
-    private val skinActivityLifecycle:ApplicationActivityLifeCycle
+class SkinManager(private val mApplication: Application) : Observable() {
+    private val skinActivityLifecycle: ApplicationActivityLifeCycle
+
     init {
         SkinPreference.init(mApplication)
         SkinResources.init(mApplication)
@@ -17,9 +18,10 @@ class SkinManager(private val mApplication: Application) : Observable(){
         mApplication.registerActivityLifecycleCallbacks(skinActivityLifecycle)
         loadSkin(SkinPreference.instance!!.getSkin()!!)
     }
+
     companion object {
         @Volatile
-        var instance:SkinManager? = null
+        var instance: SkinManager? = null
 
         fun getInstance(mApplication: Application) = run {
             if (instance == null) {
@@ -34,21 +36,25 @@ class SkinManager(private val mApplication: Application) : Observable(){
         }
     }
 
-    private fun loadSkin(skinPath:String){
-        when{
-            TextUtils.isEmpty(skinPath)->{
-                SkinPreference.instance!!.reset()
-                SkinResources.instance!!.reset()
+    private fun loadSkin(skinPath: String) {
+        when {
+            TextUtils.isEmpty(skinPath) -> {
+                SkinPreference.instance?.reset()
+                SkinResources.instance?.reset()
             }
-            else->{
+            else -> {
                 val appResources = mApplication.resources
                 val assetManager = AssetManager::class.java.newInstance()
-                val addAssetPath = AssetManager::class.java.getMethod("addAssetPath",
-                        String::class.java)
+                val addAssetPath = AssetManager::class.java.getMethod(
+                    "addAssetPath",
+                    String::class.java
+                )
                 addAssetPath.invoke(assetManager, skinPath)
 
-                val skinResources = Resources(assetManager, appResources.displayMetrics,
-                        appResources.configuration)
+                val skinResources = Resources(
+                    assetManager, appResources.displayMetrics,
+                    appResources.configuration
+                )
                 val mPm = mApplication.packageManager
                 val info = mPm.getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES)
 
