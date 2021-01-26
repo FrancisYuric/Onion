@@ -21,6 +21,17 @@ class SkinManager(private val mApplication: Application) : Observable(){
         @Volatile
         var instance:SkinManager? = null
 
+        fun getInstance(mApplication: Application) = run {
+            if (instance == null) {
+                synchronized(SkinManager::class.java)
+                {
+                    if (instance == null) {
+                        instance = SkinManager(mApplication)
+                    }
+                }
+            }
+            instance
+        }
     }
 
     private fun loadSkin(skinPath:String){

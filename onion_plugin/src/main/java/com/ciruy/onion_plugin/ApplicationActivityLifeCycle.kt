@@ -15,7 +15,7 @@ class ApplicationActivityLifeCycle(var observable: Observable) : Application.Act
     override fun onActivityStarted(p0: Activity) {}
     override fun onActivityDestroyed(activity: Activity) {
         val observer = mLayoutInflaterFactories.remove(activity)
-        SkinManager.instance.deleteObserver(observer)
+        SkinManager.instance?.deleteObserver(observer)
     }
 
     override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {}

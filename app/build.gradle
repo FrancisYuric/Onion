@@ -96,6 +96,8 @@ dependencies {
     implementation project(':onion_view')
     implementation project(':onion_data')
     implementation project(':onion_base')
+    implementation project(':onion_plugin')
+
     //onion-apt相关包
     implementation project(':onion_kannotation')
     implementation project(':onion_jannotation')
