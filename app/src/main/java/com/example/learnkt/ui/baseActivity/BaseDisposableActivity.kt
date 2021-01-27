@@ -1,6 +1,5 @@
 package com.example.learnkt.ui.baseActivity
 
-import android.util.Pair
 import android.view.View
 import android.widget.TextView
 import com.ciruy.b.heimerdinger.onion.from
