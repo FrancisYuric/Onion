@@ -41,17 +41,17 @@ class SkinResources(context: Context) {
         mAppResources.getResourceTypeName(resId), mSkinPkgName
     )
 
-    fun getColor(resId: Int) = when {
+    fun getColor(resId: Int):Int = when {
         isDefaultSkin -> mAppResources.getColor(resId)
         getIdentifier(resId) == 0 -> mAppResources.getColor(resId)
-        else -> mSkinResources?.getColor(getIdentifier(resId)!!)
+        else -> mSkinResources!!.getColor(getIdentifier(resId)!!)
     }
 
 
     fun getColorStateList(resId: Int) = when {
         isDefaultSkin -> mAppResources.getColorStateList(resId)
         getIdentifier(resId) == 0 -> mAppResources.getColorStateList(resId)
-        else -> mSkinResources?.getColorStateList(getIdentifier(resId)!!)
+        else -> mSkinResources!!.getColorStateList(getIdentifier(resId)!!)
     }
 
     fun getDrawable(resId: Int) = when {
