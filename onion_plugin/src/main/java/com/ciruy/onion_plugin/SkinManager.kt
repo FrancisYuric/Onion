@@ -36,7 +36,7 @@ class SkinManager(private val mApplication: Application) : Observable() {
         }
     }
 
-    private fun loadSkin(skinPath: String) {
+    fun loadSkin(skinPath: String?) {
         when {
             TextUtils.isEmpty(skinPath) -> {
                 SkinPreference.instance?.reset()
@@ -49,7 +49,7 @@ class SkinManager(private val mApplication: Application) : Observable() {
                     "addAssetPath",
                     String::class.java
                 )
-                addAssetPath.invoke(assetManager, skinPath)
+                addAssetPath.invoke(assetManager, skinPath!!)
 
                 val skinResources = Resources(
                     assetManager, appResources.displayMetrics,
