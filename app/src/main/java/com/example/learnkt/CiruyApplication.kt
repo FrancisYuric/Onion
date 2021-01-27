@@ -9,15 +9,16 @@ import java.io.File
 class CiruyApplication : Application() {
 
     companion object {
-        var instance: CiruyApplication? = null
+        private var instance: CiruyApplication? = null
+        fun instance() = instance!!
     }
 
-    fun getExternalDownloadLocalFilesDir() = this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString() + File.separator
+    fun getExternalDownloadLocalFilesDir() = "${this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)}${File.separator}"
 
     override fun onCreate() {
         super.onCreate()
-        MultiDex.install(this)
         instance = this
-        SkinManager.getInstance(instance!!)
+        MultiDex.install(this)
+        SkinManager.getInstance(this)
     }
 }
