@@ -11,7 +11,8 @@ class SkinResources(context: Context) {
     private var isDefaultSkin = true
 
     companion object {
-        var instance: SkinResources? = null
+        private var instance: SkinResources? = null
+        fun instance() = instance!!
         fun init(context: Context) {
             if (instance == null) {
                 synchronized(SkinResources::class) {
@@ -37,11 +38,11 @@ class SkinResources(context: Context) {
 
     private fun getIdentifier(resId: Int) = if (isDefaultSkin) resId
     else mSkinResources?.getIdentifier(
-        mAppResources.getResourceEntryName(resId),
-        mAppResources.getResourceTypeName(resId), mSkinPkgName
+            mAppResources.getResourceEntryName(resId),
+            mAppResources.getResourceTypeName(resId), mSkinPkgName
     )
 
-    fun getColor(resId: Int):Int = when {
+    fun getColor(resId: Int): Int = when {
         isDefaultSkin -> mAppResources.getColor(resId)
         getIdentifier(resId) == 0 -> mAppResources.getColor(resId)
         else -> mSkinResources!!.getColor(getIdentifier(resId)!!)
@@ -60,12 +61,11 @@ class SkinResources(context: Context) {
         else -> mSkinResources?.getDrawable(resId.identifier)
     }
 
-    fun getBackground(resId: Int): Any = {
-        when (mAppResources.getResourceTypeName(resId)) {
-            "color" -> getColor(resId)
-            else -> getDrawable(resId)
-        }
+    fun getBackground(resId: Int): Any = when (mAppResources.getResourceTypeName(resId)) {
+        "color" -> getColor(resId)
+        else -> getDrawable(resId)!!
     }
+
 
     private val Int.identifier: Int
         get() = getIdentifier(this)!!

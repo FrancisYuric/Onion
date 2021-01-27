@@ -9,7 +9,7 @@ import com.ciruy.onion_base.util.LogUtil
 import com.ciruy.onion_plugin.utils.SkinResources
 import java.util.*
 
-class SkinManager(val mApplication: Application) : Observable() {
+class SkinManager(private val mApplication: Application) : Observable() {
     private val skinActivityLifecycle: ApplicationActivityLifeCycle
 
     init {
@@ -42,7 +42,7 @@ class SkinManager(val mApplication: Application) : Observable() {
         when {
             TextUtils.isEmpty(skinPath) -> {
                 SkinPreference.instance?.reset()
-                SkinResources.instance?.reset()
+                SkinResources.instance().reset()
             }
             else -> {
                 val appResources = mApplication.resources
@@ -60,7 +60,7 @@ class SkinManager(val mApplication: Application) : Observable() {
                 val mPm = mApplication.packageManager
                 val info = mPm.getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES)
 
-                SkinResources.instance?.applySkin(skinResources, info?.packageName)
+                SkinResources.instance().applySkin(skinResources, info?.packageName)
                 SkinPreference.instance?.setSkin(skinPath)
             }
         }

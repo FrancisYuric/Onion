@@ -39,7 +39,7 @@ class SkinAttribute {
         }.onEach {
             mSkinPairs.add(it)
         }
-        if (mSkinPairs.isEmpty() || view is SkinViewSupport) {
+        if (mSkinPairs.isNotEmpty() || view is SkinViewSupport) {
             val skinView = SkinView(view, mSkinPairs)
             skinView.applySkin()
             mSkinViews.add(skinView)
@@ -61,19 +61,22 @@ class SkinView(private val view: View, private val skinPairs: List<SkinPair>) {
             var right: Drawable? = null
             var bottom: Drawable? = null
             when (it.attributeName) {
-                "background" -> when (val background = SkinResources.instance!!.getBackground(it.resId)) {
+                "background" -> when (val background = SkinResources.instance().getBackground(it.resId)) {
                     is Int -> view.setBackgroundColor(background)
-                    else -> ViewCompat.setBackground(view, background as Drawable)
+                    is Drawable ->
+                        ViewCompat.setBackground(view, background)
+                    else -> throw IllegalStateException("wrong SkinView background class type")
                 }
-                "src" -> when (val background = SkinResources.instance!!.getBackground(it.resId)) {
+                "src" -> when (val background = SkinResources.instance().getBackground(it.resId)) {
                     is Int -> view.asImageView().setImageDrawable(ColorDrawable(background))
-                    else -> view.asImageView().setImageDrawable(background as Drawable)
+                    is Drawable -> view.asImageView().setImageDrawable(background)
+                    else -> throw java.lang.IllegalStateException("wrong SkinView background class Type")
                 }
-                "textColor" -> view.asTextView().setTextColor(SkinResources.instance?.getColorStateList(it.resId))
-                "drawableLeft" -> left = SkinResources.instance?.getDrawable(it.resId)
-                "drawableTop" -> top = SkinResources.instance?.getDrawable(it.resId)
-                "drawableRight" -> right = SkinResources.instance?.getDrawable(it.resId)
-                "drawableBottom" -> bottom = SkinResources.instance?.getDrawable(it.resId)
+                "textColor" -> view.asTextView().setTextColor(SkinResources.instance().getColorStateList(it.resId))
+                "drawableLeft" -> left = SkinResources.instance().getDrawable(it.resId)
+                "drawableTop" -> top = SkinResources.instance().getDrawable(it.resId)
+                "drawableRight" -> right = SkinResources.instance().getDrawable(it.resId)
+                "drawableBottom" -> bottom = SkinResources.instance().getDrawable(it.resId)
             }
             if (left != null || right != null || top != null || bottom != null)
                 view.asTextView().setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)

@@ -33,18 +33,18 @@ class SkinThemeUtils {
             val navigationBarColor = resIds[1]
 
             if (statusBarColorResId != 0) {
-                val color = SkinResources.instance?.getColor(statusBarColorResId)
+                val color = SkinResources.instance().getColor(statusBarColorResId)
                 activity.window.statusBarColor = color!!
             } else {
                 val colorPrimaryDarkResId =
                     getResId(activity, APPCOMPAT_COLOR_PRIMARY_DARK_ATTRS)[0]
                 if (colorPrimaryDarkResId != 0) {
-                    val color = SkinResources.instance?.getColor(colorPrimaryDarkResId)
+                    val color = SkinResources.instance().getColor(colorPrimaryDarkResId)
                     activity.window.statusBarColor = color!!
                 }
             }
             if (navigationBarColor != 0) {
-                val color = SkinResources.instance?.getColor(navigationBarColor)
+                val color = SkinResources.instance().getColor(navigationBarColor)
                 activity.window.navigationBarColor = color!!
             }
         }

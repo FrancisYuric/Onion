@@ -21,7 +21,7 @@ class PTabLayout : TabLayout, SkinViewSupport {
     }
 
     override fun applySkin() {
-        if (tabIndicatorColorResId != 0) setSelectedTabIndicator(SkinResources.instance!!.getColor(tabIndicatorColorResId))
-        if (tabTextColorResId != 0) tabTextColors = SkinResources.instance!!.getColorStateList(tabTextColorResId)
+        if (tabIndicatorColorResId != 0) setSelectedTabIndicator(SkinResources.instance().getColor(tabIndicatorColorResId))
+        if (tabTextColorResId != 0) tabTextColors = SkinResources.instance().getColorStateList(tabTextColorResId)
     }
 }
