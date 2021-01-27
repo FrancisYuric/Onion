@@ -33,16 +33,16 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
                     }
                     .doIfNotNull { skinAttribute.look(it!!, attrs) }
 
-    fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? = if (name.contains('.')) null
+    private fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? = if (name.contains('.')) null
     else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }.getOrNull(0)
 
 
-    fun createView(name: String, context: Context, attrs: AttributeSet): View? {
+    private fun createView(name: String, context: Context, attrs: AttributeSet): View? {
         val constructor = findConstructor(context, name)
         return constructor?.newInstance(context, attrs)
     }
 
-    fun findConstructor(context: Context, name: String): Constructor<out View>? {
+    private fun findConstructor(context: Context, name: String): Constructor<out View>? {
         when (mConstructorMap[name]) {
             null -> try {
                 mConstructorMap[name] =
@@ -59,5 +59,5 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
         skinAttribute.applySkin()
     }
 
-    override fun onCreateView(p0: String, p1: Context, p2: AttributeSet) = null
+    override fun onCreateView(p0: String, p1: Context, p2: AttributeSet): Nothing? = null
 }
