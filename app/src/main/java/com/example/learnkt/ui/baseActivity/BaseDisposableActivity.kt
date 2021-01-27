@@ -2,6 +2,7 @@ package com.example.learnkt.ui.baseActivity
 
 import android.view.View
 import android.widget.TextView
+import androidx.core.util.Pair
 import com.ciruy.b.heimerdinger.onion.from
 import com.ciruy.b.heimerdinger.onion_view.activity.BaseActivity
 import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
@@ -38,7 +39,7 @@ abstract class BaseDisposableActivity : BaseActivity() {
             }.invoke(flowable)
 
     fun View.download(url: String, consumer: (DownloadInfo) -> Unit) = this.download(url, consumer.toConsumer())
-    private fun View.download(url: String, consumer: Consumer<DownloadInfo>) = funAddDisposable().from<Disposable, Flowable<DownloadInfo>, Consumer<DownloadInfo>> {
+    fun View.download(url: String, consumer: Consumer<DownloadInfo>) = funAddDisposable().from<Disposable, Flowable<DownloadInfo>, Consumer<DownloadInfo>> {
         this.bind2Api(it.first)
                 .subscribe(it.second)
     }.invoke(DownloadManager.instance().download(url)).invoke(consumer)
@@ -51,22 +52,23 @@ abstract class BaseDisposableActivity : BaseActivity() {
     fun View.download(flowable: Flowable<ResponseBody>, consumer: (Pair<String, Int>) -> Unit) =
             this.download(flowable, consumer.toConsumer())
 
-    private fun View.download(flowable: Flowable<ResponseBody>, consumer: Consumer<Pair<String, Int>>) =
+
+    fun View.download(flowable: Flowable<ResponseBody>, consumer: Consumer<Pair<String, Int>>) =
             funAddDisposable().from<Disposable, Flowable<ResponseBody>, Consumer<Pair<String, Int>>> {
-                this.bind2Api(it.first.subscribeOn(Schedulers.io()).progressDownload()).subscribe(it.second)
+                this.bind2Api(it.first.subscribeOn(Schedulers.io()).progressDownload())
+                        .subscribe(it.second)
             }.invoke(flowable).invoke(consumer)
 
     fun TextView.flowableTextChanges(consumer: (CharSequence) -> Unit) = this.flowableTextChanges(consumer.toConsumer())
-    private fun TextView.flowableTextChanges(consumer: Consumer<CharSequence>) =
+    fun TextView.flowableTextChanges(consumer: Consumer<CharSequence>) =
             funAddDisposable().from<Disposable, TextView, Consumer<CharSequence>> {
                 flowableTextChanges(it.first).subscribe(it.second)
             }.invoke(this).invoke(consumer)
 
-    private fun funAddDisposable(): (Disposable) -> Unit = from { addDisposable(it.second) }
-
+    fun funAddDisposable(): (Disposable) -> Unit = from { addDisposable(it.second) }
 
     fun View.flowableClick(consumer: (Any) -> Unit) = this.flowableClick(consumer.toConsumer())
-    private fun View.flowableClick(consumer: Consumer<Any>) =
+    fun View.flowableClick(consumer: Consumer<Any>) =
             funAddDisposable().from<Disposable, View, Consumer<Any>> { flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
 
     override fun onDestroy() {

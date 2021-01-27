@@ -1,6 +1,6 @@
 package com.example.learnkt.util
 
-import android.util.Pair
+import androidx.core.util.Pair
 import android.view.View
 import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
 import com.example.learnkt.CiruyApplication

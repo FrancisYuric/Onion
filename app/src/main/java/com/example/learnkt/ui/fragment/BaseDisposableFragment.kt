@@ -1,6 +1,6 @@
 package com.example.learnkt.ui.fragment
 
-import android.util.Pair
+import androidx.core.util.Pair
 import android.view.View
 import android.widget.TextView
 import com.ciruy.b.heimerdinger.onion.from

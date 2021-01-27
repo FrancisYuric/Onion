@@ -1,6 +1,6 @@
 package com.example.learnkt.listener
 
-import android.util.Pair
+import androidx.core.util.Pair
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
