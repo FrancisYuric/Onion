@@ -6,5 +6,4 @@ import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 
 class SkinChangeActivity :BaseDisposableActivity(){
     override fun layout(): Int = R.layout.activity_skin_change
-
 }

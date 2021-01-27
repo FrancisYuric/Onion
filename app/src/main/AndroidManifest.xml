@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.FlowLayoutExampleActivity">
+        <activity android:name=".ui.TestSkinPluginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,7 +33,7 @@
         <activity android:name=".ui.TestRxViewActivity" />
         <activity android:name=".ui.TestActivity" />
         <activity android:name=".ui.SkinChangeActivity" />
-        <activity android:name=".ui.TestSkinPluginActivity" />
+        <!--        <activity android:name=".ui.TestSkinPluginActivity" />-->
         <!--        <activity android:name=".ui.MyPagerActivity" />-->
         <!--        <activity android:name=".ui.RedundantAddViewActivity" />-->
         <!--        <activity android:name=".ui.MyPagerActivity" />-->

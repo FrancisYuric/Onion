@@ -7,19 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import com.ciruy.b.heimerdinger.onion.createIfNull
 import com.ciruy.b.heimerdinger.onion.doIfNotNull
+import com.ciruy.onion_base.util.LogUtil
 import com.ciruy.onion_plugin.utils.SkinThemeUtils
 import java.lang.reflect.Constructor
 import java.util.*
 
 class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory2, Observer {
 
-    val skinAttribute by lazy { SkinAttribute() }
+    private val skinAttribute by lazy { SkinAttribute() }
 
     companion object {
         val mClassPrefixList = arrayListOf("android.widget.",
                 "android.webkit.",
                 "android.app.",
-                "android.view")
+                "android.view.")
         val mConstructorMap = hashMapOf<String, Constructor<out View>>()
 
         private val mConstructorSignature = arrayOf(Context::class.java, AttributeSet::class.java)
@@ -27,7 +28,9 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet) =
             createSDKView(name, context, attrs)
-                    .createIfNull { createView(name, context, attrs) }
+                    .createIfNull {
+                        createView(name, context, attrs)
+                    }
                     .doIfNotNull { skinAttribute.look(it!!, attrs) }
 
     fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? = if (name.contains('.')) null
@@ -41,7 +44,12 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
 
     fun findConstructor(context: Context, name: String): Constructor<out View>? {
         when (mConstructorMap[name]) {
-            null -> mConstructorMap[name] = context.classLoader.loadClass(name).asSubclass(View::class.java).getConstructor(*mConstructorSignature)
+            null -> try {
+                mConstructorMap[name] =
+                        context.classLoader.loadClass(name).asSubclass(View::class.java).getConstructor(*mConstructorSignature)
+            } catch (e: Exception) {
+                LogUtil.e("constructor not found")
+            }
         }
         return mConstructorMap[name]
     }

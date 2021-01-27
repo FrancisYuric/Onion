@@ -7,6 +7,6 @@ import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 
 class TestSkinPluginActivity : BaseDisposableActivity() {
     override fun layout() = R.layout.activity_test_skin_plugin
-    fun change(view: View) = SkinManager.instance?.loadSkin("/data/data/com.example.learnkt/skin/skin-debug.apk")
-    fun restore(view: View) = SkinManager.instance?.loadSkin(null)
+    fun change(view: View) = SkinManager.instance().loadSkin("/data/data/com.example.learnkt/skin/skin_plugin-debug.apk")
+    fun restore(view: View) = SkinManager.instance().loadSkin(null)
 }
