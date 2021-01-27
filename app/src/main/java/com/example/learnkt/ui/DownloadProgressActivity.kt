@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_download_progress.*
 @BuilderClass
 class DownloadProgressActivity : BaseDisposableActivity(), ISubBuilder<SubDownloadProgressActivity> {
     override
-    fun subBuilder() = SubDownloadProgressActivity.__create(this)
+    fun subBuilder(): SubDownloadProgressActivity = SubDownloadProgressActivity.__create(this)
 
     override fun layout(): Int = R.layout.activity_download_progress
 

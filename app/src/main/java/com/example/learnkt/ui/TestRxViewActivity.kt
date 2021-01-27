@@ -34,7 +34,6 @@ class TestRxViewActivity : Activity() {
         setContentView(R.layout.activity_main)
         mNonUIThread = HandlerThread("NonUIThread")
         mNonUIThread!!.start()
-
         mHandler = NonUIThreadHandler(mNonUIThread!!.looper)
         val showDialogBtn = findViewById<TextView>(R.id.helloWorld)
         showDialogBtn.setOnClickListener(mClickListener)
@@ -49,22 +48,21 @@ class TestRxViewActivity : Activity() {
             when (msg.what) {
                 MESSAGE_SHOW_DIALOG -> {
                     if (mDialog == null) {
-
                         val dialog =
-                            Dialog(this@TestRxViewActivity, R.style.ThemeOverlay_AppCompat_Dialog)
+                                Dialog(this@TestRxViewActivity, R.style.ThemeOverlay_AppCompat_Dialog)
                         dialog.setContentView(R.layout.dialog_layout)
                         val info =
-                            dialog.findViewById(R.id.dialog_info) as TextView
+                                dialog.findViewById(R.id.dialog_info) as TextView
                         info.text = "Dialog shows in thread " + Thread.currentThread().id
                         val change = dialog.window?.decorView?.findViewById(R.id.change_btn) as Button
                         change.setOnClickListener {
                             info.text = "onClick is called in thread " + Thread.currentThread().id
                         }
                         RxView.clicks(change)
-                            .subscribe {
-                                info.text =
-                                    "onClick is called in thread " + Thread.currentThread().id
-                            }
+                                .subscribe {
+                                    info.text =
+                                            "onClick is called in thread " + Thread.currentThread().id
+                                }
                         mDialog = dialog
                     }
                     if (!mDialog!!.isShowing) {
@@ -77,8 +75,7 @@ class TestRxViewActivity : Activity() {
     }
 
     companion object {
-
-        private val MESSAGE_SHOW_DIALOG = 1
+        private const val MESSAGE_SHOW_DIALOG = 1
     }
 
 }
