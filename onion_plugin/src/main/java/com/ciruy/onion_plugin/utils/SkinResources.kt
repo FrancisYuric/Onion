@@ -14,13 +14,11 @@ class SkinResources(context: Context) {
         private var instance: SkinResources? = null
         fun instance() = instance!!
         fun init(context: Context) {
-            if (instance == null) {
+            if (instance == null)
                 synchronized(SkinResources::class) {
-                    if (instance == null) {
+                    if (instance == null)
                         instance = SkinResources(context)
-                    }
                 }
-            }
         }
     }
 

@@ -22,7 +22,7 @@ class SkinAttribute {
                 "drawableBottom")
     }
 
-    val mSkinViews = arrayListOf<SkinView>()
+    private val mSkinViews = arrayListOf<SkinView>()
 
     fun look(view: View, attrs: AttributeSet) {
         val mSkinPairs = arrayListOf<SkinPair>()
@@ -83,7 +83,7 @@ class SkinView(private val view: View, private val skinPairs: List<SkinPair>) {
         }
     }
 
-    fun applySkinSupport() = if (view is SkinViewSupport) view.applySkin() else Unit
+    private fun applySkinSupport() = if (view is SkinViewSupport) view.applySkin() else Unit
 }
 
 data class SkinPair(val attributeName: String, val resId: Int)
