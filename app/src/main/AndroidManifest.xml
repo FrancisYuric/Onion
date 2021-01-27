@@ -33,6 +33,7 @@
         <activity android:name=".ui.TestRxViewActivity" />
         <activity android:name=".ui.TestActivity" />
         <activity android:name=".ui.SkinChangeActivity" />
+        <activity android:name=".ui.TestSkinPluginActivity" />
         <!--        <activity android:name=".ui.MyPagerActivity" />-->
         <!--        <activity android:name=".ui.RedundantAddViewActivity" />-->
         <!--        <activity android:name=".ui.MyPagerActivity" />-->
