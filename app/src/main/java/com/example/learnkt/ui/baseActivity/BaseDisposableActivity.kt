@@ -28,15 +28,22 @@ abstract class BaseDisposableActivity : BaseActivity() {
             mCompositeDisposable = CompositeDisposable()
         mCompositeDisposable?.add(disposable)
     }
+
     fun <T> View.lazyBind(flowable: () -> Flowable<T>) = funAddDisposable()
-            .from<Disposable, () -> Flowable<T>, (T)->Unit> { this.lazyBind2Api(flowable).subscribe(it.second.toConsumer()) }
+            .from<Disposable, () -> Flowable<T>, (T) -> Unit> { this.lazyBind2Api(flowable).subscribe(it.second.toConsumer()) }
             .invoke(flowable)
+
+    fun <T> View.lazyBind(flowable: () -> Flowable<T>, consumer: (T) -> Unit) =
+            this.lazyBind(flowable).invoke(consumer)
     fun <T> View.bind(flowable: Flowable<T>) =
             funAddDisposable().from<Disposable, Flowable<T>, Consumer<T>> {
                 val targetFlowable = it.first.observeOn(Schedulers.io())
                 this.bind2Api(targetFlowable)
                 targetFlowable.subscribe(it.second)
             }.invoke(flowable)
+
+    fun <T> View.bind(flowable: Flowable<T>, consumer: (T) -> Unit) =
+            this.bind(flowable).invoke(consumer.toConsumer())
 
     fun View.download(url: String, consumer: (DownloadInfo) -> Unit) = this.download(url, consumer.toConsumer())
     fun View.download(url: String, consumer: Consumer<DownloadInfo>) = funAddDisposable().from<Disposable, Flowable<DownloadInfo>, Consumer<DownloadInfo>> {

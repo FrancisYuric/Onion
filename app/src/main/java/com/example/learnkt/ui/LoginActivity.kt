@@ -23,9 +23,7 @@ class LoginActivity : BaseDisposableActivity(), LoginView {
         btn_login.flowableClick {
             loginAction(weakR(), et_username.text.toString(), et_password.text.toString(),
                     object : ResultListener<LoginModel> {
-                        override fun success(t: LoginModel) {
-
-                        }
+                        override fun success(t: LoginModel) = Unit
 
                         override fun failure(errMes: String?) = ToastUtil.short(this@LoginActivity, errMes)
                     })

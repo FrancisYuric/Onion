@@ -16,11 +16,7 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
         main_btn_cancel1.cancelDownload(Constant.THUNDER_DOWNLOAD_FULL_URL)
     }
 
-    override fun onClick(p0: View?) {
-    }
-
+    override fun onClick(p0: View?) = Unit
     override fun layout() = R.layout.ac_download_demo
-    override fun staticPermission(): List<String> {
-        return listOf(Manifest.permission.INTERNET)
-    }
+    override fun staticPermission() = listOf(Manifest.permission.INTERNET)
 }
