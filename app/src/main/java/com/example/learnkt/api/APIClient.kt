@@ -1,6 +1,6 @@
 package com.example.learnkt.api
 
-import android.util.Pair
+import androidx.core.util.Pair
 import com.example.learnkt.CiruyApplication
 import com.example.learnkt.bean.Constant
 import com.example.learnkt.bean.Constant.FIRIM_URL_BASE
@@ -36,7 +36,7 @@ class APIClient {
                     .connectTimeout(it ?: 30, TimeUnit.SECONDS)
                     .cache(
                             Cache(
-                                    File(CiruyApplication.instance?.cacheDir, "cache"),
+                                    File(CiruyApplication.instance().cacheDir, "cache"),
                                     (1024 * 1024 * 100).toLong()
                             )
                     )
@@ -44,10 +44,10 @@ class APIClient {
         }
 
         val url2retrofitMem = SoftMemorizers.applicable<Pair<OkHttpClient, String>, Retrofit> {
-            Retrofit.Builder().client(it?.first)
+            Retrofit.Builder().client(it!!.first)
                     .addConverterFactory(JsonOrXmlConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .baseUrl(it?.second)
+                    .baseUrl(it.second)
                     .build()
         }
 

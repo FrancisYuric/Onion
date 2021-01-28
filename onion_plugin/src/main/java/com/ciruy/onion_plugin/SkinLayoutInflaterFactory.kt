@@ -33,8 +33,9 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
                     }
                     .doIfNotNull { skinAttribute.look(it!!, attrs) }
 
-    private fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? = if (name.contains('.')) null
-    else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }.getOrNull(0)
+    private fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? =
+            if (name.contains('.')) null
+            else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }.getOrNull(0)
 
 
     private fun createView(name: String, context: Context, attrs: AttributeSet): View? {
@@ -54,6 +55,9 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
         return mConstructorMap[name]
     }
 
+    /**
+     * 观察者模式接收到被观察者更新的回调
+     */
     override fun update(p0: Observable?, p1: Any?) {
         SkinThemeUtils.updateStatusBarColor(activity)
         skinAttribute.applySkin()

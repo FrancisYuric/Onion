@@ -55,14 +55,14 @@ class DownloadManager {
         val fileName: String = downloadInfo.mFileName
         var downloadLength = 0L
         val contentLength = downloadInfo.total
-        var file = File(CiruyApplication.instance?.applicationContext?.filesDir, fileName)
+        var file = File(CiruyApplication.instance().applicationContext?.filesDir, fileName)
         if (file.exists())
             downloadLength = file.length()
         var i = 1
         while (downloadLength >= contentLength) {
             val dotIndex = fileName.lastIndexOf(".")
             val fileNameOther = if (dotIndex == -1) "${fileName}(${i})" else "${fileName.substring(0, dotIndex)}(${i})${fileName.substring(dotIndex)}"
-            val newFile = File(CiruyApplication.instance?.filesDir, fileNameOther)
+            val newFile = File(CiruyApplication.instance().filesDir, fileNameOther)
             file = newFile
             downloadLength = newFile.length()
             ++i
@@ -113,7 +113,7 @@ class DownloadManager {
             val call = mClient.newCall(request)
             downCalls[url] = call
             val response = call.execute()
-            val file = File(CiruyApplication.instance?.filesDir, downloadInfo.mFileName)
+            val file = File(CiruyApplication.instance().filesDir, downloadInfo.mFileName)
             var inputStream: InputStream? = null
             var outputStream: FileOutputStream? = null
             try {

@@ -22,6 +22,7 @@ class ApplicationActivityLifeCycle(var observable: Observable) : Application.Act
     override fun onActivityStopped(p0: Activity) {}
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        //更新状态栏颜色
         SkinThemeUtils.updateStatusBarColor(activity)
         val layoutInflater = activity.layoutInflater
         val field = LayoutInflater::class.java.getDeclaredField("mFactorySet")

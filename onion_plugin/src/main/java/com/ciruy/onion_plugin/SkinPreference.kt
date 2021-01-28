@@ -10,6 +10,7 @@ class SkinPreference(context: Context) {
         @Volatile
         var instance: SkinPreference? = null
 
+        fun instance() = instance!!
         fun init(context: Context) {
             if (instance == null)
                 synchronized(SkinPreference::class) {

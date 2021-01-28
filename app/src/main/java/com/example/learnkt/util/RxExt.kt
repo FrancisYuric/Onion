@@ -26,7 +26,7 @@ fun Flowable<ResponseBody>.progressDownload(): Flowable<Pair<String, Int>> = thi
                 override fun subscribeActual(observer: Observer<in Pair<String, Int>>?) {
                     val downloadApkListener = DownloadApkListener(observer)
                     observer?.onSubscribe(downloadApkListener)
-                    RequestUtil.writeResponseBodyToDisk(t, CiruyApplication.instance?.getExternalDownloadLocalFilesDir()
+                    RequestUtil.writeResponseBodyToDisk(t, CiruyApplication.instance().getExternalDownloadLocalFilesDir()
                             + System.currentTimeMillis() + ".apk", downloadApkListener)
                 }
             }.toFlowable(BackpressureStrategy.DROP)
