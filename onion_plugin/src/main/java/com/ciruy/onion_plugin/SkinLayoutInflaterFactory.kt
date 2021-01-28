@@ -28,9 +28,7 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet) =
             createSDKView(name, context, attrs)
-                    .createIfNull {
-                        createView(name, context, attrs)
-                    }
+                    .createIfNull { createView(name, context, attrs) }
                     .doIfNotNull { skinAttribute.look(it!!, attrs) }
 
     private fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? =
@@ -38,10 +36,9 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
             else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }.getOrNull(0)
 
 
-    private fun createView(name: String, context: Context, attrs: AttributeSet): View? {
-        val constructor = findConstructor(context, name)
-        return constructor?.newInstance(context, attrs)
-    }
+    private fun createView(name: String, context: Context, attrs: AttributeSet): View? =
+            findConstructor(context, name)?.newInstance(context, attrs)
+
 
     private fun findConstructor(context: Context, name: String): Constructor<out View>? {
         when (mConstructorMap[name]) {

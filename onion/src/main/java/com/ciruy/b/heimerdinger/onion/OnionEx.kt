@@ -38,7 +38,7 @@ fun Int.aboveZero() = this > 0
 fun Int.belowZero() = this < 0
 fun Int.eq0() = this == 0
 
-fun <T : Any?> T.createIfNull(tProvider: () -> T) = this ?: tProvider.invoke()
+fun <T : Any?> T.createIfNull(tProvider: () -> T?) = this ?: tProvider.invoke()
 
 fun <T : Any?> T.doIfNotNull(tProvider: (T) -> Unit): T? {
     if (this != null)
