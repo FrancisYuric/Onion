@@ -50,7 +50,9 @@ class SkinManager(private val mApplication: Application) : Observable() {
             else -> {
                 val appResources = mApplication.resources
                 val assetManager = AssetManager::class.java.newInstance()
-                val addAssetPath = AssetManager::class.java.getMethod(Method.AssetManager_addAssetPath, String::class.java)
+                val addAssetPath = AssetManager::class.java
+                        .getMethod(Method.AssetManager_addAssetPath,
+                                String::class.java)
                 addAssetPath.invoke(assetManager, skinPath!!)
 
                 val skinResources = Resources(assetManager, appResources.displayMetrics, appResources.configuration)

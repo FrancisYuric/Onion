@@ -20,3 +20,9 @@ fun <T : Any> T.set(clazz: Class<*>, fieldName: String, value: Any?) =
 
 fun <T : Any> T.set(fieldName: String, value: Any?) =
         this.declaredField(this.javaClass, fieldName).set(this, value)
+
+fun <T : Any> T.method(methodName: String, paramArray: Array<Class<*>>) =
+        this.javaClass.getMethod(methodName, *paramArray)
+
+fun <T : Any> T.method(clazz: Class<*>, methodName: String, paramArray: Array<Class<*>>) =
+        clazz.getMethod(methodName, *paramArray)
