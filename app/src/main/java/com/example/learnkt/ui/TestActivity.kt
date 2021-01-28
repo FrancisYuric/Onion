@@ -25,5 +25,4 @@ class TestActivity : BaseDisposableActivity(), TestView {
             else ToastUtil.short(this, it.errMsg)
         }
     }
-
 }

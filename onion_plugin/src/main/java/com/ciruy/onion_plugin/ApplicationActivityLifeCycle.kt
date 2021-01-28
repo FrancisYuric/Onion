@@ -10,32 +10,28 @@ import com.ciruy.onion_plugin.utils.SkinThemeUtils
 import java.util.*
 
 class ApplicationActivityLifeCycle(var observable: Observable) : Application.ActivityLifecycleCallbacks {
-    override fun onActivityPaused(p0: Activity) {}
 
-    override fun onActivityStarted(p0: Activity) {}
-    override fun onActivityDestroyed(activity: Activity) {
-        val observer = mLayoutInflaterFactories.remove(activity)
-        SkinManager.instance?.deleteObserver(observer)
-    }
-
-    override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {}
-    override fun onActivityStopped(p0: Activity) {}
-
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+    private val mLayoutInflaterFactories by lazy { ArrayMap<Activity, SkinLayoutInflaterFactory>() }
+    override fun onActivitySaveInstanceState(tActivity: Activity, tBundle: Bundle) = Unit
+    override fun onActivityCreated(tActivity: Activity, savedInstanceState: Bundle?) {
         //更新状态栏颜色
-        SkinThemeUtils.updateStatusBarColor(activity)
-        val layoutInflater = activity.layoutInflater
+        SkinThemeUtils.updateStatusBarColor(tActivity)
+        val layoutInflater = tActivity.layoutInflater
         val field = LayoutInflater::class.java.getDeclaredField("mFactorySet")
         field.isAccessible = true
         field.setBoolean(layoutInflater, false)
-        val skinLayoutInflaterFactory = SkinLayoutInflaterFactory(activity)
+        val skinLayoutInflaterFactory = SkinLayoutInflaterFactory(tActivity)
         LayoutInflaterCompat.setFactory2(layoutInflater, skinLayoutInflaterFactory)
-        mLayoutInflaterFactories[activity] = skinLayoutInflaterFactory
+        mLayoutInflaterFactories[tActivity] = skinLayoutInflaterFactory
         observable.addObserver(skinLayoutInflaterFactory)
     }
 
-    override fun onActivityResumed(p0: Activity) {}
-
-    private val mLayoutInflaterFactories: ArrayMap<Activity, SkinLayoutInflaterFactory> = ArrayMap()
-
+    override fun onActivityStarted(tActivity: Activity) = Unit
+    override fun onActivityResumed(tActivity: Activity) = Unit
+    override fun onActivityPaused(tActivity: Activity) = Unit
+    override fun onActivityStopped(tActivity: Activity) = Unit
+    override fun onActivityDestroyed(tActivity: Activity) {
+        val observer = mLayoutInflaterFactories.remove(tActivity)
+        SkinManager.instance().deleteObserver(observer)
+    }
 }

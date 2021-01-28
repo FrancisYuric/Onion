@@ -12,6 +12,7 @@ import com.ciruy.b.heimerdinger.onion_view.view.lazyBind2Api
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.manager.DownloadManager
 import com.example.learnkt.util.progressDownload
+import com.example.learnkt.util.toConsumer
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -51,7 +52,6 @@ abstract class BaseDisposableActivity : BaseActivity() {
                 .subscribe(it.second)
     }.invoke(DownloadManager.instance().download(url)).invoke(consumer)
 
-    private fun <T> ((T) -> Unit).toConsumer() = Consumer<T> { this.invoke(it) }
     fun View.cancelDownload(url: String) = funAddDisposable().from<Disposable, Flowable<Any>, Any?> {
         it.first.subscribe { DownloadManager.instance().cancel(url) }
     }.invoke(flowableClick(this)).invoke(null)

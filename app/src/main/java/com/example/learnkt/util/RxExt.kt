@@ -1,7 +1,7 @@
 package com.example.learnkt.util
 
-import androidx.core.util.Pair
 import android.view.View
+import androidx.core.util.Pair
 import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
 import com.example.learnkt.CiruyApplication
 import com.example.learnkt.bean.BaseEntity
@@ -12,6 +12,7 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 
@@ -34,3 +35,5 @@ fun Flowable<ResponseBody>.progressDownload(): Flowable<Pair<String, Int>> = thi
         .observeOn(AndroidSchedulers.mainThread())
 
 fun <T : BaseEntity> errorFlowable(errMes: String) = Flowable.error<T>(Throwable(errMes))
+
+fun <T> ((T) -> Unit).toConsumer() = Consumer<T> { this.invoke(it) }
