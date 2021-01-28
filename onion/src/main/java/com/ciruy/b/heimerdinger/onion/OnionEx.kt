@@ -46,4 +46,8 @@ fun <T : Any?> T.doIfNotNull(tProvider: (T) -> Unit): T? {
     return this
 }
 
+fun <T : Any> T.self(tProvider: (T) -> Unit): T {
+    tProvider.invoke(this)
+    return this
+}
 

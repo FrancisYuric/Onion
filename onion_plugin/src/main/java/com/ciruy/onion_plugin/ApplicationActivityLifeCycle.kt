@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.ArrayMap
 import android.view.LayoutInflater
 import androidx.core.view.LayoutInflaterCompat
+import com.ciruy.onion_base.constant.Field
+import com.ciruy.onion_base.constant.set
 import com.ciruy.onion_plugin.utils.SkinThemeUtils
 import java.util.*
 
@@ -17,9 +19,7 @@ class ApplicationActivityLifeCycle(var observable: Observable) : Application.Act
         //更新状态栏颜色
         SkinThemeUtils.updateStatusBarColor(tActivity)
         val layoutInflater = tActivity.layoutInflater
-        val field = LayoutInflater::class.java.getDeclaredField("mFactorySet")
-        field.isAccessible = true
-        field.setBoolean(layoutInflater, false)
+        layoutInflater.set(LayoutInflater::class.java, Field.LayoutInflater_mFactorySet, false)
         val skinLayoutInflaterFactory = SkinLayoutInflaterFactory(tActivity)
         LayoutInflaterCompat.setFactory2(layoutInflater, skinLayoutInflaterFactory)
         mLayoutInflaterFactories[tActivity] = skinLayoutInflaterFactory
