@@ -21,18 +21,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.TestTouchConflictActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.DownloadProgressActivity" />
-        <!--        <activity android:name=".ui.LoginActivity" />-->
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.TestRxViewActivity" />
         <activity android:name=".ui.TestActivity" />
         <activity android:name=".ui.DownloadDemoActivity" />
+        <!--        <activity android:name=".ui.LoginActivity" />-->
+        <!--        <activity android:name=".ui.TestTouchConflictActivity" />-->
         <!--        <activity android:name=".ui.TestSkinPluginActivity" />-->
         <!--        <activity android:name=".ui.MyPagerActivity" />-->
         <!--        <activity android:name=".ui.RedundantAddViewActivity" />-->

@@ -117,7 +117,7 @@ public class RxPermissions {
                 .flatMap((Function<List<Permission>, ObservableSource<Boolean>>) permissions1 -> {
                     if (permissions1.isEmpty()) {
                         // Occurs during orientation change, when the subject receives onComplete.
-                        // In that case we don't want to propagate that empty list to the
+                        // In that case we don't want to propagate that empty mData to the
                         // subscriber, only the onComplete.
                         return Observable.empty();
                     }
