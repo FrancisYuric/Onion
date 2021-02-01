@@ -7,11 +7,8 @@ import java.util.concurrent.ConcurrentHashMap
 
 abstract class BaseMemorizers<T, U>(private val applicable: (T) -> U) {
     private val cache = ConcurrentHashMap<T, U>()
-    fun computeIfAbsentOrigin(t: T): U = cache.createIfNull(t) { applicable.invoke(t) }
-//    {
-//        cache[t] = cache[t] ?: applicable.invoke(t)
-//        return cache[t]!!
-//    }
+    fun computeIfAbsentOrigin(t: T): U = cache
+            .createIfNull(t) { applicable.invoke(t) }
 
     fun forgetOrigin(t: T) = cache.remove(t)
 }
