@@ -12,8 +12,7 @@ import com.example.learnkt.R
 import kotlinx.android.synthetic.main.activity_my_page.*
 import java.util.*
 
-class MyPagerActivity : BaseActivity() {
-    override fun layout() = R.layout.activity_my_page
+class MyPagerActivity : BaseActivity(R.layout.activity_my_page) {
     private val images: MutableList<Int> = mutableListOf()
     var index: Int = 0
     var preIndex: Int = 0

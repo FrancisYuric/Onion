@@ -38,6 +38,8 @@
         <activity android:name=".ui.RedundantAddViewActivity" />
         <activity android:name=".ui.FlowLayoutExampleActivity" />
         <activity android:name=".ui.EntranceActivity" />
+        <activity android:name=".ui.ContentActivity" />
+        <activity android:name=".ui.TestStackOverflowActivity" />
     </application>
 
 </manifest>

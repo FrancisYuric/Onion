@@ -5,8 +5,7 @@ import com.ciruy.b.heimerdinger.onion_view.activity.BaseActivity
 import com.example.learnkt.R
 import kotlinx.android.synthetic.main.activity_redunt.*
 
-class RedundantAddViewActivity : BaseActivity() {
-    override fun layout(): Int = R.layout.activity_redunt
+class RedundantAddViewActivity : BaseActivity(R.layout.activity_redunt) {
 
     override fun initViews() {
         super.initViews()

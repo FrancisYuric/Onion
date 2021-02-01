@@ -11,8 +11,7 @@ import com.ciruy.onion_base.util.ToastUtil
 import io.reactivex.Flowable
 import kotlinx.android.synthetic.main.ac_login.*
 
-class LoginActivity : BaseDisposableActivity(), LoginView {
-    override fun layout(): Int = R.layout.ac_login
+class LoginActivity : BaseDisposableActivity(R.layout.ac_login), LoginView {
     override fun initListeners() {
         super.initListeners()
         et_username.flowableTextChanges {

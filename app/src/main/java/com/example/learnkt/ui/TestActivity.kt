@@ -7,8 +7,7 @@ import com.example.learnkt.modules.example.TestView
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity
 import kotlinx.android.synthetic.main.activity_test.*
 
-class TestActivity : BaseDisposableActivity(), TestView {
-    override fun layout(): Int = R.layout.activity_test
+class TestActivity : BaseDisposableActivity(R.layout.activity_test), TestView {
     private val loginFun = { presenter().login(helloWorld.content, "frank", "1") }
     override fun initListeners() {
         super.initListeners()
