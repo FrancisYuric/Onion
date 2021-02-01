@@ -32,13 +32,12 @@
         <activity android:name=".ui.TestRxViewActivity" />
         <activity android:name=".ui.TestActivity" />
         <activity android:name=".ui.DownloadDemoActivity" />
-        <!--        <activity android:name=".ui.LoginActivity" />-->
-        <!--        <activity android:name=".ui.TestTouchConflictActivity" />-->
-        <!--        <activity android:name=".ui.TestSkinPluginActivity" />-->
-        <!--        <activity android:name=".ui.MyPagerActivity" />-->
-        <!--        <activity android:name=".ui.RedundantAddViewActivity" />-->
-        <!--        <activity android:name=".ui.MyPagerActivity" />-->
-        <!--        <activity android:name=".ui.FlowLayoutExampleActivity" />-->
+        <activity android:name=".ui.MyPagerActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.TestSkinPluginActivity" />
+        <activity android:name=".ui.RedundantAddViewActivity" />
+        <activity android:name=".ui.FlowLayoutExampleActivity" />
+        <activity android:name=".ui.EntranceActivity" />
     </application>
 
 </manifest>
