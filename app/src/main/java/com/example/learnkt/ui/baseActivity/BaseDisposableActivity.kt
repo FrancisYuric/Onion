@@ -49,7 +49,7 @@ abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(
             this.bind(flowable).invoke(consumer.toConsumer())
 
     fun View.download(url: String, consumer: (DownloadInfo) -> Unit) = this.download(url, consumer.toConsumer())
-    fun View.download(url: String, consumer: Consumer<DownloadInfo>) = funAddDisposable().from<Disposable, Flowable<DownloadInfo>, Consumer<DownloadInfo>> {
+    private fun View.download(url: String, consumer: Consumer<DownloadInfo>) = funAddDisposable().from<Disposable, Flowable<DownloadInfo>, Consumer<DownloadInfo>> {
         this.bind2Api(it.first)
                 .subscribe(it.second)
     }.invoke(DownloadManager.instance().download(url)).invoke(consumer)
@@ -62,14 +62,14 @@ abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(
             this.download(flowable, consumer.toConsumer())
 
 
-    fun View.download(flowable: Flowable<ResponseBody>, consumer: Consumer<Pair<String, Int>>) =
+    private fun View.download(flowable: Flowable<ResponseBody>, consumer: Consumer<Pair<String, Int>>) =
             funAddDisposable().from<Disposable, Flowable<ResponseBody>, Consumer<Pair<String, Int>>> {
                 this.bind2Api(it.first.subscribeOn(Schedulers.io()).progressDownload())
                         .subscribe(it.second)
             }.invoke(flowable).invoke(consumer)
 
     fun TextView.flowableTextChanges(consumer: (CharSequence) -> Unit) = this.flowableTextChanges(consumer.toConsumer())
-    fun TextView.flowableTextChanges(consumer: Consumer<CharSequence>) =
+    private fun TextView.flowableTextChanges(consumer: Consumer<CharSequence>) =
             funAddDisposable().from<Disposable, TextView, Consumer<CharSequence>> {
                 flowableTextChanges(it.first).subscribe(it.second)
             }.invoke(this).invoke(consumer)
@@ -77,7 +77,7 @@ abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(
     fun funAddDisposable(): (Disposable) -> Unit = from { addDisposable(it.second) }
 
     fun View.flowableClick(consumer: (Any) -> Unit) = this.flowableClick(consumer.toConsumer())
-    fun View.flowableClick(consumer: Consumer<Any>) =
+    private fun View.flowableClick(consumer: Consumer<Any>) =
             funAddDisposable().from<Disposable, View, Consumer<Any>> { flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
 
     override fun onDestroy() {
