@@ -20,7 +20,8 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 
-abstract class BaseDisposableActivity : BaseActivity() {
+abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(layout) {
+    constructor() : this(null)
 
     var mCompositeDisposable: CompositeDisposable? = null
 
@@ -36,6 +37,7 @@ abstract class BaseDisposableActivity : BaseActivity() {
 
     fun <T> View.lazyBind(flowable: () -> Flowable<T>, consumer: (T) -> Unit) =
             this.lazyBind(flowable).invoke(consumer)
+
     fun <T> View.bind(flowable: Flowable<T>) =
             funAddDisposable().from<Disposable, Flowable<T>, Consumer<T>> {
                 val targetFlowable = it.first.observeOn(Schedulers.io())

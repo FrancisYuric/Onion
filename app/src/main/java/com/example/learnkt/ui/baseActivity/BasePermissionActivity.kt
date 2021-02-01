@@ -5,7 +5,8 @@ import android.widget.Toast
 import com.example.learnkt.rx.Permission
 import com.example.learnkt.rx.RxPermissions
 
-abstract class BasePermissionActivity : BaseDisposableActivity() {
+abstract class BasePermissionActivity(override var layout:Int?) : BaseDisposableActivity(layout) {
+    constructor() : this(null)
     //staticPermission needed
     abstract fun staticPermission(): List<String>
 

@@ -1,13 +1,12 @@
 package com.example.learnkt.ui
 
 import android.Manifest
-import android.view.View
 import com.example.learnkt.R
 import com.example.learnkt.bean.Constant
 import com.example.learnkt.ui.baseActivity.BasePermissionActivity
 import kotlinx.android.synthetic.main.ac_download_demo.*
 
-class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
+class DownloadDemoActivity : BasePermissionActivity(R.layout.ac_download_demo) {
     override fun initListeners() {
         main_btn_down1.download(Constant.THUNDER_DOWNLOAD_FULL_URL) {
             main_progress1.max = it.total.toInt()
@@ -16,7 +15,5 @@ class DownloadDemoActivity : BasePermissionActivity(), View.OnClickListener {
         main_btn_cancel1.cancelDownload(Constant.THUNDER_DOWNLOAD_FULL_URL)
     }
 
-    override fun onClick(p0: View?) = Unit
-    override fun layout() = R.layout.ac_download_demo
     override fun staticPermission() = listOf(Manifest.permission.INTERNET)
 }
