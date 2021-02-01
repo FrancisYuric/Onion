@@ -21,8 +21,6 @@ abstract class BaseMemorizers<T, U>(private val applicable: (T) -> U) {
 }
 
 
-class StrongMemorizers<T, U>
-
 class SoftMemorizers<T, U>(applicable: (ComparableSoftReference<T?>) -> ComparableSoftReference<U>)
     : BaseMemorizers<ComparableSoftReference<T?>, ComparableSoftReference<U>>(applicable) {
     companion object {
@@ -42,4 +40,19 @@ class SoftMemorizers<T, U>(applicable: (ComparableSoftReference<T?>) -> Comparab
     fun forget(t: T) = computeIfAbsentOrigin(softReference<T?>().invoke(t))?.get()
 }
 
-class WeakMemorizers<T, U>
+class WeakMemorizers<T, U>(applicable: (ComparableWeakReference<T?>) -> ComparableWeakReference<U>)
+    : BaseMemorizers<ComparableWeakReference<T?>, ComparableWeakReference<U>>(applicable) {
+    companion object {
+        fun <T, U> applicable(applicable: (T?) -> U) =
+                WeakMemorizers(applicable
+                        .changeFrom<ComparableWeakReference<T?>, T?, U> { unwrapReference<T?>().invoke(it) }
+                        .changeTo { weakReference<U>().invoke(it) })
+
+
+        private fun <U> weakReference(): (u: U) -> ComparableWeakReference<U> = {
+            ComparableWeakReference(it)
+        }
+
+        private fun <U> unwrapReference(): (ComparableWeakReference<U?>) -> U? = ComparableWeakReference<U?>::get
+    }
+}
