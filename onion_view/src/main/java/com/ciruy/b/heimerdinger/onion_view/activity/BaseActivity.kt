@@ -20,19 +20,14 @@ abstract class BaseActivity(open var layout: Int?) : AppCompatActivity() {
         initData()
     }
 
-    open fun initData() {
+    open fun initData() = Unit
 
-    }
+    open fun initViews() = Unit
 
-    open fun initViews() {
-
-    }
+    open fun initListeners() = Unit
 
     fun hideActionBar() = supportActionBar?.hide()
 
     fun showActionBar() = supportActionBar?.show()
 
-    open fun initListeners() {
-
-    }
 }
