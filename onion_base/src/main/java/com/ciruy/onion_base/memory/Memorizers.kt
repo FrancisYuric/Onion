@@ -2,20 +2,16 @@ package com.ciruy.onion_base.memory
 
 import com.ciruy.b.heimerdinger.onion.changeFrom
 import com.ciruy.b.heimerdinger.onion.changeTo
-import com.ciruy.onion_base.util.LogUtil
+import com.ciruy.onion_base.rx.createIfNull
 import java.util.concurrent.ConcurrentHashMap
 
 abstract class BaseMemorizers<T, U>(private val applicable: (T) -> U) {
     private val cache = ConcurrentHashMap<T, U>()
-    fun computeIfAbsentOrigin(t: T) = if (cache.containsKey(t)) {
-        LogUtil.e("cache contains $t")
-        cache[t]
-    } else {
-        LogUtil.e("cache not contains $t")
-        val u = applicable.invoke(t)
-        cache[t] = u
-        u
-    }
+    fun computeIfAbsentOrigin(t: T): U = cache.createIfNull(t) { applicable.invoke(t) }
+//    {
+//        cache[t] = cache[t] ?: applicable.invoke(t)
+//        return cache[t]!!
+//    }
 
     fun forgetOrigin(t: T) = cache.remove(t)
 }
@@ -36,8 +32,8 @@ class SoftMemorizers<T, U>(applicable: (ComparableSoftReference<T?>) -> Comparab
         private fun <U> unwrapReference(): (ComparableSoftReference<U?>) -> U? = ComparableSoftReference<U?>::get
     }
 
-    fun computeIfAbsent(t: T) = computeIfAbsentOrigin(softReference<T?>().invoke(t))?.get()
-    fun forget(t: T) = computeIfAbsentOrigin(softReference<T?>().invoke(t))?.get()
+    fun computeIfAbsent(t: T) = computeIfAbsentOrigin(softReference<T?>().invoke(t)).get()
+    fun forget(t: T) = computeIfAbsentOrigin(softReference<T?>().invoke(t)).get()
 }
 
 class WeakMemorizers<T, U>(applicable: (ComparableWeakReference<T?>) -> ComparableWeakReference<U>)
