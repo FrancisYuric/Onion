@@ -34,9 +34,7 @@ fun <F, T, P> ((F) -> Unit).from(pair2f: (Pair<T, P>) -> F): (T) -> (P) -> Unit 
     }
 }
 
-fun Int.aboveZero() = this > 0
-fun Int.belowZero() = this < 0
-fun Int.eq0() = this == 0
+
 
 fun <T : Any?> T.createIfNull(tProvider: () -> T?) = this ?: tProvider.invoke()
 

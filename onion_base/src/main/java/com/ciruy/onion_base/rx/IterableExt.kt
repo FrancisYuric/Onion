@@ -8,8 +8,7 @@ fun <K, V> MutableMap<K, V>.createIfNull(key: K, vProvider: () -> V): V {
 }
 
 fun <V> ArrayList<V>.createIfNull(index: Int, vProvider: () -> V): V {
-    if (this.size > index)
-        return this[index]
+    if (this.size > index) return this[index]
     val element = vProvider.invoke()
     this.add(element)
     return element
