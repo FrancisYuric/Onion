@@ -11,10 +11,6 @@ abstract class BaseActivity(open var layout: Int?) : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(this.layout ?: layout()
         ?: error("activity must set init param or override layout()"))
-    }
-
-    override fun onStart() {
-        super.onStart()
         initViews()
         initListeners()
         initData()
