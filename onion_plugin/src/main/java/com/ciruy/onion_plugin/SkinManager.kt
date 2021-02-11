@@ -29,7 +29,7 @@ class SkinManager(private val mApplication: Application) : Observable() {
         @Volatile
         var instance: SkinManager? = null
 
-        fun instance(): SkinManager = instance!!
+        fun instance(): SkinManager = instance?: error("call getInstance(Application) first!")
         fun getInstance(mApplication: Application) {
             if (instance == null) {
                 synchronized(SkinManager::class.java) {

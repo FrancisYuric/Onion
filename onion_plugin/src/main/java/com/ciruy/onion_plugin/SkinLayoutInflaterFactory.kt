@@ -36,7 +36,6 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
             else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }
                     .getOrNull(0)
 
-
     private fun createView(name: String, context: Context, attrs: AttributeSet): View? =
             findConstructor(context, name)?.newInstance(context, attrs)
 
