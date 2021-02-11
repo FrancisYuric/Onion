@@ -5,7 +5,7 @@ import java.lang.ref.WeakReference
 
 class ComparableSoftReference<T>(private val referent: T) : SoftReference<T>(referent) {
 
-    override fun hashCode(): Int = get()!!.hashCode()
+    override fun hashCode(): Int = get()?.hashCode()?:-1
 
     override fun toString(): String = referent.toString()
 
@@ -13,7 +13,7 @@ class ComparableSoftReference<T>(private val referent: T) : SoftReference<T>(ref
 }
 
 class ComparableWeakReference<T>(private val referent: T) : WeakReference<T>(referent) {
-    override fun hashCode(): Int = get()!!.hashCode()
+    override fun hashCode(): Int = get()?.hashCode()?:-1
 
     override fun toString(): String = referent.toString()
 

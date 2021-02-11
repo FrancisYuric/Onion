@@ -33,7 +33,8 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
 
     private fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? =
             if (name.contains('.')) null
-            else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }.getOrNull(0)
+            else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }
+                    .getOrNull(0)
 
 
     private fun createView(name: String, context: Context, attrs: AttributeSet): View? =

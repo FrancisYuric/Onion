@@ -10,14 +10,19 @@ abstract class BaseMemorizers<T, U>(private val applicable: (T) -> U) {
     fun computeIfAbsentOrigin(t: T): U = cache
             .createIfNull(t) { applicable.invoke(t) }
 
-    fun forgetOrigin(t: T) = cache.remove(t)
+    fun forgetOrigin(t: T) {
+        if (t!=null&&cache.contains(t)) {
+            cache.remove(t)
+        }
+    }
 }
 
 
-class StrongMemorizers<T,U> (applicable: (T?) -> U):BaseMemorizers<T?,U>(applicable){
-    fun forget(t:T) = forgetOrigin(t)
-    fun computeIfAbsent(t:T) =  computeIfAbsentOrigin(t)
+class StrongMemorizers<T, U>(applicable: (T?) -> U) : BaseMemorizers<T?, U>(applicable) {
+    fun forget(t: T) = forgetOrigin(t)
+    fun computeIfAbsent(t: T) = computeIfAbsentOrigin(t)
 }
+
 class SoftMemorizers<T, U>(applicable: (ComparableSoftReference<T?>) -> ComparableSoftReference<U>)
     : BaseMemorizers<ComparableSoftReference<T?>, ComparableSoftReference<U>>(applicable) {
     companion object {
@@ -52,6 +57,7 @@ class WeakMemorizers<T, U>(applicable: (ComparableWeakReference<T?>) -> Comparab
 
         private fun <U> unwrapReference(): (ComparableWeakReference<U?>) -> U? = ComparableWeakReference<U?>::get
     }
-    fun computeIfAbsent(t:T) = computeIfAbsentOrigin(weakReference<T?>().invoke(t)).get()
-    fun forget(t:T) = forgetOrigin(weakReference<T?>().invoke(t))
+
+    fun computeIfAbsent(t: T) = computeIfAbsentOrigin(weakReference<T?>().invoke(t)).get()
+    fun forget(t: T) = forgetOrigin(weakReference<T?>().invoke(t))
 }

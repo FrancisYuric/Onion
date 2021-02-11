@@ -82,19 +82,18 @@ class SimpleFlowLayout : ViewGroup {
 
     override fun onLayout(p0: Boolean, p1: Int, p2: Int, p3: Int, p4: Int) {
         LogUtil.e("flowLayout onLayout")
-        val lineCount = allLines.size
         var curL = paddingLeft
         var curT = paddingTop
-        for (i in 0 until lineCount) {
+        for (i in 0 until allLines.size) {
             val lineViews = allLines[i]
             val lineHeight = lineHeights[i]
             for (j in 0 until lineViews.size) {
-                val view = lineViews[j]
+                val childView = lineViews[j]
                 val left = curL
                 val top = curT
-                val right = left + view.measuredWidth
-                val bottom = top + view.measuredHeight
-                view.layout(left, top, right, bottom)
+                val right = left + childView.measuredWidth
+                val bottom = top + childView.measuredHeight
+                childView.layout(left, top, right, bottom)
                 curL = right + mHorizontalSpacing
             }
             curT += lineHeight + mVerticalSpacing

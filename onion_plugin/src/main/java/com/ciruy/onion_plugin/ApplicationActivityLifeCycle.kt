@@ -11,7 +11,8 @@ import com.ciruy.onion_base.constant.set
 import com.ciruy.onion_plugin.utils.SkinThemeUtils
 import java.util.*
 
-class ApplicationActivityLifeCycle(var observable: Observable) : Application.ActivityLifecycleCallbacks {
+class ApplicationActivityLifeCycle(var observable: Observable) :
+        Application.ActivityLifecycleCallbacks {
 
     private val mLayoutInflaterFactories by lazy { ArrayMap<Activity, SkinLayoutInflaterFactory>() }
     override fun onActivitySaveInstanceState(tActivity: Activity, tBundle: Bundle) = Unit
