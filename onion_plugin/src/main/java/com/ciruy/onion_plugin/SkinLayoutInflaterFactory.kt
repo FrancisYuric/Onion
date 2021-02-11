@@ -12,7 +12,9 @@ import com.ciruy.onion_plugin.utils.SkinThemeUtils
 import java.lang.reflect.Constructor
 import java.util.*
 
-class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory2, Observer {
+class SkinLayoutInflaterFactory(val activity: Activity) :
+        LayoutInflater.Factory2,
+        Observer {
 
     private val skinAttribute by lazy { SkinAttribute() }
 
@@ -26,21 +28,28 @@ class SkinLayoutInflaterFactory(val activity: Activity) : LayoutInflater.Factory
         private val mConstructorSignature = arrayOf(Context::class.java, AttributeSet::class.java)
     }
 
-    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet) =
+    override fun onCreateView(parent: View?, name: String,
+                              context: Context,
+                              attrs: AttributeSet) =
             createSDKView(name, context, attrs)
                     .createIfNull { createView(name, context, attrs) }
                     .doIfNotNull { skinAttribute.look(it!!, attrs) }
 
-    private fun createSDKView(name: String, context: Context, attrs: AttributeSet): View? =
+    private fun createSDKView(name: String,
+                              context: Context,
+                              attrs: AttributeSet): View? =
             if (name.contains('.')) null
             else mClassPrefixList.mapNotNull { createView(it + name, context, attrs) }
                     .getOrNull(0)
 
-    private fun createView(name: String, context: Context, attrs: AttributeSet): View? =
+    private fun createView(name: String,
+                           context: Context,
+                           attrs: AttributeSet): View? =
             findConstructor(context, name)?.newInstance(context, attrs)
 
 
-    private fun findConstructor(context: Context, name: String): Constructor<out View>? {
+    private fun findConstructor(context: Context,
+                                name: String): Constructor<out View>? {
         when (mConstructorMap[name]) {
             null -> try {
                 mConstructorMap[name] =

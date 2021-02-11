@@ -15,7 +15,7 @@ fun <T : Any> T.declaredField(clazz: Class<*>, fieldName: String): Field =
         clazz.getDeclaredField(fieldName)
                 .self { it.isAccessible = true }
 
-fun <T : Any> T.set(clazz: Class<*>, fieldName: String, value: Any?) =
+fun <T : Any> T.staticSet(clazz: Class<*>, fieldName: String, value: Any?) =
         declaredField(clazz, fieldName).set(this, value)
 
 fun <T : Any> T.set(fieldName: String, value: Any?) =

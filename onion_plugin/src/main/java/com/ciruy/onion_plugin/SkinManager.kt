@@ -29,16 +29,13 @@ class SkinManager(private val mApplication: Application) : Observable() {
         @Volatile
         var instance: SkinManager? = null
 
-        fun instance(): SkinManager = instance?: error("call getInstance(Application) first!")
-        fun getInstance(mApplication: Application) {
-            if (instance == null) {
-                synchronized(SkinManager::class.java) {
-                    if (instance == null) {
-                        instance = SkinManager(mApplication)
+        fun instance(): SkinManager = instance ?: error("call getInstance(Application) first!")
+        fun getInstance(mApplication: Application) =
+                if (instance == null) {
+                    synchronized(SkinManager::class.java) {
+                        if (instance == null) instance = SkinManager(mApplication)
                     }
-                }
-            }
-        }
+                } else null
     }
 
     fun loadSkin(skinPath: String?) {
@@ -51,8 +48,7 @@ class SkinManager(private val mApplication: Application) : Observable() {
                 val appResources = mApplication.resources
                 val assetManager = AssetManager::class.java.newInstance()
                 val addAssetPath = AssetManager::class.java
-                        .getMethod(Method.AssetManager_addAssetPath,
-                                String::class.java)
+                        .getMethod(Method.AssetManager_addAssetPath, String::class.java)
                 addAssetPath.invoke(assetManager, skinPath!!)
 
                 val skinResources = Resources(assetManager, appResources.displayMetrics, appResources.configuration)
