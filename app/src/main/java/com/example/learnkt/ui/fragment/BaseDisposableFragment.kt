@@ -1,17 +1,18 @@
 package com.example.learnkt.ui.fragment
 
-import androidx.core.util.Pair
 import android.view.View
 import android.widget.TextView
+import androidx.core.util.Pair
 import com.ciruy.b.heimerdinger.onion.from
-import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
+import com.ciruy.b.heimerdinger.onion_view.ext.addDisposable
+import com.ciruy.b.heimerdinger.onion_view.ext.mCompositeDisposable
 import com.ciruy.b.heimerdinger.onion_view.fragment.BaseFragment
+import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
 import com.ciruy.b.heimerdinger.onion_view.view.lazyBind2Api
 import com.example.learnkt.bean.DownloadInfo
 import com.example.learnkt.manager.DownloadManager
 import com.example.learnkt.util.progressDownload
 import io.reactivex.Flowable
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -19,13 +20,6 @@ import okhttp3.ResponseBody
 
 abstract class BaseDisposableFragment : BaseFragment() {
 
-    var mCompositeDisposable: CompositeDisposable? = null
-
-    fun addDisposable(disposable: Disposable) {
-        if (mCompositeDisposable == null)
-            mCompositeDisposable = CompositeDisposable()
-        mCompositeDisposable?.add(disposable)
-    }
 
     fun <T> View.bind(flowable: Flowable<T>) = funAddDisposable()
             .from<Disposable, Flowable<T>, Consumer<T>> { this.bind2Api(it.first.observeOn(Schedulers.io())).subscribe(it.second) }
@@ -33,7 +27,7 @@ abstract class BaseDisposableFragment : BaseFragment() {
 
     fun <T> View.bind(flowable: Flowable<T>, consumer: (T) -> Unit) = this.bind(flowable).invoke(consumer.toConsumer())
     fun <T> View.lazyBind(flowable: () -> Flowable<T>) = funAddDisposable()
-            .from<Disposable, () -> Flowable<T>, (T)->Unit> { this.lazyBind2Api(flowable).subscribe(it.second.toConsumer()) }
+            .from<Disposable, () -> Flowable<T>, (T) -> Unit> { this.lazyBind2Api(flowable).subscribe(it.second.toConsumer()) }
             .invoke(flowable)
 
     fun View.download(url: String, consumer: (DownloadInfo) -> Unit) = this.download(url, consumer.toConsumer())
@@ -70,7 +64,7 @@ abstract class BaseDisposableFragment : BaseFragment() {
             funAddDisposable().from<Disposable, View, Consumer<Any>> { com.ciruy.b.heimerdinger.onion_view.view.flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
 
     override fun onDestroy() {
-        mCompositeDisposable?.dispose()
+        mCompositeDisposable.dispose()
         super.onDestroy()
     }
 }

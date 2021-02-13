@@ -2,6 +2,7 @@ package com.example.learnkt.ui.baseActivity
 
 import android.os.Bundle
 import android.widget.Toast
+import com.ciruy.b.heimerdinger.onion_view.ext.addDisposable
 import com.example.learnkt.rx.Permission
 import com.example.learnkt.rx.RxPermissions
 

@@ -13,4 +13,5 @@ fun LifecycleOwner.addDisposable(disposable: Disposable) {
     mCompositeDisposable.add(disposable)
 }
 
+
 //基于AOP来操作Disposable的回收？
