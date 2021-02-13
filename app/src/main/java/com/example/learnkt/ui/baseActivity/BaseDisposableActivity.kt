@@ -5,6 +5,8 @@ import android.widget.TextView
 import androidx.core.util.Pair
 import com.ciruy.b.heimerdinger.onion.from
 import com.ciruy.b.heimerdinger.onion_view.activity.BaseActivity
+import com.ciruy.b.heimerdinger.onion_view.ext.addDisposable
+import com.ciruy.b.heimerdinger.onion_view.ext.mCompositeDisposable
 import com.ciruy.b.heimerdinger.onion_view.view.bind2Api
 import com.ciruy.b.heimerdinger.onion_view.view.flowableClick
 import com.ciruy.b.heimerdinger.onion_view.view.flowableTextChanges
@@ -14,7 +16,6 @@ import com.example.learnkt.manager.DownloadManager
 import com.example.learnkt.util.progressDownload
 import com.example.learnkt.util.toConsumer
 import io.reactivex.Flowable
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
@@ -22,14 +23,6 @@ import okhttp3.ResponseBody
 
 abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(layout) {
     constructor() : this(null)
-
-    var mCompositeDisposable: CompositeDisposable? = null
-
-    fun addDisposable(disposable: Disposable) {
-        if (mCompositeDisposable == null)
-            mCompositeDisposable = CompositeDisposable()
-        mCompositeDisposable?.add(disposable)
-    }
 
     fun <T> View.lazyBind(flowable: () -> Flowable<T>) = funAddDisposable()
             .from<Disposable, () -> Flowable<T>, (T) -> Unit> { this.lazyBind2Api(flowable).subscribe(it.second.toConsumer()) }
@@ -77,11 +70,20 @@ abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(
     fun funAddDisposable(): (Disposable) -> Unit = from { addDisposable(it.second) }
 
     fun View.flowableClick(consumer: (Any) -> Unit) = this.flowableClick(consumer.toConsumer())
+
     private fun View.flowableClick(consumer: Consumer<Any>) =
             funAddDisposable().from<Disposable, View, Consumer<Any>> { flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
 
+    @Deprecated("disposable may cause memory leak")
+    fun View.flowableClickUnsafe(consumer: Consumer<Any>) =
+            flowableClick(this).subscribe(consumer)
+
+    @Deprecated("disposable may cause memory leak")
+    fun View.flowableClickUnsafe(consumer: (Any) -> Unit) =
+            flowableClick(this).subscribe(consumer.toConsumer())
+
     override fun onDestroy() {
-        mCompositeDisposable?.dispose()
+        mCompositeDisposable.dispose()
         super.onDestroy()
     }
 }

@@ -16,24 +16,20 @@ fun <F, T, P> ((F) -> T).changeTo(t2p: (T) -> P): (F) -> P = {
     t2p.invoke(this.invoke(it))
 }
 
-fun <F, T> F.from(pairConsumer: (Pair<F, T>) -> Unit): (T) -> Unit {
-    return {
-        pairConsumer.invoke(Pair(this, it))
-    }
+fun <F, T> F.from(pairConsumer: (Pair<F, T>) -> Unit): (T) -> Unit = {
+    pairConsumer.invoke(Pair(this, it))
 }
+
 
 /**
  * Activity.addDisposable(disposable):((()->disposable)->Unit)
  * (()->disposable)->Unit
  */
-fun <F, T, P> ((F) -> Unit).from(pair2f: (Pair<T, P>) -> F): (T) -> (P) -> Unit {
-    return { t ->
-        { p ->
-            this.invoke(pair2f.invoke(Pair(t, p)))
-        }
+fun <F, T, P> ((F) -> Unit).from(pair2f: (Pair<T, P>) -> F): (T) -> (P) -> Unit = { t ->
+    { p ->
+        this.invoke(pair2f.invoke(Pair(t, p)))
     }
 }
-
 
 
 fun <T : Any?> T.createIfNull(tProvider: () -> T?) = this ?: tProvider.invoke()

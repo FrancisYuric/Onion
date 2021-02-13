@@ -2,8 +2,10 @@ package com.example.learnkt
 
 import android.content.Context
 import com.app.common_upload.inter.ISubBuilder
+import com.ciruy.onion_base.util.LogUtil
 import com.example.learnkt.ui.DownloadProgressActivity
 import com.example.learnkt.ui.SubDownloadProgressActivity
+import io.reactivex.Flowable
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Test
@@ -35,5 +37,6 @@ class ExampleUnitTest : ISubBuilder<SubDownloadProgressActivity> {
 
         `when`(mMockContext.packageName).thenReturn("com.ciruy.b.heimerdinger")
         println(mMockContext.packageName)
+
     }
 }
