@@ -25,5 +25,4 @@ abstract class BaseActivity(open var layout: Int?) : AppCompatActivity() {
     fun hideActionBar() = supportActionBar?.hide()
 
     fun showActionBar() = supportActionBar?.show()
-
 }

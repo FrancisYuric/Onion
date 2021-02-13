@@ -74,13 +74,13 @@ abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(
     private fun View.flowableClick(consumer: Consumer<Any>) =
             funAddDisposable().from<Disposable, View, Consumer<Any>> { flowableClick(it.first).subscribe(it.second) }.invoke(this).invoke(consumer)
 
-    @Deprecated("disposable may cause memory leak")
+    @Deprecated("disposable may cause memory leak", ReplaceWith("flowableClick(this).subscribe(consumer)", "com.ciruy.b.heimerdinger.onion_view.view.flowableClick"))
     fun View.flowableClickUnsafe(consumer: Consumer<Any>) =
-            flowableClick(this).subscribe(consumer)
+            flowableClick(this).subscribe(consumer)!!
 
-    @Deprecated("disposable may cause memory leak")
+    @Deprecated("disposable may cause memory leak", ReplaceWith("flowableClick(this).subscribe(consumer.toConsumer())", "com.ciruy.b.heimerdinger.onion_view.view.flowableClick", "com.example.learnkt.util.toConsumer"))
     fun View.flowableClickUnsafe(consumer: (Any) -> Unit) =
-            flowableClick(this).subscribe(consumer.toConsumer())
+            flowableClick(this).subscribe(consumer.toConsumer())!!
 
     override fun onDestroy() {
         mCompositeDisposable.dispose()
