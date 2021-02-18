@@ -20,7 +20,7 @@ class SkinPreference(context: Context) {
         }
     }
 
-    lateinit var mPref: SharedPreferences
+    var mPref: SharedPreferences
 
     init {
         mPref = context.getSharedPreferences(SKIN_SHARED, Context.MODE_PRIVATE)
