@@ -19,6 +19,9 @@ abstract class BaseMemorizers<T, U>(private val applicable: (T) -> U) {
 
 
 class StrongMemorizers<T, U>(applicable: (T?) -> U) : BaseMemorizers<T?, U>(applicable) {
+    companion object{
+        fun <T,U> applicable(applicable:(T?)->U) = StrongMemorizers(applicable)
+    }
     fun forget(t: T) = forgetOrigin(t)
     fun computeIfAbsent(t: T) = computeIfAbsentOrigin(t)
 }

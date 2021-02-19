@@ -82,8 +82,4 @@ abstract class BaseDisposableActivity(override var layout: Int?) : BaseActivity(
     fun View.flowableClickUnsafe(consumer: (Any) -> Unit) =
             flowableClick(this).subscribe(consumer.toConsumer())!!
 
-    override fun onDestroy() {
-        mCompositeDisposable.dispose()
-        super.onDestroy()
-    }
 }
