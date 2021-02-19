@@ -104,7 +104,7 @@ private fun View.download(url: String, consumer: Consumer<DownloadInfo>) = owner
 
 fun View.cancelDownload(url: String) = ownerActivity.doIfNotNull {
     it.funAddDisposable().from<Disposable, Flowable<Any>, Any?> {pair->
-        pair.first.subscribe { com.ciruy.heimerdinger.onion_net.manager.OnionDownloadManager.instance().cancel(url) }
+        pair.first.subscribe { OnionDownloadManager.instance().cancel(url) }
     }.invoke(flowableClick(this)).invoke(null)
 }
 

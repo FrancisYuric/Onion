@@ -6,7 +6,8 @@ import com.ciruy.b.heimerdinger.onion_view.ext.mCompositeDisposable
 
 object OnionActivityLifecycleCallback : BaseActivityLifecycleCallback() {
     override fun onActivityDestroyed(activity: Activity) {
-        if (activity is LifecycleOwner) activity.mCompositeDisposable.dispose()
+        if (activity is LifecycleOwner)
+            activity.mCompositeDisposable.dispose()
         super.onActivityDestroyed(activity)
     }
 }

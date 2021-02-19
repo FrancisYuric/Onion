@@ -1,13 +1,13 @@
 package com.example.learnkt.api
 
 import androidx.core.util.Pair
+import com.ciruy.onion_base.memory.SoftMemorizers
 import com.example.learnkt.CiruyApplication
 import com.example.learnkt.bean.Constant
 import com.example.learnkt.bean.Constant.FIRIM_URL_BASE
 import com.example.learnkt.net.CookieJarImpl
 import com.example.learnkt.net.HttpLoggingInterceptorImpl
 import com.example.learnkt.net.JsonOrXmlConverterFactory
-import com.ciruy.onion_base.memory.SoftMemorizers
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -34,12 +34,7 @@ class APIClient {
                     .readTimeout(it ?: 30, TimeUnit.SECONDS)
                     .writeTimeout(it ?: 30, TimeUnit.SECONDS)
                     .connectTimeout(it ?: 30, TimeUnit.SECONDS)
-                    .cache(
-                            Cache(
-                                    File(CiruyApplication.instance().cacheDir, "cache"),
-                                    (1024 * 1024 * 100).toLong()
-                            )
-                    )
+                    .cache(Cache(File(CiruyApplication.instance().cacheDir, "cache"), (1024 * 1024 * 100).toLong()))
                     .cookieJar(CookieJarImpl).build()
         }
 
