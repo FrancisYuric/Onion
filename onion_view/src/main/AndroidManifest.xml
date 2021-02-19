@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ciruy.b.heimerdinger.onion_view" />
+    package="com.ciruy.b.heimerdinger.onion_view">
+
+
+</manifest>

@@ -55,7 +55,7 @@ class SkinLayoutInflaterFactory(val activity: Activity) :
                 mConstructorMap[name] =
                         context.classLoader.loadClass(name).asSubclass(View::class.java).getConstructor(*mConstructorSignature)
             } catch (e: Exception) {
-                LogUtil.e("constructor not found")
+//                LogUtil.e("constructor not found")
             }
         }
         return mConstructorMap[name]
