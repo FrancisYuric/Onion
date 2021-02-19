@@ -29,8 +29,8 @@ class SkinManager(private val mApplication: Application) : Observable() {
         @Volatile
         var instance: SkinManager? = null
 
-        fun instance(): SkinManager = instance ?: error("call getInstance(Application) first!")
-        fun getInstance(mApplication: Application) =
+        fun instance(): SkinManager = instance ?: error("call install(Application) first!")
+        fun install(mApplication: Application) =
                 if (instance == null) {
                     synchronized(SkinManager::class.java) {
                         if (instance == null) instance = SkinManager(mApplication)
