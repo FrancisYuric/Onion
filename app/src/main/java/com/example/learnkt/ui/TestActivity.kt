@@ -1,5 +1,7 @@
 package com.example.learnkt.ui
 
+import com.ciruy.b.heimerdinger.onion_view.ext.bind
+import com.ciruy.b.heimerdinger.onion_view.ext.lazyBind
 import com.ciruy.b.heimerdinger.onion_view.view.content
 import com.ciruy.onion_base.util.ToastUtil
 import com.example.learnkt.R

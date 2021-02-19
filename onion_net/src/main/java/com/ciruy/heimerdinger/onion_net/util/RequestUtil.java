@@ -1,8 +1,8 @@
-package com.example.learnkt.util;
+package com.ciruy.heimerdinger.onion_net.util;
 
 
 import com.ciruy.onion_base.util.LogUtil;
-import com.example.learnkt.listener.DownloadApkListener;
+import com.ciruy.heimerdinger.onion_net.listener.DownloadApkListener;
 
 import java.io.File;
 import java.io.FileOutputStream;

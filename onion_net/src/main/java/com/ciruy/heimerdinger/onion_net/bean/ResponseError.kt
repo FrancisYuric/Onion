@@ -1,4 +1,4 @@
-package com.example.learnkt.bean
+package com.ciruy.heimerdinger.onion_net.bean
 
 import okhttp3.MediaType
 import okhttp3.ResponseBody

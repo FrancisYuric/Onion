@@ -1,9 +1,5 @@
-package com.example.learnkt.bean
+package com.ciruy.heimerdinger.onion_net.bean
 
-import ciruy.b.heimerdinger.annotation.BuilderClass
-import java.lang.Exception
-
-@BuilderClass
 data class DownloadInfo(var url: String,
                         var total: Long,
                         var progress: Long,

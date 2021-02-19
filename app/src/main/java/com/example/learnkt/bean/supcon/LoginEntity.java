@@ -1,7 +1,7 @@
 package com.example.learnkt.bean.supcon;
 
 
-import com.example.learnkt.bean.BaseEntity;
+import com.ciruy.b.heimerdinger.onion.bean.BaseEntity;
 
 import java.io.Serializable;
 

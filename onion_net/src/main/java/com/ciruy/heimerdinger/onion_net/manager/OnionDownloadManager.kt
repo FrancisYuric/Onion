@@ -1,8 +1,8 @@
-package com.example.learnkt.manager
+package com.ciruy.heimerdinger.onion_net.manager
 
-import com.example.learnkt.CiruyApplication
-import com.example.learnkt.bean.DownloadInfo
-import com.example.learnkt.rx.DownloadObserver
+import android.app.Application
+import com.ciruy.heimerdinger.onion_net.bean.DownloadInfo
+import com.ciruy.heimerdinger.onion_net.rx.DownloadObserver
 import com.ciruy.onion_base.util.LogUtil
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,17 +14,22 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.lang.Exception
 
-class DownloadManager {
+class OnionDownloadManager {
     object Holder {
-        val INSTANCE = DownloadManager()
+        val INSTANCE = OnionDownloadManager()
     }
 
     val mClient = OkHttpClient.Builder().build()
+    lateinit var filesDir: File
+    open lateinit var mApplication: Application
+    fun install(application: Application) {
+        filesDir = application.filesDir
+        mApplication = application
+    }
 
     companion object {
-        fun instance(): DownloadManager = Holder.INSTANCE
+        fun instance(): OnionDownloadManager = Holder.INSTANCE
     }
 
     private fun createDownInfo(url: String) = DownloadInfo(url, getContentLength(url), 0, url.substring(url.lastIndexOf("/")))
@@ -42,6 +47,7 @@ class DownloadManager {
                 .subscribe(downloadObserver)
     }
 
+
     fun download(url: String) = Observable.just(url)
             .filter { !downCalls.containsKey(it) }
             .flatMap { Observable.just(createDownInfo(it)) }
@@ -55,14 +61,14 @@ class DownloadManager {
         val fileName: String = downloadInfo.mFileName
         var downloadLength = 0L
         val contentLength = downloadInfo.total
-        var file = File(CiruyApplication.instance().applicationContext?.filesDir, fileName)
+        var file = File(filesDir, fileName)
         if (file.exists())
             downloadLength = file.length()
         var i = 1
         while (downloadLength >= contentLength) {
             val dotIndex = fileName.lastIndexOf(".")
             val fileNameOther = if (dotIndex == -1) "${fileName}(${i})" else "${fileName.substring(0, dotIndex)}(${i})${fileName.substring(dotIndex)}"
-            val newFile = File(CiruyApplication.instance().filesDir, fileNameOther)
+            val newFile = File(filesDir, fileNameOther)
             file = newFile
             downloadLength = newFile.length()
             ++i
@@ -113,7 +119,7 @@ class DownloadManager {
             val call = mClient.newCall(request)
             downCalls[url] = call
             val response = call.execute()
-            val file = File(CiruyApplication.instance().filesDir, downloadInfo.mFileName)
+            val file = File(filesDir, downloadInfo.mFileName)
             var inputStream: InputStream? = null
             var outputStream: FileOutputStream? = null
             try {
@@ -130,11 +136,10 @@ class DownloadManager {
                 }
                 outputStream.flush()
                 downCalls.remove(url)
-            }catch (e:Exception){
+            } catch (e: Exception) {
 //                emitter.onError(Throwable(e.message))
 //                emitter.onNext()
-            }
-            finally {
+            } finally {
                 inputStream?.close()
                 outputStream?.close()
             }

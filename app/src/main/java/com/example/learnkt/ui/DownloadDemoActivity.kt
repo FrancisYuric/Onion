@@ -1,6 +1,8 @@
 package com.example.learnkt.ui
 
 import android.Manifest
+import com.ciruy.b.heimerdinger.onion_view.ext.cancelDownload
+import com.ciruy.b.heimerdinger.onion_view.ext.download
 import com.example.learnkt.R
 import com.example.learnkt.bean.Constant
 import com.example.learnkt.ui.baseActivity.BasePermissionActivity

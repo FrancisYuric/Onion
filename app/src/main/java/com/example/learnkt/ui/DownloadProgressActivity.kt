@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.text.TextUtils
 import com.app.common_upload.annotation.apt.BuilderClass
 import com.app.common_upload.inter.ISubBuilder
+import com.ciruy.b.heimerdinger.onion_view.ext.download
+import com.ciruy.b.heimerdinger.onion_view.ext.flowableClick
+import com.ciruy.b.heimerdinger.onion_view.ext.flowableClickUnsafe
 import com.example.learnkt.R
 import com.example.learnkt.bean.thunder_download
 import com.example.learnkt.ui.baseActivity.BaseDisposableActivity

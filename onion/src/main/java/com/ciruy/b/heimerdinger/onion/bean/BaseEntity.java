@@ -1,4 +1,4 @@
-package com.example.learnkt.bean;
+package com.ciruy.b.heimerdinger.onion.bean;
 
 import com.google.gson.Gson;
 

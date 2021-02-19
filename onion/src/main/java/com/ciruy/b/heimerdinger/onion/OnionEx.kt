@@ -34,12 +34,17 @@ fun <F, T, P> ((F) -> Unit).from(pair2f: (Pair<T, P>) -> F): (T) -> (P) -> Unit 
 
 fun <T : Any?> T.createIfNull(tProvider: () -> T?) = this ?: tProvider.invoke()
 
-fun <T : Any?> T.doIfNotNull(tProvider: (T) -> Unit): T? {
+fun <T : Any> T?.doIfNotNull(tProvider: (T) -> Unit): T? {
     if (this != null)
         tProvider.invoke(this)
     return this
 }
 
+fun <T,F> T?.selfNotNull(tProvider: (T) -> F?): F? {
+    if (this != null)
+        return tProvider.invoke(this)
+    return null
+}
 fun <T : Any> T.self(tProvider: (T) -> Unit): T {
     tProvider.invoke(this)
     return this
