@@ -33,7 +33,7 @@ import okhttp3.ResponseBody
 import java.io.File
 
 val LifecycleOwner.mCompositeDisposable: CompositeDisposable
-    get() = LifeCycleOwnerMemorizer.getIfAbsent(this)
+    get() = LifeCycleOwnerMemorizer.getIfAbsent(this)?: error("activity recycled")
 
 fun LifecycleOwner.addDisposable(disposable: Disposable) {
     mCompositeDisposable.add(disposable)
