@@ -1,7 +1,7 @@
-# LearnKt
+# Onion
 
 #### 介绍
-This project is mainly set to learn the language kotlin.Sincerely hope that I could be stronger!To be a better man.
+This project is mainly set to enjoy programming with kotlin.Sincerely hope that I could be stronger!To be a better man.
 
 #### 软件架构
 软件架构说明
