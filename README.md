@@ -1,11 +1,10 @@
 # Onion
 
 #### 介绍
-This project is mainly set to enjoy programming with kotlin.Sincerely hope that I could be stronger!To be a better man.
+本项目主要的目的在于将函数式的思想尽可能应用到Android的日常开发中，致力于实现更低的耦合性，更高的代码可读性。
 
 #### 软件架构
 软件架构说明
-
 
 #### 安装教程
 
