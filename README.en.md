@@ -1,7 +1,7 @@
-# LearnKt
+# Onion
 
 #### Description
-This project is mainly set to learn the language kotlin.Sincerely hope that I could be stronger!To be a better man.
+This project is mainly set to enjoy programming with kotlin.Sincerely hope that I could be stronger!To be a better man.
 
 #### Software Architecture
 Software architecture description
