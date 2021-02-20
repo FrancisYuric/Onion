@@ -6,7 +6,7 @@ import com.ciruy.onion_base.memory.WeakMemorizers
 import io.reactivex.disposables.CompositeDisposable
 
 object LifeCycleOwnerMemorizer {
-    val memorizer:StrongMemorizers<LifecycleOwner?,CompositeDisposable> = StrongMemorizers.applicable {
+    val memorizer:WeakMemorizers<LifecycleOwner?,CompositeDisposable> = WeakMemorizers.applicable {
         CompositeDisposable()
     }
     fun getIfAbsent(lifecycleOwner: LifecycleOwner) = memorizer.computeIfAbsent(lifecycleOwner)
