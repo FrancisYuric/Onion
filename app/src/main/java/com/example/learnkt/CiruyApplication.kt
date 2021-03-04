@@ -5,6 +5,7 @@ import androidx.multidex.MultiDex
 import com.ciruy.b.heimerdinger.onion_view.manager.OnionDisposableManager
 import com.ciruy.heimerdinger.onion_net.manager.OnionDownloadManager
 import com.ciruy.onion_plugin.SkinManager
+import com.squareup.leakcanary.LeakCanary
 
 class CiruyApplication : Application() {
 
@@ -25,5 +26,7 @@ class CiruyApplication : Application() {
         OnionDisposableManager.install(this)
         //下载管理器初始化
         OnionDownloadManager.instance().install(this)
+        //LeakCanary project init
+        LeakCanary.install(this)
     }
 }

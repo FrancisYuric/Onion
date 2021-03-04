@@ -33,7 +33,7 @@ import okhttp3.ResponseBody
 import java.io.File
 
 val LifecycleOwner.mCompositeDisposable: CompositeDisposable
-    get() = LifeCycleOwnerMemorizer.getIfAbsent(this)?: error("activity recycled")
+    get() = LifeCycleOwnerMemorizer.getIfAbsent(this)
 
 fun LifecycleOwner.addDisposable(disposable: Disposable) {
     mCompositeDisposable.add(disposable)
@@ -122,8 +122,6 @@ private fun View.download(flowable: Flowable<ResponseBody>, consumer: Consumer<P
 fun View.bind2ProgressDownload(flowable: Flowable<ResponseBody>): Flowable<Pair<String, Int>> = this.bind2Api(flowable).progressDownload()
 
 
-
-fun <T : BaseEntity> errorFlowable(errMes: String) = Flowable.error<T>(Throwable(errMes))
 fun Flowable<ResponseBody>.progressDownload(): Flowable<Pair<String, Int>> = this.observeOn(Schedulers.io())
         .onErrorReturn { ResponseError.error(it) }
         .flatMap { t: ResponseBody ->
