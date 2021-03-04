@@ -11,46 +11,44 @@
         <TextView
             style="@style/TestTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            style="@style/TestTextView"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryDark" />
 
         <TextView
             style="@style/TestTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryDark" />
 
         <TextView
             style="@style/TestTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@color/colorAccent" />
 
         <TextView
             style="@style/TestTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryDark" />
 
         <TextView
             style="@style/TestTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@color/colorAccent" />
 
         <TextView
             style="@style/TestTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryDark" />
 
-        <TextView
-            style="@style/TestTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp" />
-
-        <TextView
-            style="@style/TestTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp" />
-
-        <TextView
-            style="@style/TestTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp" />
     </com.ciruy.b.heimerdinger.onion_view.view.viewGroup.SimpleFlowLayout>
 </LinearLayout>

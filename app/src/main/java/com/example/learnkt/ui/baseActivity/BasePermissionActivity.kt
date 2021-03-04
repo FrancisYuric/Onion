@@ -8,7 +8,7 @@ import com.example.learnkt.rx.RxPermissions
 
 abstract class BasePermissionActivity(override var layout:Int?) : BaseDisposableActivity(layout) {
     constructor() : this(null)
-    //staticPermission needed
+    //static Permission needed
     abstract fun staticPermission(): List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
